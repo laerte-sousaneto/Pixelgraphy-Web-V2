@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="pixelApp" lang="en" id="ng-app">
+
 <head lang="en">
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Meta Tags -->
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/default.css" />
+    <!-- Style -->
+
     <title>Welcome to Pixelgraphy!</title>
 </head>
+
 <body>
 
+    <ng-view></ng-view>
+
+    <script type="text/javascript" src="js/lib/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript" src="js/lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+
+
+    <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/lib/ui-utils.js"></script>
+    <script type="text/javascript" src="js/lib/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <!-- App Module -->
+    <script type="text/javascript" src="js/pixelApp.js"></script>
+    <!-- App Module -->
+
+    <!-- Services -->
+    <script type="text/javascript" src="js/service/dataAccessor.js"></script>
+    <script type="text/javascript" src="js/service/userService.js"></script>
+    <!-- Services -->
+
+    <!-- View Controllers -->
+    <script type="text/javascript" src="js/controller/homeController.js"></script>
+    <script type="text/javascript" src="js/controller/loginController.js"></script>
+    <!-- View Controllers -->
+
+
+
+
 </body>
+
 </html>

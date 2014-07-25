@@ -1,0 +1,112 @@
+html, body
+{
+    background: url("../image/background.jpg") repeat;
+}
+body
+{
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+a
+{
+    cursor: pointer;
+}
+.heading
+{
+    /*color: #245269;*/
+}
+
+.thumbnail
+{
+    /*background: #31708f;*/
+}
+
+.light-padding
+{
+    padding: 2px;
+}
+.normal-padding
+{
+    padding: 10px;
+}
+
+.bottom-column
+{
+    float: none;
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.img-container
+{
+    min-height: 180px;
+}
+
+.showPreview
+{
+    opacity: 1;
+    transition: opacity 0.5s ease; /* You should probably browser-prefix this */
+}
+
+.hidePreview
+{
+    opacity: 0;
+    transition: opacity 0.5s ease; /* You should probably browser-prefix this */
+}
+
+.ui-show
+{
+    width: 311px;
+    height: 180px;
+    opacity: 1;
+    transition: height 0.5s, opacity 0.5s ease; /* You should probably browser-prefix this */
+}
+.ui-hide
+{
+    height: 50px;
+    opacity: 0;
+    transition: height 0.5s, opacity 0.5s ease; /* You should probably browser-prefix this */
+}
+.invalid-label
+{
+    color: #d9534f !important;
+}
+.invalid-input
+{
+    border-color: red;
+}
+.sm-margin
+{
+    margin: 2px;
+}
+.md-margin
+{
+    margin: 10px;
+}
+@media all and (max-width: 700px)
+{
+    .img-container
+    {
+        min-height: 0;
+    }
+
+    .ui-show
+    {
+        width: auto;
+        height: auto;
+        opacity: 1;
+        transition: height 0.5s, opacity 0.5s ease; /* You should probably browser-prefix this */
+    }
+    .ui-hide
+    {
+        height: auto;
+        opacity: 0;
+        transition: height 0.5s, opacity 0.5s ease; /* You should probably browser-prefix this */
+    }
+}
+
+.noBorder
+{
+    border: none;
+}

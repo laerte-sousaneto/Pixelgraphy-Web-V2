@@ -1,0 +1,272 @@
+<div id="home" class="container">
+
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
+
+            <!-- Title Area -->
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <div class="row">
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                            <img width="65" src="../image/logo.png" />
+                        </div>
+
+                        <div class="col-lg-11 col-lg-offset-0
+                        col-md-10 col-md-offset-1
+                        col-sm-10 col-sm-offset-1
+                        col-xs-9" >
+
+                            <!--<h1>Welcome to Pixelgraphy</h1>-->
+
+                            <div class="navbar navbar-default light-padding" role="navigation">
+
+                                <div class="container-fluid">
+
+                                    <div class="navbar-header">
+
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navMenu">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+
+                                        <a href="#" class="navbar-brand">Pixelgraphy</a>
+                                    </div>
+
+                                    <div id="navMenu" class="collapse navbar-collapse">
+                                        <ul class="nav navbar-default navbar-nav">
+                                            <li class="active"><a href="#">Home</a> </li>
+                                            <li><a href="#/About">About</a> </li>
+                                            <li><a href="#/Feedback">Feedback</a> </li>
+                                        </ul>
+
+                                        <div class="navbar-right">
+
+                                            <button
+                                                    type="button"
+                                                    class="btn btn-primary navbar-btn"
+                                                    data-toggle="modal"
+                                                    data-target="#loginModal"
+
+                                                    >
+
+                                                Log In
+                                            </button>
+                                            <button
+                                                    type="button"
+                                                    class="btn btn-warning navbar-btn"
+                                                    data-toggle="modal"
+                                                    data-target="#registerModal"
+
+                                                    >
+                                                Sign Up!
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <!-- Title Area -->
+
+            <!-- Main Content -->
+            <div class="row">
+                <!-- Guest Gallery Area -->
+                <div id="imageGallery" ng-class="{'showPreview': imagePreview, 'hidePreview' : !imagePreview}">
+
+                    <div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="imageInfo in imageSelected">
+
+                        <div class="row light-padding" >
+
+                            <div class="col-md-12 thumbnail" >
+
+                                <div class="row">
+
+                                    <div class="col-lg-12 col-xs-6">
+                                        <div class="img-container">
+
+                                            <img id="{{imageInfo['image']['ID']}}"
+                                                 class="img-rounded img-responsive img-thumbnail"
+                                                 ui-toggle="imageInfo['show']"
+                                                 ng-src="{{imageInfo['image']['directory']}}"
+                                                    />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-xs-6">
+                                        <blockquote class="caption">
+
+                                            <p ng-bind="imageInfo['image']['name']"></p>
+                                            <footer ng-bind="imageInfo['image']['username']"><cite title="Source Title"></cite></footer>
+
+                                        </blockquote>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Guest Gallery Area -->
+
+            </div>
+            <!-- Main Content -->
+
+            <!--Login Modal -->
+            <div ng-controller="loginController" id="loginModal" class="modal fade" tab-index="-1" >
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Portal Login</h4>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="row" ng-hide="statusPanel">
+
+                                <div class="col-lg-6 col-lg-offset-3">
+
+                                    <label class="src-only" for="username" ng-class="{'invalid-label': hasLoginError}">Username</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="username"
+                                           placeholder="Enter Username"
+                                           ng-model="username"
+                                           ng-class="{'invalid-input': hasLoginError}"/>
+
+                                    <label class="src-only" for="password" ng-class="{'invalid-label': hasLoginError}">Password</label>
+                                    <input type="password"
+                                           class="form-control"
+                                           name="password"
+                                           placeholder="Enter Password"
+                                           ng-model="password"
+                                           ng-class="{'invalid-input': hasLoginError}"/>
+
+
+                                    <div ng-bind="loginError" class="text-danger text-center"></div>
+
+                                    <a class="form-control noBorder text-center">Forgot Password?</a>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row" ng-show="statusPanel">
+
+                                <div class="col-lg-6 col-lg-offset-3 text-center">
+
+                                    <img src="../image/loading.gif" width="50" alt="loading image"/>
+                                    <p ng-bind="statusMsg"></p>
+                                    <p ng-bind="statusSubMsg"></p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="signIn()">Log In!</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!--Login Modal -->
+
+            <!--Register Modal -->
+            <div ng-controller="loginController" id="registerModal" class="modal fade" tab-index="-1" >
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Be One of Us</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <div class="col-lg-6 col-lg-offset-3">
+
+                                        <label class="src-only" for="username">Username</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="username"
+                                               name="username"
+                                               placeholder="Enter Username" />
+
+                                        <label class="src-only" for="password">Password</label>
+                                        <input type="password"
+                                               class="form-control"
+                                               id="password"
+                                               name="password"
+                                               placeholder="Enter Password" />
+
+                                        <label class="src-only" for="password2">Repeat Password</label>
+                                        <input type="password"
+                                               class="form-control"
+                                               id="password2"
+                                               name="password2"
+                                               placeholder="Enter Password Again" />
+
+                                        <label class="src-only" for="email">Purchase Email Address</label>
+                                        <input type="email"
+                                               class="form-control"
+                                               id="email"
+                                               name="email"
+                                               placeholder="Enter Email" />
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Sign Up!</button>
+                            </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!--Register Modal -->
+        </div>
+
+    </div>
+
+
+</div>
