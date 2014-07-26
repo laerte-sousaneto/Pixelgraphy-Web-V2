@@ -12,7 +12,14 @@ pixelApp.config(function routing($routeProvider)
     $routeProvider.when('/',
         {
             templateUrl: '../directory/home.html',
-            controller: 'homeCTRL'
+            controller: 'homeController'
+        }
+    );
+
+    $routeProvider.when('/portal',
+        {
+            templateUrl: '../directory/portal.html',
+            controller: 'portalController'
         }
     );
 

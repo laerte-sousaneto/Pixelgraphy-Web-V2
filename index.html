@@ -19,6 +19,10 @@
 
     <ng-view></ng-view>
 
+    <div ng-include src="'templates/loginModal.html'">
+
+    </div>
+
     <script type="text/javascript" src="js/lib/jquery-2.1.1.min.js"></script>
 
     <script type="text/javascript" src="js/lib/angular.min.js"></script>
@@ -36,15 +40,14 @@
     <!-- Services -->
     <script type="text/javascript" src="js/service/dataAccessor.js"></script>
     <script type="text/javascript" src="js/service/userService.js"></script>
+    <script type="text/javascript" src="js/service/uiService.js"></script>
     <!-- Services -->
 
     <!-- View Controllers -->
     <script type="text/javascript" src="js/controller/homeController.js"></script>
     <script type="text/javascript" src="js/controller/loginController.js"></script>
+    <script type="text/javascript" src="js/controller/portalController.js"></script>
     <!-- View Controllers -->
-
-
-
 
 </body>
 

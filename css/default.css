@@ -46,13 +46,13 @@ a
 .showPreview
 {
     opacity: 1;
-    transition: opacity 0.5s ease; /* You should probably browser-prefix this */
+    transition: opacity 2s ease; /* You should probably browser-prefix this */
 }
 
 .hidePreview
 {
     opacity: 0;
-    transition: opacity 0.5s ease; /* You should probably browser-prefix this */
+    transition: opacity 2s ease; /* You should probably browser-prefix this */
 }
 
 .ui-show

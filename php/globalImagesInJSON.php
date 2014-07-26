@@ -1,4 +1,5 @@
 <?php
+
 	require 'Database.class.php';
 	
 	$db = new Database();

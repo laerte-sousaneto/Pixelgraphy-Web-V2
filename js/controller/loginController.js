@@ -5,7 +5,7 @@
 
 pixelApp.controller('loginController', loginController);
 
-function loginController($scope, dataAccessor, userService)
+function loginController($scope, dataAccessor, userService, uiService, $timeout)
 {
     $scope.username = "laerte";
     $scope.password = "123";
@@ -44,7 +44,17 @@ function loginController($scope, dataAccessor, userService)
                     $scope.loginError = data['error_msg'];
 
                     $scope.statusMsg = "Login Succesfull.";
-                    $scope.statusSubMsg = "Setting up portal.";
+                    $scope.statusSubMsg = "Loading Portal!";
+
+                    uiService.setShowHome(false);
+
+                    $timeout(function()
+                    {
+                        window.location.href = "#/portal";
+                        $("#loginModal").modal('hide');
+                        $scope.statusPanel = false;
+                    }, 3000);
+
                 }
                 else
                 {

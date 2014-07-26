@@ -4,11 +4,10 @@
 
 'use strict';
 
-pixelApp.controller('homeCTRL',homeController);
+pixelApp.controller('homeController',homeController);
 
-function homeController($scope, $interval, $timeout, dataAccessor, userService)
+function homeController($scope, $interval, $timeout, dataAccessor, userService, uiService)
 {
-    $scope.message = "<h1>Welcome to home.</h1>";
     $scope.homeSource = "http://userhome.laertesousa.com/";
     $scope.images = null;
     $scope.imageSelected = null;
@@ -17,20 +16,10 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService)
 
     $scope.imagePreview = true;
 
-
     $scope.userProfile = null;
     $scope.userImages = null;
 
-    $scope.$on('profileUpdate',function()
-    {
-        $scope.userProfile = userService.userProfile;
-    });
 
-    $scope.$on('imagesUpdate',function()
-    {
-        console.log('here');
-        $scope.userImages = userService.userImages;
-    });
 
     var imageChangeInterval = 4000; //(milli seconds)
     var fadeInterval = 500;
@@ -76,12 +65,23 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService)
 
     });
 
-    $scope.signIn = function()
+    //Broadcast Handlers
+    $scope.$on('profileUpdate',function()
     {
-        console.log("hello there home");
-    }
+        $scope.userProfile = userService.userProfile;
+    });
 
-    miscSetup();
+    $scope.$on('imagesUpdate',function()
+    {
+        console.log('here');
+        $scope.userImages = userService.userImages;
+    });
+
+    $scope.$on('uiUpdate',function()
+    {
+        $scope.imagePreview = uiService.showHome;
+    });
+
 }
 
 function trySignIn(event)
@@ -161,88 +161,3 @@ function setSource(data, source)
 
 }
 
-function miscSetup()
-{
-    /*$('#signin').popover({
-        //trigger: 'focus'
-        template:   '<div class="popover" role="tooltip">' +
-            '<form onsubmit="return false;" id="signInForm" >'+
-            '<div class="arrow"></div>' +
-            '<h3 class="popover-title"></h3>' +
-            '<div>' +
-
-            "" +
-                "<div class='form-group container-fluid'>" +
-                    "<div class='row'>" +
-                        "<div class='col-lg-12'>" +
-                            "<label class='src-only' for='username'>Username</label>" +
-                            "<input type='text' class='form-control' id='username' name='username' placeholder='Enter Username' />" +
-                            "<label class='src-only' for='password'>Password</label>" +
-                            "<input type='password' class='form-control' id='password' name='password' placeholder='Enter Password' />" +
-                        "</div>" +
-                    "</div>" +
-                    "<div class='row text-center'>" +
-                        "<div class='col-lg-12'>" +
-                            "<button  id='login'  class='btn btn-md btn-primary md-margin'" +
-                                       "ng-click='signIn()'>Sign In!</button>" +
-                        "</div>" +
-                        "<div class='col-lg-12'>" +
-                            "<a class='nav'>Forgot Password?</a>" +
-                        "</div>" +
-                    "</div>" +
-                "</div>"+
-
-            '</div>' +
-            "<form>"+
-            '</div>'
-    });*/
-
-}
-
-
-pixelApp.directive('popOver', function ($compile) {
-
-    /*var itemsTemplate = "<ul class='unstyled'><li ng-repeat='item in items'>{{item}}</li></ul>";
-    var getTemplate = function (contentType) {
-        var template = '';
-        switch (contentType) {
-            case 'items':
-                template = itemsTemplate;
-                break;
-        }
-        return template;
-    }*/
-
-    return {
-        template: "<span></span>",
-        link: function (scope, element, attrs)
-        {
-            var popOverContent = "<button id ='customSign' onclick=\"alert(scope.message)\">Here</button>";
-
-            console.log(scope.images);
-            console.log(scope.message);
-
-            element.bind('mouseenter',function()
-            {
-                //alert('here');
-                console.log(scope.images);
-                scope.$apply("signIn()");
-            });
-
-            var options = {
-                content: popOverContent,
-                placement: "bottom",
-                html: true,
-                title: scope.title
-            };
-
-            $(element).popover(options);
-
-            $("#customSign").bind('click',function()
-            {
-                //scope.$apply("signIn()");
-                alert('here');
-            });
-        }
-    };
-});
