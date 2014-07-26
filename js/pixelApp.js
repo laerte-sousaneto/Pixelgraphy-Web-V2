@@ -23,6 +23,20 @@ pixelApp.config(function routing($routeProvider)
         }
     );
 
+    $routeProvider.when('/about',
+        {
+            templateUrl: '../directory/about.html',
+            controller: 'aboutController'
+        }
+    );
+
+    $routeProvider.when('/feedback',
+        {
+            templateUrl: '../directory/feedback.html',
+            controller: 'feedbackController'
+        }
+    );
+
     $routeProvider.otherwise(
         {
             redirectTo: '/'
