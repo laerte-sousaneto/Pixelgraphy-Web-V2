@@ -32,6 +32,19 @@ pixelApp.factory('dataAccessor', function($http)
             ).success(onSuccess);
         },
 
+        checkSession: function(userID, onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    //url     :   '../../php/login_check.php',
+                    url     :   'http://pixel.laertesousa.com/php/checkSession.php',
+                    data    :   $.param({'userID':userID}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
+
         getUser: function(id, onSuccess)
         {
             $http(

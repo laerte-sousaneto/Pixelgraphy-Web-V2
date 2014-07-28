@@ -1,14 +1,10 @@
 <?php
-/*
-####### THIS IS BEING PHASED OUT, ALL ACCOUNT MANAGEMENT WILL COME FROM THE ACCOUNT MANAGEMENT OBJECT ########
-TO ACCESS SESSION DATA:
-$_SESSION['usr'] -- username
-$_SESSION['pwd'] -- password
-$_SESSION['id'] -- user unique ID
-$_SESSION['email'] -- user email
-*/
 
-session_start();
+if(session_id() == '')
+{
+    session_start();
+}
+
 
 require 'Database.class.php';
 
@@ -33,10 +29,7 @@ try
 		$iddata = mysqli_query($db->getConnection() ,"SELECT * FROM users WHERE username='$chkusr'");
 		$id = mysqli_fetch_array($iddata);
 
-        if(session_id() == '')
-        {
-            session_start();
-        }
+
 
         $_SESSION['user'] = $id['user_id'];
 

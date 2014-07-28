@@ -4,7 +4,7 @@
 
 'use strict';
 
-var pixelApp = angular.module('pixelApp',['ngRoute','ui.utils', 'ui.bootstrap']);
+var pixelApp = angular.module('pixelApp',['ngRoute', 'ui.utils', 'ui.bootstrap']);
 
 
 pixelApp.config(function routing($routeProvider)
