@@ -1,10 +1,10 @@
 <?php
+header("access-control-allow-origin: *");
 
 if(session_id() == '')
 {
     session_start();
 }
-
 
 require 'Database.class.php';
 
@@ -31,7 +31,7 @@ try
 
 
 
-        $_SESSION['user'] = $id['user_id'];
+        $_SESSION['userID'] = $id['user_id'];
 
 		echo json_encode(array('result' => $id['user_id'], 'error' => false));
 	}

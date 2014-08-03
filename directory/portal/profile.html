@@ -1,1 +1,139 @@
-<h1>Profile</h1>
+<div ng-controller="profileController">
+
+    <!-- Top Info -->
+    <div class="row">
+
+        <div class="col-md-4">
+            <img class="img-responsive img-thumbnail" ng-src="{{data['profile_picture']}}" />
+        </div>
+
+        <!-- Main Info -->
+        <div class="col-md-8">
+
+            <h1 ng-bind="data['fullname']"></h1>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Major
+                                </span>
+                                <span class="form-control"
+                                      ng-bind="data.major">
+
+                                </span>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Gender
+                                </span>
+                                <span class="form-control" ng-bind="data.gender"></span>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Relationship
+                                </span>
+                                <span class="form-control" ng-bind="data.relationship"></span>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Birthday
+                                </span>
+                                <span class="form-control" ng-bind="data.DOB"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Main Info -->
+
+    </div>
+    <!-- Top Info -->
+
+    <!-- Bottom Info -->
+    <div class="row" style="margin-top: 10px;">
+
+        <div class="col-md-12">
+
+            <tabset id="subTab">
+
+                <tab heading="About">
+
+                    <div class="well" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+
+                        <div class="row">
+
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-info">
+
+                                    <div class="panel-heading">Hobbies</div>
+                                    <div class="panel-body">
+                                        <p ng-bind="data.hobbies"></p>
+                                    </div>
+
+                                </div>
+
+                                <div class="panel panel-info">
+
+                                    <div class="panel-heading">Biography</div>
+                                    <div class="panel-body">
+                                        <p ng-bind="data.biography"></p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </tab>
+
+                <tab heading="Gallery">
+                    <div class="well" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                        <div class="row">
+
+                            <div class="col-md-10">
+
+                                <div class="panel">
+                                    <p ng-bind="data.hobbies"></p>
+                                </div>
+
+                                <div class="panel">
+                                    <p ng-bind="data.biography"></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </tab>
+
+            </tabset>
+
+        </div>
+
+    </div>
+    <!-- Bottom Info -->
+
+</div>
+
+
+

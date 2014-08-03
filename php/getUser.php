@@ -5,6 +5,7 @@
  * Date: 7/21/2014
  * Time: 9:26 PM
  */
+header("access-control-allow-origin: *");
 
 require "Database.class.php";
 

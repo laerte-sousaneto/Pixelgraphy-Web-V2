@@ -24,13 +24,7 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
     var imageChangeInterval = 4000; //(milli seconds)
     var fadeInterval = 500;
 
-    dataAccessor.getImages(function(data)
-    {
-        $scope.images = data;
-        setSource(data,$scope.homeSource);
-
-        setImageBoxes($scope, 3);
-    });
+    userService.updateGlobalImages();
 
     $scope.$watch('images', function()
     {
@@ -43,37 +37,19 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
        }
     });
 
-    $scope.$watch('imagePreview',function()
-    {
-       if($scope.imagePreview == false)
-       {
-
-            $('#imageGallery').hide('fast', function()
-            {
-                //$scope.loginPanel = !$scope.imagePreview;
-            });
-
-       }
-       else
-       {
-           $('#imageGallery').show('fast', function()
-           {
-
-           });
-
-       }
-
-    });
 
     //Broadcast Handlers
     $scope.$on('profileUpdate',function()
     {
         $scope.userProfile = userService.userProfile;
     });
-
+    $scope.$on('globalImagesUpdate', function()
+    {
+        $scope.images = userService.globalImages;
+        setImageBoxes($scope, 3);
+    });
     $scope.$on('imagesUpdate',function()
     {
-        console.log('here');
         $scope.userImages = userService.userImages;
     });
 

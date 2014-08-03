@@ -1,1 +1,33 @@
-<h1> Global Feed</h1>
+<div id="globalfeed"
+     ng-controller="globalFeedController"
+     when-scrolled="loadMore()"
+     style="height: 400px; overflow-y: scroll; overflow-x: hidden;">
+
+    <div ng-repeat="image in items">
+
+        <div class="row" style="margin: 10px;">
+
+            <div class="col-md-5">
+                <img class="img-responsive img-thumbnail" ng-src="{{image['image']['directory']}}" />
+            </div>
+
+            <div class="col-md-4">
+
+                <h1 ng-bind="image['image']['name']">
+                </h1>
+
+                <p ng-bind="image['image']['description']"></p>
+                <blockquote class="caption">
+                    <footer ng-bind="image['image']['username']"><cite title="Source Title"></cite></footer>
+                </blockquote>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+

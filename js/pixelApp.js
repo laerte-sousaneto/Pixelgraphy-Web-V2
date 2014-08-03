@@ -4,7 +4,7 @@
 
 'use strict';
 
-var pixelApp = angular.module('pixelApp',['ngRoute', 'ui.utils', 'ui.bootstrap']);
+var pixelApp = angular.module('pixelApp',['ngRoute', 'ui.utils', "ui.scroll", "ui.scroll.jqlite", 'ui.bootstrap']);
 
 
 pixelApp.config(function routing($routeProvider)
@@ -45,5 +45,33 @@ pixelApp.config(function routing($routeProvider)
 });
 
 
+pixelApp.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
 
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight)
+            {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});
+
+function setSource(data, source)
+{
+    for(var x in data)
+    {
+        data[x].directory = source + data[x].directory;
+    }
+
+}
+
+
+function setDirectorySource(data, source, field)
+{
+    data[field] = source + data[field];
+
+    return data;
+}
 
