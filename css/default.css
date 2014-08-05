@@ -91,20 +91,23 @@ a
     border: none;
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar
+{
     width: 12px;
+    height: 70%;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8);*/
     -webkit-border-radius: 10px;
     background-color: transparent;
     border-radius: 10px;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb
+{
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: #345d8b;

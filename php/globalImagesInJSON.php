@@ -9,4 +9,3 @@
 	$imageData = $db->retrieveMostRecentImagesInJSON();
 	
 	echo $imageData;
-?> 

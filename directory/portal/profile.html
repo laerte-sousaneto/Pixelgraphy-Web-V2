@@ -108,22 +108,93 @@
                 </tab>
 
                 <tab heading="Gallery">
+
                     <div class="well" style="border-top-left-radius: 0; border-top-right-radius: 0;">
-                        <div class="row">
 
-                            <div class="col-md-10">
+                        <div class="row" ng-hide="showImages">
 
-                                <div class="panel">
-                                    <p ng-bind="data.hobbies"></p>
+                            <div class="col-md-4"
+                                 ng-repeat="album in albums track by $index">
+
+                                <div class="panel panel-default" style="cursor:pointer;"
+                                     ng-click="showAlbumImages(album.ID)">
+
+                                    <div class="panel-heading">
+                                        {{album.name | uppercase}}
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="row">
+
+                                            <div class="col-md-4 "
+                                                 ng-repeat="image in albumImages | limitTo: 3">
+                                                <div>
+
+                                                    <img
+                                                         class="img-rounded img-responsive"
+                                                         ng-src="{{image['directory']}}"
+                                                            />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="panel">
-                                    <p ng-bind="data.biography"></p>
-                                </div>
                             </div>
 
                         </div>
+
+                        <div ng-hide="!showImages">
+
+                            <button type="button" class="btn btn-info btn-md" ng-click="toggleImages()">
+                                <span class="glyphicon glyphicon-arrow-left"></span> Back
+                            </button>
+
+                            <div class="row">
+
+                                <div class="col-md-4" ng-repeat="imageInfo in albumImages">
+
+                                    <div class="row light-padding" >
+
+                                        <div class="col-md-12 thumbnail" >
+
+                                            <div class="row">
+
+                                                <div class="col-lg-12 col-xs-6">
+                                                    <div class="img-container">
+
+                                                        <img id="{{imageInfo['ID']}}"
+                                                             class="img-rounded img-responsive img-thumbnail"
+                                                             ng-src="{{imageInfo['directory']}}"
+                                                                />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-xs-6">
+                                                    <blockquote class="caption">
+
+                                                        <p ng-bind="imageInfo['name']"></p>
+                                                        <footer ng-bind="imageInfo['username']"><cite title="Source Title"></cite></footer>
+
+                                                    </blockquote>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </tab>
 
             </tabset>

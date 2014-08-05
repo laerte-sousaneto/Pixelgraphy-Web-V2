@@ -26,7 +26,7 @@
 		
 		function __construct()
 		{
-			$this->host = '192.168.1.7';
+			$this->host = 'pixel.laertesousa.com';
 			$this->username = 'laerte';
 			$this->password = 'lta86t7v';
 			$this->dbName = 'pixelgraphy';

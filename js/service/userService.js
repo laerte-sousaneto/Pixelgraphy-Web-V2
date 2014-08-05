@@ -8,6 +8,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
 
     service.userID = null;
     service.userProfile = null;
+    service.albums = null;
     service.userImages = null;
     service.globalImages = null;
 
@@ -80,6 +81,18 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
 
     };
 
+    service.updateAlbums = function()
+    {
+        dataAccessor.getAlbums(function(data)
+        {
+            if(!data['error'])
+            {
+                service.albums = data['result'];
+            }
+
+            service.notifyPropertyChanged('albums');
+        });
+    };
 
     service.updateGlobalImages = function()
     {
@@ -94,6 +107,10 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
 
     };
 
+    service.notifyPropertyChanged = function(property)
+    {
+        $rootScope.$broadcast(property);
+    };
 
     service.broadcastUpdate = function()
     {

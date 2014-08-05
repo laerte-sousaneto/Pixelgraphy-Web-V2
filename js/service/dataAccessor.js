@@ -22,6 +22,31 @@ pixelApp.factory('dataAccessor', function($http)
             .success(onSuccess);
         },
 
+        getAlbums: function(onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    url     :   '../../php/getUserAlbums.php'
+                    //url     :   'http://pixel.laertesousa.com/php/globalImagesInJSON.php'
+                }
+            )
+            .success(onSuccess);
+        },
+
+        getAlbumImages: function(albumID, onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    url     :   '../../php/getAlbumImages.php',
+                    //url     :   'http://pixel.laertesousa.com/php/login_check.php',
+                    data    :   $.param({'albumID':albumID}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
+
         tryLogin: function(username, password, onSuccess)
         {
             $http(

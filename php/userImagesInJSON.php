@@ -10,4 +10,3 @@
 	$imageData = $db->retrieveUserImageDataInJSON($userID);
 	
 	echo $imageData;
-?> 

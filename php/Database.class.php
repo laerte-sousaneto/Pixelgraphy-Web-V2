@@ -137,7 +137,57 @@
 			}
 			return $resultArray;
 		}
-		
+
+
+        //
+        function retrieveUserAlbums($userID)
+        {
+            $query = "select id, name from albums where owner_id = '".$userID."'";
+
+            $result = mysqli_query($this->connection,$query);
+            $resultArray = array();
+
+            while($row = mysqli_fetch_array($result))
+            {
+                $id = $row['id'];
+                $name = $row['name'];
+
+                array_push($resultArray, array("ID"=>$id, "name"=>$name));
+            }
+
+            return $resultArray;
+        }
+
+
+        //
+        function retrieveAlbumImages($albumID)
+        {
+            $query = "select image_id,user_id,name,description,directory,date from images where album = '".$albumID."'";
+            $query .= " ORDER BY date_unix DESC";
+            $result = mysqli_query($this->connection,$query);
+            $resultArray = array();
+            while($row = mysqli_fetch_array($result))
+            {
+                $user_id = $row['user_id'];
+                $image_id = $row['image_id'];
+                $name = $row['name'];
+                $description = $row['description'];
+                $directory = $row['directory'];
+                $date = $row['date'];
+                $temp = explode(".", $row['directory']);
+
+                array_push($resultArray,array("ID"=>$image_id,
+                    "name"=>$name,
+                    "username"=>$this->getUsername($user_id),
+                    "description"=>$description,
+                    "directory"=>$temp[0].'_homepage.'.end($temp),
+                    "date"=>$date));
+            }
+
+            return $resultArray;
+        }
+
+
 		//
 		function retrieveUserImageDataInJSON($userID)
 		{
@@ -238,7 +288,7 @@
 			while($row = mysqli_fetch_array($result))
 			{
 				$Image_id = $row['image_id'];
-				$username = $row['user_id'];
+				$username = $this->getUsername($row['user_id']);
 				$name = $row['name'];
 				$description = $row['description'];
 				$directory = $row['directory'];
