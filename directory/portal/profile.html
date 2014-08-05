@@ -116,8 +116,8 @@
                             <div class="col-md-4"
                                  ng-repeat="album in albums track by $index">
 
-                                <div class="panel panel-default" style="cursor:pointer;"
-                                     ng-click="showAlbumImages(album.ID)">
+                                <div class="panel panel-info" style="cursor:pointer;"
+                                     ng-click="showAlbumImages($index)">
 
                                     <div class="panel-heading">
                                         {{album.name | uppercase}}
@@ -127,7 +127,7 @@
                                         <div class="row">
 
                                             <div class="col-md-4 "
-                                                 ng-repeat="image in albumImages | limitTo: 3">
+                                                 ng-repeat="image in album.images | limitTo: 3">
                                                 <div>
 
                                                     <img

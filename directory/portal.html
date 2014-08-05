@@ -39,12 +39,14 @@
                                     <li><a href="#/feedback">Feedback</a> </li>
                                 </ul>
 
-                                <form class="navbar-form navbar-left" role="search">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </form>
+                                <div class="navbar-form navbar-left">
+                                    <button type="button"
+                                            class="btn btn-primary btn-md"
+                                            data-toggle="modal"
+                                            data-target="#uploadModal">
+                                        Upload Image!
+                                    </button>
+                                </div>
 
                                 <div class="navbar-right">
 
@@ -124,5 +126,9 @@
 
     </div>
     <!-- Content -->
+
+    <!-- Upload Modal -->
+    <div ng-include src="'templates/uploadModal.html'">
+    <!-- Upload Modal -->
 
 </div>

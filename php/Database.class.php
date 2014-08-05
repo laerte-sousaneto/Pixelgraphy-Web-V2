@@ -151,8 +151,9 @@
             {
                 $id = $row['id'];
                 $name = $row['name'];
+                $images = $this->retrieveAlbumImages($id);
 
-                array_push($resultArray, array("ID"=>$id, "name"=>$name));
+                array_push($resultArray, array("ID"=>$id, "name"=>$name, "images"=>$images));
             }
 
             return $resultArray;

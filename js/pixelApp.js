@@ -62,6 +62,7 @@ function setSource(data, source)
 {
     for(var x in data)
     {
+        console.log(data[x]);
         data[x].directory = source + data[x].directory;
     }
 

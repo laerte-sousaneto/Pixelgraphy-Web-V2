@@ -30,7 +30,6 @@ function profileController($scope, userService, dataAccessor)
     $scope.$on('profileUpdate',function()
     {
         $scope.data = userService.userProfile;
-        console.log($scope.data);
     });
 
     $scope.$on('albums', function()
@@ -39,18 +38,10 @@ function profileController($scope, userService, dataAccessor)
     });
 
 
-    $scope.showAlbumImages = function(albumID)
+    $scope.showAlbumImages = function(index)
     {
-        dataAccessor.getAlbumImages(albumID, function(data)
-        {
-            if(!data['error'])
-            {
-                $scope.showImages = true;
-                setSource(data['result'], $scope.homeSource);
-                $scope.albumImages = data['result'];
-
-            }
-        });
+        $scope.showImages = true;
+        $scope.albumImages = $scope.albums[index].images;
     };
 
     $scope.toggleImages = function()
