@@ -26,17 +26,11 @@ function portalController($scope, sessionStateService)
             url: 'directory/portal/profile.html'
         },
         {
-            title:'Settings',
-            content:'',
-            icon: 'glyphicon-list-alt' ,
-            disabled: false
-        },
-        {
             title:'Upload',
             content:'',
             active: true,
             url: 'directory/portal/upload.html',
-            icon: 'glyphicon-list-alt' ,
+            icon: 'glyphicon-picture' ,
             disabled: false
         }
     ];

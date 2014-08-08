@@ -25,6 +25,7 @@
 		private $user;
 		private $file;
 		private $name;
+        private $album;
 		private $description;
 		private $isProfile;
 		private $directory;
@@ -33,17 +34,19 @@
 		private $image_id;
 		
 		//---DEFAULT CONSTRUCTOR---
-		function __construct($user,$file,$name,$description,$isProfile)
+		function __construct($user,$file,$name, $album,$description,$isProfile)
 		{
 			$this->database = new Database();
 								
 			$this->user = $user;
 			$this->file = $file;
-			$this->name = $file['name'];
+			$this->name = $name;
+            $this->album = $album;
 			$this->description = $description;
 			$this->image_id = uniqid();
 			$this->isProfile = $isProfile;
-			$this->directory = $this->generateDirectory();
+			$this->rootDirectory = "/var/www/html/userhome_pixel/".$user."_home/";
+            $this->imageURL = "http://userhome.laertesousa.com/".$user."_home/";
             $this->tempURL = "http://pixel.laertesousa.com/temp/";
             $this->tempDirectory = "/var/www/html/pixelgraphy/temp/";
 			$this->domain = 'pixelgraphy.net/';
@@ -92,7 +95,7 @@
 			
 			if($this->isImageFile($ext) && $this->noFileError() && $this->noDuplicate())
 			{
-				if(move_uploaded_file($this->file['tmp_name'],"../".$this->directory))
+				if(move_uploaded_file($this->file['tmp_name'],$this->rootDirectory.$this->image_id.".".$ext))
 				{
 					if($this->isProfile == 'true')
 					{
@@ -101,11 +104,11 @@
 					else
 					{
 						$this->database
-						->insertImage($this->image_id,$this->name,$this->user,
-						$this->directory,$this->description,0);
+						->insertImage($this->image_id,$this->name, $this->album,$this->user,
+						$this->imageURL.$this->image_id.".".$ext,$this->description,0);
 						
-						$imageUtility = new ImageUtility('../'.$this->directory);
-						$imageUtility->cropAndSave($this->image_id.'_homepage.'.$this->getFileExtension(),'../'.$this->database->getUserHome($this->user).'/',350,200);
+						$imageUtility = new ImageUtility($this->rootDirectory.$this->image_id.".".$ext);
+						$imageUtility->cropAndSave($this->image_id.'_homepage.'.$this->getFileExtension(),$this->rootDirectory,350,200);
 					}
 					
 					echo "File Uploaded";

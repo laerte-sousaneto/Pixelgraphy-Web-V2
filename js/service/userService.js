@@ -23,7 +23,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
             if(!data['error'])
             {
                 service.userProfile = data['result'];
-                setDirectorySource(service.userProfile,service.imageSource,'profile_picture');
             }
 
             service.notifyProfileUpdate();
@@ -32,7 +31,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
         dataAccessor.getUserImages(this.userID,function(data)
         {
             service.userImages = data;
-            //setDirectorySource(service.userProfile,"http://userhome.laertesousa.com/",'profile_picture');
 
             service.notifyImagesUpdate();
         });
@@ -107,7 +105,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
         dataAccessor.getImages(function(data)
         {
             var images = data;
-            setSource(data,"http://userhome.laertesousa.com/");
             service.globalImages = images;
 
             service.notifyGlobalImagesUpdate();

@@ -318,7 +318,8 @@
 				"username"=>$username,
 				"name"=>$name,
 				"description"=>$description,
-				"directory"=>$temp[0].'_homepage.'.end($temp),
+				"directory"=>"http://userhome.laertesousa.com/".$row['user_id'].'_home/'.$Image_id."_homepage.".end($temp),
+                //"directory"=>$row['directory'],
 				"date"=>$date));
 			}
 			return json_encode($resultArray);
@@ -346,7 +347,7 @@
 			insert image information into the database.
 			Note: This method is only inserting the image information, not the actual image.
 		*/
-		public function insertImage($image_id,$name,$username,
+		public function insertImage($image_id,$name,$album,$username,
 		$directory,$description,$privacy)
 		{
 			$table = 'images';
@@ -356,6 +357,7 @@
 				(					//Table fields
 					'image_id',
 					'name',
+                    'album',
 					'user_id',
 					'description',	
 					'privacy',
@@ -369,7 +371,8 @@
 					(
 						"'".$image_id."'",
 						"'".$name."'",
-						"'".$this->getUserID($username)."'",
+                        "'".$album."'",
+						"'".$username."'",
 						"'".$description."'",
 						"'".$privacy."'",
 						"'".$directory."'",

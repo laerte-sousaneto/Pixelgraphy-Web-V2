@@ -7,6 +7,7 @@
  */
 
 require 'ImageServerUpload.class.php';
+error_reporting(E_ALL);
 
 if(session_id() == '')
 {
@@ -19,5 +20,5 @@ $file = ($_FILES['file']);
 $fileName = "";
 $desc = "";
 
-$uploader = new ImageServerUpload($user,$file,$fileName,$desc,$isProfile);
+$uploader = new ImageServerUpload($user,$file,$fileName,"",$desc,$isProfile);
 echo json_encode($uploader->uploadTempImageFile());

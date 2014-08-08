@@ -33,6 +33,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
                     'file':fileInfo,
                     'name':"",
                     'description':"",
+                    'album':$scope.selectedAlbum,
                     'size':fileInfo.size,
                     'type':fileInfo.type,
                     'status':'active',
@@ -57,7 +58,42 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
     $scope.uploadFile = function(fileIndex)
     {
+        var file = $scope.files[fileIndex];
 
+        var url = "php/uploadImage.php";
+
+        var xhr = new XMLHttpRequest();
+        var fileData = new FormData();
+
+        xhr.open("POST", url, true);
+
+        xhr.onreadystatechange = function()
+        {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Handle response.
+                console.log(xhr.responseText);
+               // var phpResponse = JSON.parse(xhr.responseText);
+
+                console.log(phpResponse);
+                if(!phpResponse['error'])
+                {
+                    $timeout(function()
+                    {
+
+
+                    },2000);
+                }
+            }
+        };
+
+        fileData.append('file', file.file);
+        fileData.append('nameInput',file.name);
+        fileData.append('album', file.album.id);
+        fileData.append('descriptionInput', file.description);
+        fileData.append('isProfile', false);
+
+        // Initiate a multipart/form-data upload
+        xhr.send(fileData);
     };
 
     $scope.sendTempFile = function(fileIndex)
@@ -94,7 +130,6 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
         // Initiate a multipart/form-data upload
         xhr.send(fileData);
-
 
     };
 

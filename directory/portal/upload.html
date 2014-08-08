@@ -95,7 +95,9 @@
                                 />
                     </div>
 
-                    <button class="btn btn-sm btn-info text-center">Upload</button>
+                    {{file.album}}
+
+                    <button class="btn btn-sm btn-info text-center" ng-click="uploadFile($index)">Upload</button>
 
                 </fieldset>
 
