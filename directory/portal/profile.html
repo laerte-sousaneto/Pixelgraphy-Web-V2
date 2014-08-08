@@ -116,10 +116,11 @@
                             <div class="col-md-4"
                                  ng-repeat="album in albums track by $index">
 
-                                <div class="panel panel-info" style="cursor:pointer;"
-                                     ng-click="showAlbumImages($index)">
+                                <div class="panel panel-info" >
 
-                                    <div class="panel-heading">
+                                    <div class="panel-heading"style="
+                                         cursor:pointer;"
+                                         ng-click="showAlbumImages($index)">
                                         {{album.name | uppercase}}
                                     </div>
 
@@ -138,6 +139,16 @@
                                             </div>
 
                                         </div>
+
+
+
+                                        <div class="text-center" style="margin: 5px;">
+                                            <button class="btn btn-sm btn-danger"
+                                                    ng-click="removeAlbum($index)">Remove</button>
+                                        </div>
+
+
+
                                     </div>
 
                                 </div>
@@ -176,7 +187,6 @@
                                                     <blockquote class="caption">
 
                                                         <p ng-bind="imageInfo['name']"></p>
-                                                        <footer ng-bind="imageInfo['username']"><cite title="Source Title"></cite></footer>
 
                                                     </blockquote>
                                                 </div>

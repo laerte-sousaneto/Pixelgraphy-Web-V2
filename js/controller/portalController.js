@@ -6,7 +6,7 @@
 
 pixelApp.controller('portalController', portalController);
 
-function portalController($scope, $window, userService, sessionStateService)
+function portalController($scope, sessionStateService)
 {
 
     $scope.tabs = [
@@ -20,7 +20,7 @@ function portalController($scope, $window, userService, sessionStateService)
         {
             title:'Profile',
             content:'Profile',
-            active: true,
+            active: false,
             disabled: false,
             icon: 'glyphicon-user' ,
             url: 'directory/portal/profile.html'
@@ -28,6 +28,14 @@ function portalController($scope, $window, userService, sessionStateService)
         {
             title:'Settings',
             content:'',
+            icon: 'glyphicon-list-alt' ,
+            disabled: false
+        },
+        {
+            title:'Upload',
+            content:'',
+            active: true,
+            url: 'directory/portal/upload.html',
             icon: 'glyphicon-list-alt' ,
             disabled: false
         }

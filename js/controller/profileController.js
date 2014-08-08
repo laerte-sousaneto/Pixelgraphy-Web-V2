@@ -6,7 +6,7 @@
 
 pixelApp.controller('profileController', profileController);
 
-function profileController($scope, userService, dataAccessor)
+function profileController($scope, userService, dataModifier)
 {
     $scope.homeSource = "http://userhome.laertesousa.com/";
 
@@ -44,6 +44,18 @@ function profileController($scope, userService, dataAccessor)
         $scope.albumImages = $scope.albums[index].images;
     };
 
+    $scope.removeAlbum = function(index)
+    {
+        dataModifier.removeAlbum($scope.albums[index].ID, function(data)
+        {
+            if(data == true)
+            {
+                userService.updateAlbums();
+            }
+
+            console.log(data);
+        });
+    };
     $scope.toggleImages = function()
     {
         $scope.showImages = !$scope.showImages;

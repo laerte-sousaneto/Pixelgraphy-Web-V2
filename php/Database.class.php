@@ -137,8 +137,6 @@
 			}
 			return $resultArray;
 		}
-
-
         //
         function retrieveUserAlbums($userID)
         {
@@ -158,8 +156,6 @@
 
             return $resultArray;
         }
-
-
         //
         function retrieveAlbumImages($albumID)
         {
@@ -187,8 +183,6 @@
 
             return $resultArray;
         }
-
-
 		//
 		function retrieveUserImageDataInJSON($userID)
 		{
@@ -329,7 +323,23 @@
 			}
 			return json_encode($resultArray);
 		}
-		
+
+        function createAlbum($name, $owner_id)
+        {
+            $sql = "INSERT INTO albums(name,owner_id) VALUES('".$name."','".$owner_id."')";
+            $result = mysqli_query($this->connection,$sql);
+
+            return $result;
+        }
+
+        function removeAlbum($id)
+        {
+            $sql = "delete from albums where id=".$id;
+            $result = mysqli_query($this->connection,$sql);
+
+            return $result;
+        }
+
 		/*
 			Method Functionality: Inserts an image into the database
 			Specification: Uses parameters being passed to create a query, in order to 
