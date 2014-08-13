@@ -177,7 +177,7 @@
                     "name"=>$name,
                     "username"=>$this->getUsername($user_id),
                     "description"=>$description,
-                    "directory"=>$temp[0].'_homepage.'.end($temp),
+                    "directory"=>$temp[0].".".$temp[1].".".$temp[2].'_homepage.'.end($temp),
                     "date"=>$date));
             }
 

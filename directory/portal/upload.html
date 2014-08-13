@@ -21,20 +21,24 @@
 
         <div class="navbar-form navbar-right">
 
-            <div class="form-group">
+            <div class="form-group has-feedback"
+                 ng-class="{'has-success' : isAlbumValid(), 'has-error' : !isAlbumValid()}">
 
                 <input type="text"
                        class="form-control"
                        ng-model="newAlbum"
                        placeholder="Album's Name">
 
-                <button type="submit"
-                        class="btn btn-default"
-                        ng-click="createAlbum()">Create Album</button>
 
+
+                <span class="glyphicon glyphicon-ok form-control-feedback"
+                      ng-class="{'glyphicon-ok': isAlbumValid(), 'glyphicon-remove': !isAlbumValid()}"></span>
             </div>
 
-            {{newAlbum}}
+            <button type="submit"
+                    class="btn btn-default"
+                    ng-click="createAlbum()"
+                    ng-disabled="!isAlbumValid(newAlbum)">Create Album</button>
 
         </div>
     </div>
@@ -67,37 +71,46 @@
 
                 <fieldset>
 
-                    <div class="form-group">
-                        <label>Name</label>
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success' : isNameValid(file.name), 'has-error' : !isNameValid(file.name)}">
+                        <label class="control-label">Name</label>
                         <input type="text"
                                class="form-control"
                                placeholder="Name"
                                ng-model="file.name"
                                 />
+                        <span class="glyphicon glyphicon-ok form-control-feedback"
+                                ng-class="{'glyphicon-ok': isNameValid(file.name), 'glyphicon-remove': !isNameValid(file.name)}"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group has-success"
+                         ng-class="{'has-success' : isAlbumSelected(file.album), 'has-error' : !isAlbumSelected(file.album)}">
 
-                        <label>Album</label>
+                        <label class="control-label">Album</label>
                         <select class="form-control"
-                                ng-model="selectedAlbum"
+                                ng-model="file.album"
                                 ng-options="album as album.name for album in albums"></select>
 
                     </div>
 
-                    <div class="form-group">
-                        <label>Description</label>
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-success' : isDescriptionValid(file.description), 'has-error' : !isDescriptionValid(file.description)}">
+                        <label class="control-label">Description</label>
                         <textarea  type="text"
                                    class="form-control"
-                                   placeholder=""
+                                   rows="8"
+                                   placeholder="Describe your image here!"
                                    ng-model="file.description"
                                    multiline
                                 />
+                        <span style="margin:5px;">{{file.description.length}} / 150</span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback"
+                              ng-class="{'glyphicon-ok': isDescriptionValid(file.description), 'glyphicon-remove': !isDescriptionValid(file.description)}"></span>
                     </div>
 
-                    {{file.album}}
-
-                    <button class="btn btn-sm btn-info text-center" ng-click="uploadFile($index)">Upload</button>
+                    <button class="btn btn-sm btn-info text-center"
+                            ng-click="uploadFile($index)"
+                            ng-disabled="!isUploadEnabled($index)">Upload</button>
 
                 </fieldset>
 

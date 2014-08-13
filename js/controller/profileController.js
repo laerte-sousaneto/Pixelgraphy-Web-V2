@@ -37,7 +37,6 @@ function profileController($scope, userService, dataModifier)
         $scope.albums = userService.albums;
     });
 
-
     $scope.showAlbumImages = function(index)
     {
         $scope.showImages = true;
@@ -61,4 +60,5 @@ function profileController($scope, userService, dataModifier)
         $scope.showImages = !$scope.showImages;
     };
 
+    userService.updateAlbums();
 }

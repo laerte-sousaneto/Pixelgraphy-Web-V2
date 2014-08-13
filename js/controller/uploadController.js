@@ -11,8 +11,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
 {
     $scope.newFiles = null;
     $scope.files = [];
-    $scope.albums = [{'id':'0', 'name':'Album 1'},{'id':'1', 'name':'Album 2'}];
-    $scope.selectedAlbum = $scope.albums[0];
+    $scope.albums = userService.albums;
     $scope.newAlbum = "";
 
     $scope.uploadLimit = 3;
@@ -33,7 +32,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
                     'file':fileInfo,
                     'name':"",
                     'description':"",
-                    'album':$scope.selectedAlbum,
+                    'album':null,
                     'size':fileInfo.size,
                     'type':fileInfo.type,
                     'status':'active',
@@ -56,6 +55,11 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
     });
 
+    $scope.$on('albums', function()
+    {
+        $scope.albums = userService.albums;
+    });
+
     $scope.uploadFile = function(fileIndex)
     {
         var file = $scope.files[fileIndex];
@@ -74,21 +78,39 @@ function uploadController($scope, $timeout, dataModifier, userService)
                 console.log(xhr.responseText);
                // var phpResponse = JSON.parse(xhr.responseText);
 
-                console.log(phpResponse);
-                if(!phpResponse['error'])
+                //console.log(phpResponse);
+                /*if(!phpResponse['error'])
                 {
                     $timeout(function()
                     {
 
 
                     },2000);
-                }
+                }*/
             }
         };
 
+        xhr.upload.addEventListener("progress", function(e)
+        {
+
+            if (e.lengthComputable)
+            {
+                console.log('here');
+                var percentage = Math.round((e.loaded * 100) / e.total);
+
+                if(percentage == 100)
+                {
+                    $scope.$apply(function(){$scope.files[fileIndex].uploaded = true});
+                    //userService.updateAlbums();
+                }
+
+                $scope.$apply(function(){$scope.files[fileIndex].progress = percentage});
+            }
+        }, false);
+
         fileData.append('file', file.file);
         fileData.append('nameInput',file.name);
-        fileData.append('album', file.album.id);
+        fileData.append('album', file.album.ID);
         fileData.append('descriptionInput', file.description);
         fileData.append('isProfile', false);
 
@@ -149,6 +171,39 @@ function uploadController($scope, $timeout, dataModifier, userService)
         }
 
     }
+
+    $scope.isAlbumValid = function()
+    {
+        var regex = new RegExp("^(([a-zA-Z0-9\\s]){3,25})$");
+        return regex.test($scope.newAlbum);
+    }
+
+    $scope.isAlbumSelected = function(album)
+    {
+        return album != null;
+    }
+
+    $scope.isNameValid = function(name)
+    {
+        var regex = new RegExp("^(([a-zA-Z0-9\\s\\.\\'\\()\\%\\@\\:\\,]){3,25})$");
+        return regex.test(name);
+    }
+
+    $scope.isDescriptionValid = function(description)
+    {
+        var regex = new RegExp("^(([a-zA-Z0-9\\s\\n\\.\\'\\()\\%\\@\\:\\,]){10,150})$");
+        return regex.test(description);
+    }
+
+    $scope.isUploadEnabled = function(fileIndex)
+    {
+        return ($scope.isNameValid($scope.files[fileIndex].name)
+            && $scope.isDescriptionValid($scope.files[fileIndex].description)
+            && $scope.isAlbumSelected($scope.files[fileIndex].album)
+            && !$scope.files[fileIndex].uploaded);
+    }
+
+    userService.updateAlbums();
 }
 
 
