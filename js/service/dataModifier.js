@@ -28,6 +28,17 @@ pixelApp.factory('dataModifier', function($http)
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);
+        },
+        removeImage: function(id, onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    url     :   '../../php/Modifiers/removeImage.php',
+                    data    :   $.param({'id':id}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
         }
     }
 });

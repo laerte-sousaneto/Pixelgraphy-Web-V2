@@ -55,6 +55,24 @@ function profileController($scope, userService, dataModifier)
             console.log(data);
         });
     };
+
+    $scope.removeImage = function(index)
+    {
+        dataModifier.removeImage($scope.albumImages[index].ID, function(data)
+        {
+
+            if(!data['error'])
+            {
+                console.log($scope.albumImages, index);
+                $scope.albumImages.splice(index,1);
+                console.log($scope.albumImages);
+            }
+
+            console.log(data);
+        });
+    }
+
+
     $scope.toggleImages = function()
     {
         $scope.showImages = !$scope.showImages;

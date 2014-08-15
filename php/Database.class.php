@@ -396,6 +396,12 @@
 		*/
 		public function removeImage($image_id)
 		{
+            $results = array(
+                'result' => "",
+                'error' => false,
+                'error_msg' => ""
+
+            );
 			$query = "SELECT directory FROM images WHERE image_id='".$image_id."'";
 			$query1 = "DELETE FROM images WHERE image_id='".$image_id."'";
 			$query2 = "DELETE FROM comments WHERE image_id='".$image_id."'";
@@ -405,26 +411,37 @@
 				$row = mysqli_fetch_array($result);
 				
 				$temp = explode(".", $row['directory']);
-				if(unlink("../".$row['directory']) && unlink("../".$temp[0].'_homepage.'.end($temp)))
+                $temp2 = explode("/", $row['directory']);
+                $ext = end($temp);
+
+                $path = "/var/www/html/userhome_pixel/".$temp2[3]."/".$temp2[4];
+
+				if(unlink($path))
 				{
 					if(!mysqli_query($this->getConnection(),$query1))
 					{
-						echo mysqli_error($this->getConnection());
+                        $results['error'] = true;
+                        $results['error_msg'] = mysqli_error($this->getConnection());
 					}
 					if(!mysqli_query($this->getConnection(),$query2))
 					{
-						echo mysqli_error($this->getConnection());
+                        $results['error'] = true;
+                        $results['error_msg'] = mysqli_error($this->getConnection());
 					}
 				}
 				else
 				{
-					echo "file was not deleted sucessfully";	
+                    $results['error'] = true;
+                    $results['error_msg'] = "file was not deleted sucessfully";
 				}
 			}
 			else
 			{
-				echo mysqli_error($this->getConnection());
+                $results['error'] = true;
+                $results['error_msg'] = mysqli_error($this->getConnection());
 			}
+
+            return $results;
 			
 		}
 		/*

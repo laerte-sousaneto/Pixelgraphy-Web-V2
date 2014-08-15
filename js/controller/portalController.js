@@ -20,7 +20,7 @@ function portalController($scope, sessionStateService)
         {
             title:'Profile',
             content:'Profile',
-            active: false,
+            active: true,
             disabled: false,
             icon: 'glyphicon-user' ,
             url: 'directory/portal/profile.html'
@@ -28,7 +28,7 @@ function portalController($scope, sessionStateService)
         {
             title:'Upload',
             content:'',
-            active: true,
+            active: false,
             url: 'directory/portal/upload.html',
             icon: 'glyphicon-picture' ,
             disabled: false
