@@ -17,6 +17,12 @@ function profileController($scope, userService, dataModifier)
     $scope.showImages = false;
     $scope.albumImages = null;
 
+    $scope.removalIndex = null;
+    $scope.removalImageImage = null;
+
+    $scope.albumRemovalIndex = null;
+    $scope.removalAlbum = null;
+
     if($scope.albums == null)
     {
         userService.updateAlbums();
@@ -45,6 +51,7 @@ function profileController($scope, userService, dataModifier)
 
     $scope.removeAlbum = function(index)
     {
+        console.log(index);
         dataModifier.removeAlbum($scope.albums[index].ID, function(data)
         {
             if(data == true)
@@ -54,6 +61,8 @@ function profileController($scope, userService, dataModifier)
 
             console.log(data);
         });
+
+        $('#albumRemovalModal').modal('hide');
     };
 
     $scope.removeImage = function(index)
@@ -63,14 +72,12 @@ function profileController($scope, userService, dataModifier)
 
             if(!data['error'])
             {
-                console.log($scope.albumImages, index);
                 $scope.albumImages.splice(index,1);
-                console.log($scope.albumImages);
             }
 
-            console.log(data);
+            $('#imageRemovalModal').modal('hide');
         });
-    }
+    };
 
 
     $scope.toggleImages = function()
@@ -78,5 +85,38 @@ function profileController($scope, userService, dataModifier)
         $scope.showImages = !$scope.showImages;
     };
 
+    $scope.openImageRemovalModal = function(index)
+    {
+        $('#imageRemovalModal').modal('show');
+
+        $scope.removalIndex = index;
+        $scope.removalImage = $scope.albumImages[index];
+    };
+
+    $scope.dismissImageRemovalModal = function()
+    {
+        $('#imageRemovalModal').modal('hide');
+    };
+
+    $scope.openAlbumRemovalModal = function(index)
+    {
+        $scope.albumRemovalIndex = index;
+        $scope.removalAlbum = $scope.albums[index];
+
+        console.log($scope.removalAlbum);
+
+        $("#albumRemovalModal").modal('show');
+    };
+
+    $scope.dismissAlbumRemovalModal = function()
+    {
+        $("#albumRemovalModal").modal('hide');
+    };
+
+
     userService.updateAlbums();
+
+
+
+
 }

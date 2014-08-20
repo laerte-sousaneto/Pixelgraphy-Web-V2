@@ -259,4 +259,9 @@ textarea {
         width: auto;
         color: white;
     }
+
+    .form-control
+    {
+        font-size: 10px;
+    }
 }

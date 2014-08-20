@@ -1,0 +1,32 @@
+<!--Image Modal -->
+<div id="imageRemovalModal" class="modal fade" tab-index="-1" >
+
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                Are you sure you want to delete this picture?
+            </div>
+
+            <div class="modal-body text-center">
+
+                <img    class="img-rounded img-responsive"
+                        style="margin: 5px;"
+                        ng-src="{{removalImage.directory}}"
+                        />
+                <h2 ng-bind="removalImage.name"></h2>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-md" ng-click="removeImage(removalIndex)">Yes</button>
+                <button type="button" class="btn btn-primary btn-md" ng-click="dismissImageRemovalModal()">No</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!--Image Modal -->

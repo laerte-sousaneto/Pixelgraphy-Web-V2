@@ -12,7 +12,7 @@
 		
 		-----------------------------------------------------------------------------
 	*/
-	require_once "Credential.class.php";
+	require_once "Config/Credential.class.php";
 	
 	class Database
 	{

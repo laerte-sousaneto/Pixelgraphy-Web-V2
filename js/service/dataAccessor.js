@@ -52,7 +52,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/login_check.php',
+                    url     :   '../../php/Accessors/login_check.php',
                     //url     :   'http://pixel.laertesousa.com/php/login_check.php',
                     data    :   $.param({'username':username, 'password':password}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
@@ -78,7 +78,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/getUser.php',
+                    url     :   '../../php/Accessors/getUser.php',
                     data    :   $.param({'userID':id}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }

@@ -52,7 +52,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
                         if(!data['error'])
                         {
                             service.userProfile = data['result'];
-                            setDirectorySource(service.userProfile,service.imageSource,'profile_picture');
                         }
 
                         service.notifyProfileUpdate();

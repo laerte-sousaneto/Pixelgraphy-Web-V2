@@ -1,4 +1,4 @@
-<div ng-controller="profileController">
+<div ng-controller="profileController" onload="init();">
 
     <!-- Top Info -->
     <div class="row">
@@ -8,7 +8,7 @@
         </div>
 
         <!-- Main Info -->
-        <div class="col-lg-12 col-md-8 col-sm-8 col-md-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-md-xs-12">
 
             <h1 ng-bind="data['fullname']"></h1>
 
@@ -143,10 +143,9 @@
                                         </div>
 
 
-
                                         <div class="text-center pull-left" style="margin-top: 10px;">
                                             <button class="btn btn-sm btn-danger"
-                                                    ng-click="removeAlbum($index)">
+                                                    ng-click="openAlbumRemovalModal($index)">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </div>
@@ -201,7 +200,8 @@
 
                                                 <div class="col-lg-1" style="margin: 5px;">
                                                     <button class="btn btn-sm btn-danger"
-                                                            ng-click="removeImage($index)">
+                                                            ng-click="openImageRemovalModal($index)"
+                                                            >
                                                         <span class="glyphicon glyphicon-trash"></span>
                                                     </button>
                                                 </div>
@@ -228,6 +228,10 @@
 
     </div>
     <!-- Bottom Info -->
+
+
+    <div ng-include src="'../../templates/imageRemovalModal.html'"></div>
+    <div ng-include src="'../../templates/albumRemovalModal.html'"></div>
 
 </div>
 
