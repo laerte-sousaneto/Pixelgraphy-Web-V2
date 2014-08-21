@@ -37,8 +37,6 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
                     userService.setUserID(data['result']);
                     //$("#loginModal").modal('hide');
 
-                    console.log(data);
-
                     $scope.statusPanel = true;
                     $scope.hasLoginError = false;
                     $scope.loginError = data['error_msg'];
@@ -58,7 +56,6 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
                 }
                 else
                 {
-                    console.log(data);
                     $scope.statusPanel = false;
                     $scope.hasLoginError = true;
                     $scope.loginError = data['error_msg'];

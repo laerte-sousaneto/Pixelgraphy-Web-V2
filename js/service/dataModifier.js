@@ -39,6 +39,17 @@ pixelApp.factory('dataModifier', function($http)
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);
+        },
+        register: function(username, password1, password2, email, onSuccess)
+        {
+            $http(
+                {
+                    method : 'POST',
+                    url : '../../php/Modifiers/register.php',
+                    data : $.param({'username':username,'password1':password1,'password2':password2, 'email':email}),
+                    headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
         }
     }
 });

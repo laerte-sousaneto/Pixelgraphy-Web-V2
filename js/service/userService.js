@@ -43,6 +43,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
         {
             service.userID = sessionStateService.getSessionField('userID', function(data)
             {
+                console.log(data);
                 if(!data['error'])
                 {
                     service.userID = data['result'];
@@ -97,6 +98,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
     {
         dataAccessor.getImages(function(data)
         {
+            console.log(data);
             var images = data;
             service.globalImages = images;
 

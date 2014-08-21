@@ -9,25 +9,22 @@ pixelApp.controller('homeController',homeController);
 function homeController($scope, $interval, $timeout, dataAccessor, userService, uiService)
 {
     $scope.homeSource = "http://userhome.laertesousa.com/";
-    $scope.images = null;
+    $scope.images = userService.globalImages;
     $scope.imageSelected = null;
     $scope.index = 0;
     $scope.lastBoxIndex = 0;
 
     $scope.imagePreview = true;
 
-    $scope.userProfile = null;
-    $scope.userImages = null;
-
-
 
     var imageChangeInterval = 4000; //(milli seconds)
     var fadeInterval = 500;
 
-    userService.updateGlobalImages();
+
 
     $scope.$watch('images', function()
     {
+        console.log('images update', $scope.images);
        if($scope.imageSelected != null)
        {
            $interval(function()
@@ -35,22 +32,19 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
               nextImage($scope, $timeout, fadeInterval);
            }, imageChangeInterval);
        }
+       else
+       {
+           console.log('global images update', $scope.images);
+           userService.updateGlobalImages();
+       }
+
     });
 
-
-    //Broadcast Handlers
-    $scope.$on('profileUpdate',function()
-    {
-        $scope.userProfile = userService.userProfile;
-    });
     $scope.$on('globalImagesUpdate', function()
     {
         $scope.images = userService.globalImages;
+        console.log('watch on global');
         setImageBoxes($scope, 3);
-    });
-    $scope.$on('imagesUpdate',function()
-    {
-        $scope.userImages = userService.userImages;
     });
 
     $scope.$on('uiUpdate',function()
@@ -58,13 +52,8 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
         $scope.imagePreview = uiService.showHome;
     });
 
-}
 
-function trySignIn(event)
-{
-    var username = $("#signInForm").get(0).username.value.trim();
-    var password = $("#signInForm").get(0).password.value.trim();
-    alert(username +" "+ password);
+
 }
 
 function setImageBoxes(scope, quantity)

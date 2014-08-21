@@ -16,33 +16,58 @@
 
                     <div class="col-lg-6 col-lg-offset-3">
 
-                        <label class="src-only" for="username">Username</label>
-                        <input type="text"
-                               class="form-control"
-                               id="username"
-                               name="username"
-                               placeholder="Enter Username" />
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': isUsernameValid(), 'has-error': !isUsernameValid()}">
+                            <label class="src-only" for="username">Username</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="username"
+                                   ng-model="username"
+                                   placeholder="Enter Username" />
 
-                        <label class="src-only" for="password">Password</label>
-                        <input type="password"
-                               class="form-control"
-                               id="password"
-                               name="password"
-                               placeholder="Enter Password" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': isUsernameValid(), 'glyphicon-remove': !isUsernameValid()}"></span>
 
-                        <label class="src-only" for="password2">Repeat Password</label>
-                        <input type="password"
-                               class="form-control"
-                               id="password2"
-                               name="password2"
-                               placeholder="Enter Password Again" />
+                        </div>
 
-                        <label class="src-only" for="email">Purchase Email Address</label>
-                        <input type="email"
-                               class="form-control"
-                               id="email"
-                               name="email"
-                               placeholder="Enter Email" />
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': isPasswordValid(), 'has-error': !isPasswordValid()}">
+                            <label class="src-only" for="password">Password</label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   ng-model="password"
+                                   placeholder="Enter Password" />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': isPasswordValid(), 'glyphicon-remove': !isPasswordValid()}"></span>
+                        </div>
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': isRepeatPasswordValid(), 'has-error': !isRepeatPasswordValid()}">
+                            <label class="src-only" for="password2">Repeat Password</label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="password2"
+                                   ng-model="repeatPassword"
+                                   placeholder="Enter Password Again" />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': isRepeatPasswordValid(), 'glyphicon-remove': !isRepeatPasswordValid()}"></span>
+                        </div>
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': isEmailValid(), 'has-error': !isEmailValid()}">
+                            <label class="src-only" for="email">Purchase Email Address</label>
+                            <input type="email"
+                                   class="form-control"
+                                   id="email"
+                                   ng-model="email"
+                                   placeholder="Enter Email" />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
+                        </div>
 
 
 
@@ -53,7 +78,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Sign Up!</button>
+                <button type="button" class="btn btn-primary" ng-click="register()">Sign Up!</button>
             </div>
 
         </div>

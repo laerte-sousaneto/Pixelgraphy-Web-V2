@@ -15,8 +15,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/globalImagesInJSON.php'
-                    //url     :   'http://pixel.laertesousa.com/php/globalImagesInJSON.php'
+                    url     :   '../../php/Accessors/globalImagesInJSON.php'
                 }
             )
             .success(onSuccess);
