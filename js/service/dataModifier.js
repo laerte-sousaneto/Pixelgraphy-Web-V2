@@ -50,6 +50,17 @@ pixelApp.factory('dataModifier', function($http)
                     headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);
+        },
+        verifyAccount: function(username,code, onSuccess)
+        {
+            $http(
+                {
+                    method: 'POST',
+                    url : '../../php/Modifiers/verifyAccount.php',
+                    data :$.param({'username':username, 'code':code}),
+                    headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
         }
     }
 });

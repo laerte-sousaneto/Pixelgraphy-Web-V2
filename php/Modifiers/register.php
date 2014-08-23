@@ -5,6 +5,10 @@ require '../Database.class.php';
 $db = new Database();
 $con = $db->getConnection();
 
+$uniqNumber = hexdec(uniqid());
+$numLength = strlen($uniqNumber);
+$uniqNumber = substr($uniqNumber,$numLength-8, $numLength-1);
+
 try
 {
 	$usr = $_POST['username'];
@@ -58,9 +62,9 @@ try
 		$rh = encryption512($usr.$uuid);
 		$hash = hash("sha512", $usr, false); 
 		
-		mysqli_query($con,"INSERT INTO users (user_id, username, password, email, hash, verified, rhash) VALUES ('$uuid','$usr', '$pw1', '$eml', '$hash', '0', '$rh')");
+		mysqli_query($con,"INSERT INTO users (user_id, username, password, email, hash, verified, verificationCode) VALUES ('$uuid','$usr', '$pw1', '$eml', '$hash', '0', $uniqNumber )");
 		echo 'true';
-		email_verify($usr, $eml, $hash);
+		email_verify($usr, $eml, $uniqNumber);
 		/*echo '<h2>Your account has been created successfully ' . $usr . '! Please check your email to verify your account.</h2><h3>You will be redirected in <span id="timer">5</span> seconds.</h3><br/><a id="back" class="pure-button pure-button-primary" href="http://www.pixelgraphy.net">Back to Main Page</a>';*/
 		
 	}
@@ -70,11 +74,11 @@ catch(Exception $ex)
 	echo $ex->getMessage();
 }
 
-function email_verify($u, $e, $h)
+function email_verify($username, $email, $code)
 {
-	$vurl 	 = 'http://pixel.laertesousa.com/verifystep2.php?usr='.$u.'&hash='.$h;
-	$msgurl = 'Please click the following link to verify your account: <a href="'.$vurl.'">Verify!</a>';
-	$to = $e;
+	$url 	 = 'http://pixel.laertesousa.com/#/verify/'.$username.'/'.$code;
+	$msgurl = 'Please click the following link to verify your account: <a href="'.$url.'">Verify!</a>';
+	$to = $email;
     $from = 'support@pixelgraphy.net';
     $subject = 'Verify your account with Pixelgraphy'; 
     $message = '

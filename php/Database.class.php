@@ -79,7 +79,52 @@
 			}
 			return $successful;
 		}
-		
+
+        public function verifyAccount($username, $code)
+        {
+            $results = array(
+                'error'=> false,
+                'msg'=> ""
+            );
+
+            $query = "SELECT * FROM users WHERE username='".$username."' and verificationCode='".$code."'";
+
+            $result = mysqli_query($this->connection, $query);
+
+            if(mysqli_num_rows($result) == 1)
+            {
+                $this->updateVerifiedField('1',$username, $code);
+            }
+            else
+            {
+                $results['error'] = true;
+                $results['msg'] = "Validation Failed";
+            }
+
+            return $results;
+
+        }
+
+        public function updateVerifiedField($value, $username, $code)
+        {
+            $query = "UPDATE users SET verified='".$value."' WHERE username='".$username."'";
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function createProfileEntry($user_id)
+        {
+            $defaultImagePath = 'displaydefault.png';
+            $query = "INSERT INTO uprofile (user_id, profile_picture) VALUES ('$user_id','$defaultImagePath')";
+
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function updateUserHomePath($directory, $username)
+        {
+            $query = "UPDATE users SET home_path='$directory' WHERE username='$username'";
+            $result = mysqli_query($this->connection, $query);
+        }
+
 		/*
 			Method Functionality: Alters user setting based on given data and condition.
 			Specifications: method will table and user varibles to find a specific setting
@@ -318,7 +363,7 @@
 				"username"=>$username,
 				"name"=>$name,
 				"description"=>$description,
-				"directory"=>"http://userhome.laertesousa.com/".$row['user_id'].'_home/'.$Image_id."_homepage.".end($temp),
+				"directory"=>"http://userhome.laertesousa.com/".$username.'/'.$Image_id."_homepage.".end($temp),
                 //"directory"=>$row['directory'],
 				"date"=>$date));
 			}

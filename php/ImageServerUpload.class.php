@@ -23,6 +23,7 @@
 		//---PRIVATE MEMBERS---
 		private $database;
 		private $user;
+        private $username;
 		private $file;
 		private $name;
         private $album;
@@ -36,17 +37,21 @@
 		//---DEFAULT CONSTRUCTOR---
 		function __construct($user,$file,$name, $album,$description,$isProfile)
 		{
+
 			$this->database = new Database();
-								
+
+
 			$this->user = $user;
+            $this->username = $this->database->getUsername($user);
 			$this->file = $file;
 			$this->name = $name;
             $this->album = $album;
 			$this->description = $description;
 			$this->image_id = uniqid();
 			$this->isProfile = $isProfile;
-			$this->rootDirectory = "/var/www/html/userhome_pixel/".$user."_home/";
-            $this->imageURL = "http://userhome.laertesousa.com/".$user."_home/";
+			$this->rootDirectory = "/var/www/html/userhome_pixel/".$this->username."/";
+            $this->imageURL = "http://userhome.laertesousa.com/".$this->username;
+
             $this->tempURL = "http://pixel.laertesousa.com/temp/";
             $this->tempDirectory = "/var/www/html/pixelgraphy/temp/";
 			$this->domain = 'pixelgraphy.net/';

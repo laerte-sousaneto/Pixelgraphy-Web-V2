@@ -16,7 +16,7 @@ function registerController($scope, dataModifier)
 
     $scope.isUsernameValid = function()
     {
-        var regex = new RegExp("^([a-zA-Z0-9]){4,20}$");
+        var regex = new RegExp("^([a-zA-Z0-9\\.\\-]){4,20}$");
         return regex.test($scope.username);
     };
 
