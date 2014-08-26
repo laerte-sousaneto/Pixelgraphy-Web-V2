@@ -4,7 +4,7 @@
 
 pixelApp.controller('verify', verifyController);
 
-function verifyController($scope, $routeParams, $timeout, dataModifier)
+function verifyController($scope, $routeParams, $timeout, dataModifier, userService)
 {
     $scope.username = $routeParams.username;
     $scope.code = $routeParams.code;
@@ -51,6 +51,13 @@ function verifyController($scope, $routeParams, $timeout, dataModifier)
                     {
                         $scope.verificationComplete = true;
                         $scope.status = "Your username was successfully verified.";
+                        $scope.subStatus = "You will automatically be logged in to the portal.";
+                        userService.setUserID(data['userID']);
+
+                        $timeout(function()
+                            {
+                                window.location.href = "#/portal";
+                            }, 3000);
                     }
                     else
                     {

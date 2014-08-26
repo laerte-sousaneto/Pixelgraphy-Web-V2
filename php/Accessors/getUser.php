@@ -9,7 +9,6 @@ header("access-control-allow-origin: *");
 
 require "../Database.class.php";
 
-$userDomain = "http://userhome.laertesousa.com";
 $userID = $_POST['userID'];
 $userData = null;
 
@@ -19,7 +18,7 @@ $db = new Database();
 if($userID != "" && $userID != null)
 {
     $result = $db->retrieveUserData($userID);
-    $result['profile_picture'] = $userDomain . $result['profile_picture'];
+    $result['profile_picture'] = USER_HOME_URL . $result['profile_picture'];
     $userData = array(  'result'    =>  $result,
                         'error'     =>  false,
                         'error_msg' =>  ""

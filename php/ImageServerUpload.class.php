@@ -50,7 +50,7 @@
 			$this->image_id = uniqid();
 			$this->isProfile = $isProfile;
 			$this->rootDirectory = "/var/www/html/userhome_pixel/".$this->username."/";
-            $this->imageURL = "http://userhome.laertesousa.com/".$this->username;
+            $this->imageURL = "http://userhome.laertesousa.com/".$this->username."/";
 
             $this->tempURL = "http://pixel.laertesousa.com/temp/";
             $this->tempDirectory = "/var/www/html/pixelgraphy/temp/";
@@ -109,8 +109,7 @@
 					else
 					{
 						$this->database
-						->insertImage($this->image_id,$this->name, $this->album,$this->user,
-						$this->imageURL.$this->image_id.".".$ext,$this->description,0);
+						->insertImage($this->image_id,$this->name, $this->album,$this->user,$this->username . '/' . $this->image_id.".".$ext,$this->description,0);
 						
 						$imageUtility = new ImageUtility($this->rootDirectory.$this->image_id.".".$ext);
 						$imageUtility->cropAndSave($this->image_id.'_homepage.'.$this->getFileExtension(),$this->rootDirectory,350,200);

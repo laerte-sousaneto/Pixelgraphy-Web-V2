@@ -8,9 +8,8 @@ pixelApp.controller('profileController', profileController);
 
 function profileController($scope, userService, dataModifier)
 {
-    $scope.homeSource = "http://userhome.laertesousa.com/";
-
     $scope.data = userService.userProfile;
+
     $scope.verticalTab = true;
     $scope.albums = userService.albums;
 
@@ -51,15 +50,12 @@ function profileController($scope, userService, dataModifier)
 
     $scope.removeAlbum = function(index)
     {
-        console.log(index);
         dataModifier.removeAlbum($scope.albums[index].ID, function(data)
         {
             if(data == true)
             {
                 userService.updateAlbums();
             }
-
-            console.log(data);
         });
 
         $('#albumRemovalModal').modal('hide');
@@ -115,8 +111,5 @@ function profileController($scope, userService, dataModifier)
 
 
     userService.updateAlbums();
-
-
-
 
 }

@@ -13,6 +13,7 @@
 		-----------------------------------------------------------------------------
 	*/
 	require_once "Config/Credential.class.php";
+    require_once "Config/Config.php";
 	
 	class Database
 	{
@@ -84,7 +85,8 @@
         {
             $results = array(
                 'error'=> false,
-                'msg'=> ""
+                'msg'=> "",
+                'userID' => null
             );
 
             $query = "SELECT * FROM users WHERE username='".$username."' and verificationCode='".$code."'";
@@ -94,11 +96,13 @@
             if(mysqli_num_rows($result) == 1)
             {
                 $this->updateVerifiedField('1',$username, $code);
+                $results['userID'] = mysqli_fetch_array($result)['user_id'];
             }
             else
             {
                 $results['error'] = true;
                 $results['msg'] = "Validation Failed";
+                $results['userID'] = null;
             }
 
             return $results;
@@ -113,7 +117,7 @@
 
         public function createProfileEntry($user_id)
         {
-            $defaultImagePath = 'displaydefault.png';
+            $defaultImagePath = 'default.png';
             $query = "INSERT INTO uprofile (user_id, profile_picture) VALUES ('$user_id','$defaultImagePath')";
 
             $result = mysqli_query($this->connection, $query);
@@ -208,6 +212,7 @@
             $query .= " ORDER BY date_unix DESC";
             $result = mysqli_query($this->connection,$query);
             $resultArray = array();
+
             while($row = mysqli_fetch_array($result))
             {
                 $user_id = $row['user_id'];
@@ -216,13 +221,12 @@
                 $description = $row['description'];
                 $directory = $row['directory'];
                 $date = $row['date'];
-                $temp = explode(".", $row['directory']);
 
                 array_push($resultArray,array("ID"=>$image_id,
                     "name"=>$name,
                     "username"=>$this->getUsername($user_id),
                     "description"=>$description,
-                    "directory"=>$temp[0].".".$temp[1].".".$temp[2].'_homepage.'.end($temp),
+                    "directory"=>USER_HOME_URL . $row['directory'],
                     "date"=>$date));
             }
 
@@ -363,7 +367,7 @@
 				"username"=>$username,
 				"name"=>$name,
 				"description"=>$description,
-				"directory"=>"http://userhome.laertesousa.com/".$username.'/'.$Image_id."_homepage.".end($temp),
+				"directory"=>USER_HOME_URL.$username.'/'.$Image_id."_homepage.".end($temp),
                 //"directory"=>$row['directory'],
 				"date"=>$date));
 			}

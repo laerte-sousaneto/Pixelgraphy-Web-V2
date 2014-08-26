@@ -14,6 +14,11 @@ try
     if(!$results['error'])
     {
         create_folder($username, $db);
+
+        if(session_id() == '')
+            session_start();
+
+        $_SESSION['userID'] = $results['userID'];
     }
 
     echo json_encode($results);
@@ -30,7 +35,7 @@ function create_folder($username, $database)
 
     $database->updateUserHomePath($dir_path, $username);
 
-    $database->createProfileEntry($username);
+    $database->createProfileEntry($database->getUserID($username));
 
     if(!file_exists($dir_path))
     {

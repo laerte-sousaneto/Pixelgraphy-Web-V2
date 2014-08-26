@@ -7,15 +7,26 @@ pixelApp.controller('loginController', loginController);
 
 function loginController($scope, dataAccessor, userService, uiService, $timeout)
 {
-    $scope.username = "laerte";
-    $scope.password = "123";
+    $scope.username = "sousa";
+    $scope.password = "lta86t7v";
     $scope.loginError = "";
     $scope.hasLoginError = false;
 
+    $scope.forgotPasswordPanel = false;
     $scope.statusPanel = false;
     $scope.statusMsg = "Logging In...";
     $scope.statusSubMsg = "Checking Credentials.";
 
+    //ForgotPassword
+    $scope.email = "";
+
+
+    $scope.isEmailValid = function()
+    {
+        var regex = new RegExp("^([a-z0-9._%+-]+(@purchase+\.edu))$");
+        return regex.test($scope.email);
+        //return true;
+    };
 
     $scope.validate = function()
     {
@@ -41,7 +52,7 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
                     $scope.hasLoginError = false;
                     $scope.loginError = data['error_msg'];
 
-                    $scope.statusMsg = "Login Succesfull.";
+                    $scope.statusMsg = "Login Successful.";
                     $scope.statusSubMsg = "Loading Portal!";
 
                     uiService.setShowHome(false);

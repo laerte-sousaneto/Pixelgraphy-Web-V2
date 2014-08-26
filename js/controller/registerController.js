@@ -13,6 +13,15 @@ function registerController($scope, dataModifier)
     $scope.repeatPassword = "";
     $scope.email = "";
 
+    $scope.username = "sousa.lae";
+    $scope.password = "lta86t7v";
+    $scope.repeatPassword = "lta86t7v";
+    $scope.email = "sousa.lae@gmail.com";
+
+    $scope.registered = false;
+    $scope.inProcess = false;
+    $scope.statusMsg = "";
+    $scope.statusSubMsg = "";
 
     $scope.isUsernameValid = function()
     {
@@ -49,14 +58,36 @@ function registerController($scope, dataModifier)
     {
         if($scope.isAllFieldsValid())
         {
+            $scope.statusMsg = "Registering your account...";
+            $scope.statusSubMsg = "Checking given information.";
+            $scope.inProcess = true;
+
             dataModifier.register($scope.username,$scope.password, $scope.repeatPassword, $scope.email, function(data)
             {
                 {
-                    console.log(data);
+                    if(!data['error'])
+                    {
+                        console.log(data);
+                        $scope.statusMsg = "Account successfully registered.";
+                        $scope.statusSubMsg = "Please check your email for validation code.";
+                        $scope.registered = true;
+                    }
+                    else
+                    {
+                        console.log(data);
+                        $scope.statusMsg = data['msg'];
+                        $scope.statusSubMsg = "";
+                        $scope.inProcess = false;
+                    }
                 }
 
             });
         }
+
+    };
+
+    $scope.recoverPassword = function()
+    {
 
     };
 }

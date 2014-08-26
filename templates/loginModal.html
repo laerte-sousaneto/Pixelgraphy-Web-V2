@@ -13,7 +13,7 @@
 
             <div class="modal-body">
 
-                <div class="row" ng-hide="statusPanel">
+                <div class="row" ng-hide="(statusPanel || forgotPasswordPanel)">
 
                     <div class="col-lg-6 col-lg-offset-3">
 
@@ -36,13 +36,38 @@
 
                         <div ng-bind="loginError" class="text-danger text-center"></div>
 
-                        <a class="form-control noBorder text-center">Forgot Password?</a>
+                        <a class="form-control noBorder text-center" ng-click="forgotPasswordPanel = true;">Forgot Password?</a>
+{{forgotPasswordPanel}}
+                        {{(statusPanel || forgotPassword)}}
+                    </div>
+
+                </div>
+
+                <div class="row" ng-show="forgotPasswordPanel">
+
+                    <div class="col-lg-6 col-lg-offset-3">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': isEmailValid(), 'has-error': !isEmailValid()}">
+                            <label class="src-only" for="username">Email</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="email"
+                                   ng-model="email"
+                                   placeholder="Enter Email" />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
+
+                        </div>
+
+                        <a class="form-control noBorder text-center" ng-click="forgotPasswordPanel = false;">Login</a>
 
                     </div>
 
                 </div>
 
-                <div class="row" ng-show="statusPanel">
+                <div class="row" ng-show="(statusPanel && !forgotPasswordPanel)">
 
                     <div class="col-lg-6 col-lg-offset-3 text-center">
 
@@ -55,10 +80,13 @@
 
                 </div>
 
+
+
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-lg" ng-click="signIn()">Log In!</button>
+                <button type="button" class="btn btn-primary btn-lg" ng-click="signIn()" ng-show="!forgotPasswordPanel">Log In!</button>
+                <button type="button" class="btn btn-primary btn-lg" ng-click="" ng-show="forgotPasswordPanel">Recover Password!</button>
             </div>
 
         </div>

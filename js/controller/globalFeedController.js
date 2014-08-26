@@ -7,6 +7,8 @@ pixelApp.controller('globalFeedController', globalFeedController);
 
 function globalFeedController($scope, userService)
 {
+    $scope.images = userService.globalImages;
+
     $scope.loadMore = function()
     {
         if($scope.images != null)
@@ -15,7 +17,7 @@ function globalFeedController($scope, userService)
             {
                 if($scope.counter == 0)
                 {
-                    while($scope.counter < 3 && $scope.images.length > 3)
+                    while($scope.counter < 3 && $scope.images.length > 0  && $scope.images.length > $scope.counter)
                     {
                         $scope.items.push({id: $scope.counter, image: $scope.images[$scope.counter]});
                         $scope.counter++;
@@ -59,5 +61,8 @@ function globalFeedController($scope, userService)
     {
         $scope.images = userService.globalImages;
         $scope.loadMore();
+
     });
+
+    userService.updateGlobalImages();
 }

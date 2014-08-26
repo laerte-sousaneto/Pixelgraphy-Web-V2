@@ -18,7 +18,6 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
     $scope.$watch('newFiles', function()
     {
-        console.log('here');
         if($scope.newFiles != null && notUploadedCount($scope.files.length) < $scope.uploadLimit)
         {
             var length = $scope.newFiles.length;
@@ -64,7 +63,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
     {
         var file = $scope.files[fileIndex];
 
-        var url = "php/uploadImage.php";
+        var url = "php/Modifiers/uploadImage.php";
 
         var xhr = new XMLHttpRequest();
         var fileData = new FormData();
@@ -136,7 +135,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
                 var phpResponse = JSON.parse(xhr.responseText);
 
-                console.log(phpResponse);
+                //console.log(phpResponse);
                 if(!phpResponse['error'])
                 {
                     $timeout(function()
@@ -210,7 +209,6 @@ function uploadController($scope, $timeout, dataModifier, userService)
 function setTempFile(file, source)
 {
     file.source = source;
-    console.log(source);
 }
 /*
  Directive used to read file from input, while using 2 way binding.
@@ -224,7 +222,6 @@ pixelApp.directive("readFile", function ($timeout)
 
             element.unbind("change").bind("change", function (changeEvent)
             {
-                console.log(element);
 
                 if(!scope.$$phase)
                 {

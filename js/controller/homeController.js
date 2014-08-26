@@ -24,7 +24,6 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
 
     $scope.$watch('images', function()
     {
-        console.log('images update', $scope.images);
        if($scope.imageSelected != null)
        {
            $interval(function()
@@ -34,7 +33,6 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
        }
        else
        {
-           console.log('global images update', $scope.images);
            userService.updateGlobalImages();
        }
 
@@ -43,7 +41,6 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
     $scope.$on('globalImagesUpdate', function()
     {
         $scope.images = userService.globalImages;
-        console.log('watch on global');
         setImageBoxes($scope, 3);
     });
 

@@ -12,7 +12,7 @@
 
             <div class="modal-body">
 
-                <div class="row">
+                <div class="row" ng-hide="inProcess || forgotPasswordPanel">
 
                     <div class="col-lg-6 col-lg-offset-3">
 
@@ -69,7 +69,24 @@
                                   ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
                         </div>
 
+                        <div class="well alert-danger" ng-show="statusMsg.length > 0">
+                            <p ng-bind="statusMsg"></p>
+                        </div>
 
+                    </div>
+
+                </div>
+
+                <div class = "row" ng-hide="!inProcess || forgotPasswordPanel">
+
+                    <div class="col-lg-6 col-lg-offset-3 text-center">
+
+                        <img src="../image/loading.gif" width="50" alt="loading image" ng-hide="registered"/>
+
+                        <p ng-bind="statusMsg"></p>
+                        <p ng-bind="statusSubMsg"></p>
+
+                        <a class="navbar-link lead" href="#/verify/{{username}}/%20" ng-show="registered" data-dismiss="#registerModal">Validate Account</a>
 
                     </div>
 
@@ -78,7 +95,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="register()">Sign Up!</button>
+                <button type="button" class="btn btn-primary" ng-click="register()" ng-hide="registered">Sign Up!</button>
             </div>
 
         </div>

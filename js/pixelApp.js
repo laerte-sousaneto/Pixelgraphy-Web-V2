@@ -63,22 +63,3 @@ pixelApp.directive('whenScrolled', function() {
         });
     };
 });
-
-function setSource(data, source)
-{
-    for(var x in data)
-    {
-        console.log(data[x]);
-        data[x].directory = source + data[x].directory;
-    }
-
-}
-
-
-function setDirectorySource(data, source, field)
-{
-    data[field] = source + data[field];
-
-    return data;
-}
-
