@@ -12,7 +12,8 @@
 		
 		-----------------------------------------------------------------------------
 	*/
-	require_once "Credential.class.php";
+	require_once "Config/Credential.class.php";
+    require_once "Config/Config.php";
 	
 	class Database
 	{
@@ -79,7 +80,55 @@
 			}
 			return $successful;
 		}
-		
+
+        public function verifyAccount($username, $code)
+        {
+            $results = array(
+                'error'=> false,
+                'msg'=> "",
+                'userID' => null
+            );
+
+            $query = "SELECT * FROM users WHERE username='".$username."' and verificationCode='".$code."'";
+
+            $result = mysqli_query($this->connection, $query);
+
+            if(mysqli_num_rows($result) == 1)
+            {
+                $this->updateVerifiedField('1',$username, $code);
+                $results['userID'] = mysqli_fetch_array($result)['user_id'];
+            }
+            else
+            {
+                $results['error'] = true;
+                $results['msg'] = "Validation Failed";
+                $results['userID'] = null;
+            }
+
+            return $results;
+
+        }
+
+        public function updateVerifiedField($value, $username, $code)
+        {
+            $query = "UPDATE users SET verified='".$value."' WHERE username='".$username."'";
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function createProfileEntry($user_id)
+        {
+            $defaultImagePath = 'default.png';
+            $query = "INSERT INTO uprofile (user_id, profile_picture) VALUES ('$user_id','$defaultImagePath')";
+
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function updateUserHomePath($directory, $username)
+        {
+            $query = "UPDATE users SET home_path='$directory' WHERE username='$username'";
+            $result = mysqli_query($this->connection, $query);
+        }
+
 		/*
 			Method Functionality: Alters user setting based on given data and condition.
 			Specifications: method will table and user varibles to find a specific setting
@@ -163,6 +212,7 @@
             $query .= " ORDER BY date_unix DESC";
             $result = mysqli_query($this->connection,$query);
             $resultArray = array();
+
             while($row = mysqli_fetch_array($result))
             {
                 $user_id = $row['user_id'];
@@ -171,13 +221,12 @@
                 $description = $row['description'];
                 $directory = $row['directory'];
                 $date = $row['date'];
-                $temp = explode(".", $row['directory']);
 
                 array_push($resultArray,array("ID"=>$image_id,
                     "name"=>$name,
                     "username"=>$this->getUsername($user_id),
                     "description"=>$description,
-                    "directory"=>$temp[0].'_homepage.'.end($temp),
+                    "directory"=>USER_HOME_URL . $row['directory'],
                     "date"=>$date));
             }
 
@@ -318,7 +367,7 @@
 				"username"=>$username,
 				"name"=>$name,
 				"description"=>$description,
-				"directory"=>"http://userhome.laertesousa.com/".$row['user_id'].'_home/'.$Image_id."_homepage.".end($temp),
+				"directory"=>USER_HOME_URL.$username.'/'.$Image_id."_homepage.".end($temp),
                 //"directory"=>$row['directory'],
 				"date"=>$date));
 			}
@@ -396,6 +445,12 @@
 		*/
 		public function removeImage($image_id)
 		{
+            $results = array(
+                'result' => "",
+                'error' => false,
+                'error_msg' => ""
+
+            );
 			$query = "SELECT directory FROM images WHERE image_id='".$image_id."'";
 			$query1 = "DELETE FROM images WHERE image_id='".$image_id."'";
 			$query2 = "DELETE FROM comments WHERE image_id='".$image_id."'";
@@ -405,26 +460,37 @@
 				$row = mysqli_fetch_array($result);
 				
 				$temp = explode(".", $row['directory']);
-				if(unlink("../".$row['directory']) && unlink("../".$temp[0].'_homepage.'.end($temp)))
+                $temp2 = explode("/", $row['directory']);
+                $ext = end($temp);
+
+                $path = "/var/www/html/userhome_pixel/".$temp2[3]."/".$temp2[4];
+
+				if(unlink($path))
 				{
 					if(!mysqli_query($this->getConnection(),$query1))
 					{
-						echo mysqli_error($this->getConnection());
+                        $results['error'] = true;
+                        $results['error_msg'] = mysqli_error($this->getConnection());
 					}
 					if(!mysqli_query($this->getConnection(),$query2))
 					{
-						echo mysqli_error($this->getConnection());
+                        $results['error'] = true;
+                        $results['error_msg'] = mysqli_error($this->getConnection());
 					}
 				}
 				else
 				{
-					echo "file was not deleted sucessfully";	
+                    $results['error'] = true;
+                    $results['error_msg'] = "file was not deleted sucessfully";
 				}
 			}
 			else
 			{
-				echo mysqli_error($this->getConnection());
+                $results['error'] = true;
+                $results['error_msg'] = mysqli_error($this->getConnection());
 			}
+
+            return $results;
 			
 		}
 		/*
@@ -634,8 +700,21 @@
 			$query = "select ".$field." from users where user_id ='".$userID."'";
 			$result = mysqli_query($this->connection,$query);
 			$row = mysqli_fetch_array($result);
+
 			return $row['username'];
 		}
+
+        public function getPasswordHash($email)
+        {
+            $field = 'password';
+            $query = "select ".$field." from users where email ='".$email."'";
+            $result = mysqli_query($this->connection,$query);
+            $row = mysqli_fetch_array($result);
+
+            return $row[$field];
+        }
+
+
 		/*
 			Method Functionality: Returns current time in readable format
 		*/

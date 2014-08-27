@@ -8,14 +8,19 @@ pixelApp.controller('profileController', profileController);
 
 function profileController($scope, userService, dataModifier)
 {
-    $scope.homeSource = "http://userhome.laertesousa.com/";
-
     $scope.data = userService.userProfile;
+
     $scope.verticalTab = true;
     $scope.albums = userService.albums;
 
     $scope.showImages = false;
     $scope.albumImages = null;
+
+    $scope.removalIndex = null;
+    $scope.removalImageImage = null;
+
+    $scope.albumRemovalIndex = null;
+    $scope.removalAlbum = null;
 
     if($scope.albums == null)
     {
@@ -37,7 +42,6 @@ function profileController($scope, userService, dataModifier)
         $scope.albums = userService.albums;
     });
 
-
     $scope.showAlbumImages = function(index)
     {
         $scope.showImages = true;
@@ -52,13 +56,60 @@ function profileController($scope, userService, dataModifier)
             {
                 userService.updateAlbums();
             }
+        });
 
-            console.log(data);
+        $('#albumRemovalModal').modal('hide');
+    };
+
+    $scope.removeImage = function(index)
+    {
+        dataModifier.removeImage($scope.albumImages[index].ID, function(data)
+        {
+
+            if(!data['error'])
+            {
+                $scope.albumImages.splice(index,1);
+            }
+
+            $('#imageRemovalModal').modal('hide');
         });
     };
+
+
     $scope.toggleImages = function()
     {
         $scope.showImages = !$scope.showImages;
     };
+
+    $scope.openImageRemovalModal = function(index)
+    {
+        $('#imageRemovalModal').modal('show');
+
+        $scope.removalIndex = index;
+        $scope.removalImage = $scope.albumImages[index];
+    };
+
+    $scope.dismissImageRemovalModal = function()
+    {
+        $('#imageRemovalModal').modal('hide');
+    };
+
+    $scope.openAlbumRemovalModal = function(index)
+    {
+        $scope.albumRemovalIndex = index;
+        $scope.removalAlbum = $scope.albums[index];
+
+        console.log($scope.removalAlbum);
+
+        $("#albumRemovalModal").modal('show');
+    };
+
+    $scope.dismissAlbumRemovalModal = function()
+    {
+        $("#albumRemovalModal").modal('hide');
+    };
+
+
+    userService.updateAlbums();
 
 }

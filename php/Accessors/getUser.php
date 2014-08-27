@@ -7,7 +7,7 @@
  */
 header("access-control-allow-origin: *");
 
-require "Database.class.php";
+require "../Database.class.php";
 
 $userID = $_POST['userID'];
 $userData = null;
@@ -17,7 +17,9 @@ $db = new Database();
 
 if($userID != "" && $userID != null)
 {
-    $userData = array(  'result'    =>  $db->retrieveUserData($userID),
+    $result = $db->retrieveUserData($userID);
+    $result['profile_picture'] = USER_HOME_URL . $result['profile_picture'];
+    $userData = array(  'result'    =>  $result,
                         'error'     =>  false,
                         'error_msg' =>  ""
                     );

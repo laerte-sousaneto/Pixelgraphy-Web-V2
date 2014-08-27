@@ -13,7 +13,7 @@ function portalController($scope, sessionStateService)
         {
             title:'Gallery',
             content:'Global Feed',
-            disabled: false,
+            active: true,
             icon: 'glyphicon-camera' ,
             url: 'directory/portal/globalfeed.html'
         },
@@ -21,14 +21,13 @@ function portalController($scope, sessionStateService)
             title:'Profile',
             content:'Profile',
             active: false,
-            disabled: false,
             icon: 'glyphicon-user' ,
             url: 'directory/portal/profile.html'
         },
         {
             title:'Upload',
             content:'',
-            active: true,
+            active: false,
             url: 'directory/portal/upload.html',
             icon: 'glyphicon-picture' ,
             disabled: false

@@ -5,17 +5,28 @@
 
 pixelApp.controller('loginController', loginController);
 
-function loginController($scope, dataAccessor, userService, uiService, $timeout)
+function loginController($scope, dataAccessor, dataModifier, userService, uiService, $timeout)
 {
-    $scope.username = "laerte";
-    $scope.password = "123";
+    $scope.username = "laerte.sousaneto";
+    $scope.password = "lta86t7v";
     $scope.loginError = "";
     $scope.hasLoginError = false;
 
+    $scope.forgotPasswordPanel = false;
     $scope.statusPanel = false;
     $scope.statusMsg = "Logging In...";
     $scope.statusSubMsg = "Checking Credentials.";
 
+    //ForgotPassword
+    $scope.email = "";
+
+
+    $scope.isEmailValid = function()
+    {
+        var regex = new RegExp("^([a-z0-9._%+-]+(@purchase+\.edu))$");
+        return regex.test($scope.email);
+        //return true;
+    };
 
     $scope.validate = function()
     {
@@ -37,13 +48,11 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
                     userService.setUserID(data['result']);
                     //$("#loginModal").modal('hide');
 
-                    console.log(data);
-
                     $scope.statusPanel = true;
                     $scope.hasLoginError = false;
                     $scope.loginError = data['error_msg'];
 
-                    $scope.statusMsg = "Login Succesfull.";
+                    $scope.statusMsg = "Login Successful.";
                     $scope.statusSubMsg = "Loading Portal!";
 
                     uiService.setShowHome(false);
@@ -58,7 +67,6 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
                 }
                 else
                 {
-                    console.log(data);
                     $scope.statusPanel = false;
                     $scope.hasLoginError = true;
                     $scope.loginError = data['error_msg'];
@@ -68,5 +76,17 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
             }
         );
     }
+
+    $scope.recoverPassword = function()
+    {
+        if($scope.isEmailValid())
+        {
+            dataModifier.requestPasswordChange($scope.email, function(data)
+            {
+                console.log(data);
+            });
+        }
+    };
+
 
 }

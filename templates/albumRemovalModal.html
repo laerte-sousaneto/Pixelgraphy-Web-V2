@@ -1,0 +1,41 @@
+<!--Album Modal -->
+<div id="albumRemovalModal" class="modal fade" tab-index="-1" >
+
+    <div class="modal-dialog modal-md">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                Are you sure you want to delete this album?
+            </div>
+
+            <div class="modal-body text-center">
+
+                <h2 ng-bind="removalAlbum.name"></h2>
+
+                <div class="row">
+
+                    <div class="col-lg-4" ng-repeat="image in removalAlbum.images | limitTo: 3">
+
+                        <img    class="img-rounded img-responsive"
+                                style="margin: 5px;"
+                                ng-src="{{image.directory}}"
+                                />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-md" ng-click="removeAlbum(albumRemovalIndex)">Yes</button>
+                <button type="button" class="btn btn-primary btn-md" ng-click="dismissAlbumRemovalModal()">No</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!--Album Modal -->

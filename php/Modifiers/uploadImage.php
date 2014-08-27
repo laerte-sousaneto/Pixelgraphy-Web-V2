@@ -6,7 +6,7 @@
  * Time: 1:28 PM
  */
 
-require 'ImageServerUpload.class.php';
+require '../ImageServerUpload.class.php';
 
 if(session_id() == '')
 {

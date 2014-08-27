@@ -91,7 +91,7 @@ a
     border: none;
 }
 
-::-webkit-scrollbar
+::-webkit-scrollbar-y
 {
     width: 12px;
     height: 70%;
@@ -203,7 +203,11 @@ a
     color: black;
 }
 
-@media all and (max-width: 700px)
+textarea {
+    resize: none;
+}
+
+@media all and (max-width: 767px)
 {
     .img-container
     {
@@ -254,5 +258,10 @@ a
 
         width: auto;
         color: white;
+    }
+
+    .form-control
+    {
+        font-size: 10px;
     }
 }
