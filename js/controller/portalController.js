@@ -14,7 +14,6 @@ function portalController($scope, sessionStateService)
             title:'Gallery',
             content:'Global Feed',
             active: true,
-            disabled: false,
             icon: 'glyphicon-camera' ,
             url: 'directory/portal/globalfeed.html'
         },
@@ -22,7 +21,6 @@ function portalController($scope, sessionStateService)
             title:'Profile',
             content:'Profile',
             active: false,
-            disabled: false,
             icon: 'glyphicon-user' ,
             url: 'directory/portal/profile.html'
         },

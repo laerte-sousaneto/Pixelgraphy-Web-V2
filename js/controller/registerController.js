@@ -13,7 +13,7 @@ function registerController($scope, dataModifier)
     $scope.repeatPassword = "";
     $scope.email = "";
 
-    $scope.username = "sousa.lae";
+    $scope.username = "laerte.sousaneto";
     $scope.password = "lta86t7v";
     $scope.repeatPassword = "lta86t7v";
     $scope.email = "sousa.lae@gmail.com";

@@ -40,6 +40,12 @@ pixelApp.config(['$routeProvider','$locationProvider',
                 controller: 'verifyController'
             }
         ).
+        when('/resetpassword/:code',
+            {
+                templateUrl: '../directory/resetPassword.html',
+                controller: 'resetPasswordController'
+            }
+        ).
         otherwise(
             {
                 redirectTo: '/'

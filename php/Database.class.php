@@ -700,8 +700,21 @@
 			$query = "select ".$field." from users where user_id ='".$userID."'";
 			$result = mysqli_query($this->connection,$query);
 			$row = mysqli_fetch_array($result);
+
 			return $row['username'];
 		}
+
+        public function getPasswordHash($email)
+        {
+            $field = 'password';
+            $query = "select ".$field." from users where email ='".$email."'";
+            $result = mysqli_query($this->connection,$query);
+            $row = mysqli_fetch_array($result);
+
+            return $row[$field];
+        }
+
+
 		/*
 			Method Functionality: Returns current time in readable format
 		*/

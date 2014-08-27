@@ -2,7 +2,7 @@
  * Created by Lae on 8/23/2014.
  */
 
-pixelApp.controller('verify', verifyController);
+pixelApp.controller('verifyController', verifyController);
 
 function verifyController($scope, $routeParams, $timeout, dataModifier, userService)
 {
@@ -32,8 +32,6 @@ function verifyController($scope, $routeParams, $timeout, dataModifier, userServ
     {
         return $scope.isUsernameValid() && $scope.isCodeValid();
     };
-
-
 
     $scope.verify = function()
     {

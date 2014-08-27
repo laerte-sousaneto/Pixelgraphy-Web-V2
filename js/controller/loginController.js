@@ -5,9 +5,9 @@
 
 pixelApp.controller('loginController', loginController);
 
-function loginController($scope, dataAccessor, userService, uiService, $timeout)
+function loginController($scope, dataAccessor, dataModifier, userService, uiService, $timeout)
 {
-    $scope.username = "sousa";
+    $scope.username = "laerte.sousaneto";
     $scope.password = "lta86t7v";
     $scope.loginError = "";
     $scope.hasLoginError = false;
@@ -76,5 +76,17 @@ function loginController($scope, dataAccessor, userService, uiService, $timeout)
             }
         );
     }
+
+    $scope.recoverPassword = function()
+    {
+        if($scope.isEmailValid())
+        {
+            dataModifier.requestPasswordChange($scope.email, function(data)
+            {
+                console.log(data);
+            });
+        }
+    };
+
 
 }

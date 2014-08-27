@@ -37,8 +37,7 @@
                         <div ng-bind="loginError" class="text-danger text-center"></div>
 
                         <a class="form-control noBorder text-center" ng-click="forgotPasswordPanel = true;">Forgot Password?</a>
-{{forgotPasswordPanel}}
-                        {{(statusPanel || forgotPassword)}}
+
                     </div>
 
                 </div>
@@ -85,8 +84,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-lg" ng-click="signIn()" ng-show="!forgotPasswordPanel">Log In!</button>
-                <button type="button" class="btn btn-primary btn-lg" ng-click="" ng-show="forgotPasswordPanel">Recover Password!</button>
+                <button type="button" class="btn btn-primary btn-md" ng-click="signIn()" ng-show="!forgotPasswordPanel">Log In!</button>
+                <button type="button" class="btn btn-primary btn-md" ng-click="recoverPassword()" ng-show="forgotPasswordPanel">Recover Password!</button>
             </div>
 
         </div>
