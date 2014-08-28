@@ -13,6 +13,7 @@
 
             <div class="modal-body">
 
+                <!-- Login View -->
                 <div class="row" ng-hide="(statusPanel || forgotPasswordPanel)">
 
                     <div class="col-lg-6 col-lg-offset-3">
@@ -41,14 +42,24 @@
                     </div>
 
                 </div>
+                <!-- Login View -->
 
-                <div class="row" ng-show="forgotPasswordPanel">
+                <!-- Password Recover View -->
+                <div class="row" ng-show="(forgotPasswordPanel && !statusPanel)">
 
-                    <div class="col-lg-6 col-lg-offset-3">
+                    <div class="col-lg-3">
+
+                        <a class="pull-left" ng-click="forgotPasswordPanel = false;">
+                            <span class="glyphicon glyphicon-arrow-left" style="font-size: 18px;"></span>
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-6">
 
                         <div class="form-group has-feedback"
-                             ng-class="{'has-success': isEmailValid(), 'has-error': !isEmailValid()}">
-                            <label class="src-only" for="username">Email</label>
+                             ng-class="{'has-success': (isEmailValid() && !hasRecoverError), 'has-error': (!isEmailValid() || hasRecoverError)}">
+                            <label class="src-only" for="email">Email</label>
                             <input type="text"
                                    class="form-control"
                                    id="email"
@@ -56,21 +67,31 @@
                                    placeholder="Enter Email" />
 
                             <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
+                                  ng-class="{'glyphicon-ok': (isEmailValid() && !hasRecoverError), 'glyphicon-remove': (!isEmailValid() || hasRecoverError)}"></span>
 
                         </div>
 
-                        <a class="form-control noBorder text-center" ng-click="forgotPasswordPanel = false;">Login</a>
+                        <div ng-bind="recoverError" class="text-danger text-center"></div>
 
                     </div>
 
                 </div>
+                <!-- Password Recover View -->
 
-                <div class="row" ng-show="(statusPanel && !forgotPasswordPanel)">
+                <!-- Status View -->
+                <div class="row" ng-show="statusPanel">
 
-                    <div class="col-lg-6 col-lg-offset-3 text-center">
+                    <div class="col-lg-3">
 
-                        <img src="../image/loading.gif" width="50" alt="loading image"/>
+                        <a class="pull-left" ng-click="(previousPanel())">
+                            <span class="glyphicon glyphicon-arrow-left" style="font-size: 18px;"></span>
+                        </a>
+
+                    </div>
+
+                    <div class="col-lg-6 text-center">
+
+                        <img src="../image/loading.gif" width="50" alt="loading image" ng-show="loadingImage"/>
 
                         <p ng-bind="statusMsg"></p>
                         <p ng-bind="statusSubMsg"></p>
@@ -78,6 +99,7 @@
                     </div>
 
                 </div>
+                <!-- Status View -->
 
 
 

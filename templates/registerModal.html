@@ -17,17 +17,16 @@
                     <div class="col-lg-6 col-lg-offset-3">
 
                         <div class="form-group has-feedback"
-                             ng-class="{'has-success': isUsernameValid(), 'has-error': !isUsernameValid()}">
-                            <label class="src-only" for="username">Username</label>
-                            <input type="text"
+                             ng-class="{'has-success': isEmailValid(), 'has-error': !isEmailValid()}">
+                            <label class="src-only" for="email">Purchase Email Address</label>
+                            <input type="email"
                                    class="form-control"
-                                   id="username"
-                                   ng-model="username"
-                                   placeholder="Enter Username" />
+                                   id="email"
+                                   ng-model="email"
+                                   placeholder="Enter Email" />
 
                             <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': isUsernameValid(), 'glyphicon-remove': !isUsernameValid()}"></span>
-
+                                  ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
                         </div>
 
                         <div class="form-group has-feedback"
@@ -56,19 +55,6 @@
                                   ng-class="{'glyphicon-ok': isRepeatPasswordValid(), 'glyphicon-remove': !isRepeatPasswordValid()}"></span>
                         </div>
 
-                        <div class="form-group has-feedback"
-                             ng-class="{'has-success': isEmailValid(), 'has-error': !isEmailValid()}">
-                            <label class="src-only" for="email">Purchase Email Address</label>
-                            <input type="email"
-                                   class="form-control"
-                                   id="email"
-                                   ng-model="email"
-                                   placeholder="Enter Email" />
-
-                            <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
-                        </div>
-
                         <div class="well alert-danger" ng-show="statusMsg.length > 0">
                             <p ng-bind="statusMsg"></p>
                         </div>
@@ -86,7 +72,7 @@
                         <p ng-bind="statusMsg"></p>
                         <p ng-bind="statusSubMsg"></p>
 
-                        <a class="navbar-link lead" href="#/verify/{{username}}/%20" ng-show="registered" data-dismiss="#registerModal">Validate Account</a>
+                        <a class="navbar-link lead" ng-click="goToVerify();" ng-show="registered" data-dismiss="#registerModal">Validate Account</a>
 
                     </div>
 
@@ -95,7 +81,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="register()" ng-hide="registered">Sign Up!</button>
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-click="register()"
+                        ng-hide="registered"
+                        ng-disabled="!isAllFieldsValid();">Sign Up!</button>
             </div>
 
         </div>

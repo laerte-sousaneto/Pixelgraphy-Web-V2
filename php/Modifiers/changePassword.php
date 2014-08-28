@@ -14,6 +14,7 @@ try
 {
     $query = mysqli_query($db->getConnection(),"SELECT * FROM users WHERE rhash='".$h1."'");
 
+
     if($p1 != $p2)//This step should never be hit, checking will be done before it gets to this form
     {
         throw new Exception('Passwords don\'t match!');
@@ -28,12 +29,20 @@ try
     }*/
     else if(mysqli_num_rows($query)==1)
     {
+        $userID = mysqli_fetch_array($query)['user_id'];
+
         $pass = hash('whirlpool',$p1,false);
         $nhash = hash('whirlpool',$p1.time().$h1, false);
+
         mysqli_query($db->getConnection(),"UPDATE users SET password='".$pass."' WHERE rhash='".$h1."'");
-        mysqli_query($db->getConnection(),"UPDATE users SET rhash='".$nhash."' WHERE rhash='".$h1."'");
+        $isDone = mysqli_query($db->getConnection(),"UPDATE users SET rhash='".$nhash."' WHERE rhash='".$h1."'");
+
+        if(session_id() == '')
+            session_start();
+
+        $_SESSION['userID'] = $userID;
         
-        echo json_encode( array('error' => false, 'msg' => "") );
+        echo json_encode( array('error' => false, 'msg' => "", 'userID' => $userID) );
     }
     else if(mysqli_num_rows($query)==0)
     {
@@ -46,5 +55,5 @@ try
 }
 catch(Exception $ex)
 {
-    echo json_encode( array('error' => false, 'msg' => $ex->getMessage()) );
+    echo json_encode( array('error' => true, 'msg' => $ex->getMessage()) );
 }

@@ -16,10 +16,12 @@ $result = array(
 );
 try
 {
-	$usr = $_POST['username'];
 	$pw1 = hash("whirlpool", $_POST['password1'], false); //CHANGING TO WHIRLPOOL FOR RELEASE
 	$pw2 = hash("whirlpool", $_POST['password2'], false); //CHANGING TO WHIRLPOOL FOR RELEASE
 	$eml = $_POST['email'];
+
+    $isPurchaseEmail = preg_match("/^([a-z0-9._%+-]+(@purchase.edu))$/",trim($eml));
+
 
 	//BEGIN SQL INJECTION PROTECTION
 	$usr = stripslashes($usr);
@@ -32,15 +34,11 @@ try
 	$eml = mysqli_real_escape_string($con,$eml);
 	//END SQL INJECTION PROTECTION
 
-	$query = mysqli_query($con,"SELECT * FROM users WHERE username='$usr' OR email ='$eml'");
+	$query = mysqli_query($con,"SELECT * FROM users WHERE email ='$eml'");
 
-	if(mysqli_num_rows($query)==1)
+	if(mysqli_num_rows($query) >= 1)
 	{
-		throw new Exception("Username or email is already in use.");
-	}
-	else if($usr == "")
-	{
-		throw new Exception("Please enter a valid username");
+		throw new Exception("User with provided email already exists.");
 	}
 	else if($pw1 == "" || $pw2 == "")
 	{
@@ -58,15 +56,16 @@ try
 	{
 		throw new Exception("E-Mail is not valid");
 	}
-	/*else if(!preg_match("^([a-z0-9._%+-]+(@purchase+\.edu))$",$eml))
+	else if(!$isPurchaseEmail)
 	{
-		throw new Exception("E-Mail must be an @purchase.edu email");
-	}*/
+		throw new Exception("E-Mail must be a @purchase.edu email");
+	}
 	else
 	{
 		$uuid = generate_uuid();
 		$rh = encryption512($usr.$uuid);
 		$hash = hash("sha512", $usr, false);
+        $usr = strstr($eml, '@', true);
 
 		mysqli_query($con,"INSERT INTO users (user_id, username, password, email, hash, verified, verificationCode) VALUES ('$uuid','$usr', '$pw1', '$eml', '$hash', '0', $uniqNumber )");
 		echo json_encode($result);

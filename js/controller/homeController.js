@@ -21,7 +21,6 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
     var fadeInterval = 500;
 
 
-
     $scope.$watch('images', function()
     {
        if($scope.imageSelected != null)

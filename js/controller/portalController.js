@@ -6,8 +6,11 @@
 
 pixelApp.controller('portalController', portalController);
 
-function portalController($scope, sessionStateService)
+function portalController($scope, sessionStateService, userService)
 {
+    $scope.loggedIn = userService.loggedIn;
+
+    userService.updateUserProfile();
 
     $scope.tabs = [
         {
@@ -34,7 +37,12 @@ function portalController($scope, sessionStateService)
         }
     ];
 
-    //$scope.template = $scope.tabs[1].url;
+    $scope.$on('profileUpdate', function()
+    {
+        $scope.loggedIn = userService.loggedIn;
+        console.log($scope.loggedIn);
+    });
+
 
     $scope.setTab = function(index)
     {

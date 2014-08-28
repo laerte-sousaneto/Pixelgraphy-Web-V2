@@ -12,6 +12,8 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
     service.userImages = null;
     service.globalImages = null;
 
+    service.loggedIn = false;
+
     service.imageSource = "http://userhome.laertesousa.com/";
 
     service.setUserID = function(userID)
@@ -54,12 +56,17 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
                             service.userProfile = data['result'];
                         }
 
+                        service.loggedIn = true;
+
                         service.notifyProfileUpdate();
                     });
+
+                    return true;
                 }
                 else
                 {
                     window.location.href='/';
+                    service.loggedIn = false;
                 }
 
             });

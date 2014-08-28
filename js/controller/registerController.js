@@ -6,14 +6,12 @@
 
 pixelApp.controller('registerController', registerController);
 
-function registerController($scope, dataModifier)
+function registerController($scope, $timeout, dataModifier)
 {
-    $scope.username = "";
     $scope.password = "";
     $scope.repeatPassword = "";
     $scope.email = "";
 
-    $scope.username = "laerte.sousaneto";
     $scope.password = "lta86t7v";
     $scope.repeatPassword = "lta86t7v";
     $scope.email = "sousa.lae@gmail.com";
@@ -22,12 +20,6 @@ function registerController($scope, dataModifier)
     $scope.inProcess = false;
     $scope.statusMsg = "";
     $scope.statusSubMsg = "";
-
-    $scope.isUsernameValid = function()
-    {
-        var regex = new RegExp("^([a-zA-Z0-9\\.\\-]){4,20}$");
-        return regex.test($scope.username);
-    };
 
     $scope.isPasswordValid = function()
     {
@@ -44,13 +36,13 @@ function registerController($scope, dataModifier)
     $scope.isEmailValid = function()
     {
         var regex = new RegExp("^([a-z0-9._%+-]+(@purchase+\.edu))$");
-        //return regex.test($scope.email);
-        return true;
+        return regex.test($scope.email);
+        //return true;
     };
 
     $scope.isAllFieldsValid = function()
     {
-        return $scope.isUsernameValid() && $scope.isPasswordValid() && $scope.isRepeatPasswordValid() && $scope.isEmailValid();
+        return $scope.isPasswordValid() && $scope.isRepeatPasswordValid() && $scope.isEmailValid();
     }
 
 
@@ -62,7 +54,7 @@ function registerController($scope, dataModifier)
             $scope.statusSubMsg = "Checking given information.";
             $scope.inProcess = true;
 
-            dataModifier.register($scope.username,$scope.password, $scope.repeatPassword, $scope.email, function(data)
+            dataModifier.register($scope.email,$scope.password, $scope.repeatPassword, function(data)
             {
                 {
                     if(!data['error'])
@@ -86,8 +78,14 @@ function registerController($scope, dataModifier)
 
     };
 
-    $scope.recoverPassword = function()
+    $scope.goToVerify = function()
     {
+        $('#registerModal').modal('hide');
+
+        $timeout(function()
+        {
+            window.location.href = "http://pixel.laertesousa.com/#/verify/%20/%20";
+        },300);
 
     };
 }

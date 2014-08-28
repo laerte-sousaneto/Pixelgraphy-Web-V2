@@ -10,8 +10,11 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
     $scope.username = "laerte.sousaneto";
     $scope.password = "lta86t7v";
     $scope.loginError = "";
+    $scope.recoverError = "";
     $scope.hasLoginError = false;
+    $scope.hasRecoverError = false;
 
+    $scope.loadingImage = false;
     $scope.forgotPasswordPanel = false;
     $scope.statusPanel = false;
     $scope.statusMsg = "Logging In...";
@@ -38,6 +41,7 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
         if(true)
         {
             $scope.statusPanel = true;
+            $scope.loadingImage = true;
         }
 
         dataAccessor.tryLogin($scope.username, $scope.password, function(data)
@@ -46,6 +50,7 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
                 if(!data['error'])
                 {
                     userService.setUserID(data['result']);
+                    userService.loggedIn = true;
                     //$("#loginModal").modal('hide');
 
                     $scope.statusPanel = true;
@@ -71,6 +76,7 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
                     $scope.hasLoginError = true;
                     $scope.loginError = data['error_msg'];
 
+
                 }
 
             }
@@ -79,14 +85,40 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
 
     $scope.recoverPassword = function()
     {
+        $scope.statusMsg = "Sending recover key to email.";
+        $scope.statusSubMsg = "Please Wait.";
+        $scope.statusPanel = true;
+        $scope.loadingImage = true;
+
         if($scope.isEmailValid())
         {
             dataModifier.requestPasswordChange($scope.email, function(data)
             {
+                $scope.loadingImage = false;
+
+                if(!data['error'])
+                {
+                    $scope.statusMsg = "An email with intructions to reset your password was sent.";
+                    $scope.statusSubMsg = "Please check your email";
+                }
+                else
+                {
+                    $scope.statusMsg = "There was an error";
+                    $scope.statusSubMsg = data['msg'];
+
+                    $scope.recoverError = data['msg'];
+                    $scope.hasRecoverError = true;
+                    $scope.statusPanel = false;
+                }
+
                 console.log(data);
             });
         }
     };
 
-
+    $scope.previousPanel = function()
+    {
+        $scope.forgotPasswordPanel = false;
+        $scope.statusPanel = false;
+    };
 }
