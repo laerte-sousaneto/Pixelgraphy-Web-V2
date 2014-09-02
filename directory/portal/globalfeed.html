@@ -21,6 +21,18 @@
                     <footer class="" ng-bind="image['image']['username'] | uppercase" style="color: white;"><cite title="Source Title"></cite></footer>
                 </blockquote>
 
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="alert alert-warning"
+                             style="display: inline; cursor: pointer;"
+                                ng-click="showImageDetails($index)">
+                            <span class="badge">{{image.image.comments.length}} </span>
+                            <span >Comments</span>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
 
         </div>

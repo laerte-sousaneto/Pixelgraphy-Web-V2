@@ -58,6 +58,4 @@ function portalController($scope, sessionStateService, userService)
         });
     };
 
-
-
 }

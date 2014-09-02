@@ -64,5 +64,12 @@ function globalFeedController($scope, userService)
 
     });
 
+    $scope.showImageDetails = function(index)
+    {
+        userService.setSelectedImage($scope.images[index]);
+        console.log($scope.images, index);
+        $("#pictureDetailsModal").modal('show');
+    };
+
     userService.updateGlobalImages();
 }

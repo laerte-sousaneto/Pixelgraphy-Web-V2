@@ -1,0 +1,48 @@
+<!--Register Modal -->
+<div ng-controller="pictureDetailsController" id="pictureDetailsModal" class="modal fade" tab-index="-1" >
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header noBorder">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-lg-8">
+
+                        <img class="img-thumbnail" width="100%" ng-src="{{image['directory']}}" />
+
+
+                        <blockquote class="caption">
+                            <p ng-bind="image['description']"></p>
+                            <footer class="black" ng-bind="image['username'] | uppercase" style="color: white;"><cite title="Source Title"></cite></footer>
+                        </blockquote>
+
+                    </div>
+
+                    <div class="col-lg-4 well" style="height: 400px;">
+
+                        <div class="row">
+
+                        </div>
+
+                        <div class="row">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!--Register Modal -->

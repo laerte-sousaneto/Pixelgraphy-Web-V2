@@ -11,6 +11,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
     service.albums = null;
     service.userImages = null;
     service.globalImages = null;
+    service.selectedImage = null;
 
     service.loggedIn = false;
 
@@ -37,6 +38,13 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
             service.notifyImagesUpdate();
         });
 
+    };
+
+    service.setSelectedImage = function(image)
+    {
+        service.selectedImage = image;
+        console.log(image);
+        service.notifyPropertyChanged("SelectedImage");
     };
 
     service.updateUserProfile = function()

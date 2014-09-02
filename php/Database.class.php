@@ -329,6 +329,7 @@
 			$query = "select image_id,user_id,name,description,directory,date from images ORDER BY date_unix DESC";
 			$result = mysqli_query($this->connection,$query);
 			$resultArray = array();
+
 			while($row = mysqli_fetch_array($result))
 			{
 				$Image_id = $row['image_id'];
@@ -340,6 +341,7 @@
 				
 				array_push($resultArray,array($Image_id,$username,$name,$description,$directory,$date));
 			}
+
 			return $resultArray;
 		}
 		/*	
@@ -369,6 +371,7 @@
 				"description"=>$description,
 				"directory"=>USER_HOME_URL.$username.'/'.$Image_id."_homepage.".end($temp),
                 //"directory"=>$row['directory'],
+                "comments" => $this->retrieveCommentsWithKeys($Image_id),
 				"date"=>$date));
 			}
 			return json_encode($resultArray);
