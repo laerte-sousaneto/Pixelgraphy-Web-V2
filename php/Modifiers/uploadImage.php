@@ -7,6 +7,9 @@
  */
 
 require '../ImageServerUpload.class.php';
+require_once '../Database.class.php';
+
+$db = new Database();
 
 if(session_id() == '')
 {
@@ -20,7 +23,7 @@ if(isset($_SESSION['userID']))
     $file = ($_FILES['file']);
     $album = $_POST['album'];
     $fileName = $_POST['nameInput'];
-    $desc = $_POST['descriptionInput'];
+    $desc = mysqli_real_escape_string($db->getConnection(), $_POST['descriptionInput']);
 
     $uploader = new ImageServerUpload($user,$file,$fileName,$album,$desc,$isProfile);
     $uploader->uploadImageFile();

@@ -60,15 +60,18 @@ function globalFeedController($scope, userService)
     $scope.$on('globalImagesUpdate', function()
     {
         $scope.images = userService.globalImages;
+        $scope.counter = 0;
+        $scope.items = [];
         $scope.loadMore();
 
     });
 
     $scope.showImageDetails = function(index)
     {
-        userService.setSelectedImage($scope.images[index]);
-        console.log($scope.images, index);
+        userService.setSelectedImage(index);
         $("#pictureDetailsModal").modal('show');
+
+        userService.updateGlobalImages();
     };
 
     userService.updateGlobalImages();

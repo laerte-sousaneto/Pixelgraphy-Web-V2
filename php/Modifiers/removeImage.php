@@ -7,4 +7,3 @@
 	
 	 echo json_encode($database->removeImage($image_id));
 
-?>

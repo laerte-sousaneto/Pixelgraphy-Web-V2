@@ -40,6 +40,17 @@ pixelApp.factory('dataModifier', function($http)
                 }
             ).success(onSuccess);
         },
+        addComment: function(image_id, comment, onSuccess)
+        {
+            $http(
+                {
+                    method : 'POST',
+                    url : '../../php/Modifiers/CommentFeed.add.php',
+                    data : $.param({'image_id':image_id, 'comment':comment}),
+                    headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
         register: function(email, password1, password2, onSuccess)
         {
             $http(

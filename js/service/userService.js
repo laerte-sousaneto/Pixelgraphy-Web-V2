@@ -11,7 +11,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
     service.albums = null;
     service.userImages = null;
     service.globalImages = null;
-    service.selectedImage = null;
+    service.selectedImageIndex = null;
 
     service.loggedIn = false;
 
@@ -40,10 +40,9 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
 
     };
 
-    service.setSelectedImage = function(image)
+    service.setSelectedImage = function(index)
     {
-        service.selectedImage = image;
-        console.log(image);
+        service.selectedImageIndex = index;
         service.notifyPropertyChanged("SelectedImage");
     };
 

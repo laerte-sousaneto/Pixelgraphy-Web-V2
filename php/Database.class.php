@@ -222,11 +222,16 @@
                 $directory = $row['directory'];
                 $date = $row['date'];
 
+                $username = $this->getUsername($user_id);
+
+                $extension = end(explode(".", $row['directory']));
+
                 array_push($resultArray,array("ID"=>$image_id,
                     "name"=>$name,
-                    "username"=>$this->getUsername($user_id),
+                    "username"=>$username,
                     "description"=>$description,
                     "directory"=>USER_HOME_URL . $row['directory'],
+                    "thumbnail"=>USER_HOME_URL . $username . "/" . $image_id . "_homepage." . $extension,
                     "date"=>$date));
             }
 
@@ -312,7 +317,8 @@
 								"poster"=>$username,
 								"comment"=>$comment,
 								"date"=>$date,
-								"posterID"=>$user_id)
+								"posterID"=>$user_id,
+                                "profilePicture"=>$this->getProfilePicture($username))
 							);
 			}
 			
@@ -466,9 +472,10 @@
                 $temp2 = explode("/", $row['directory']);
                 $ext = end($temp);
 
-                $path = "/var/www/html/userhome_pixel/".$temp2[3]."/".$temp2[4];
+                $path = USERS_HOME_PATH.$row['directory'];
+                $path2 = USERS_HOME_PATH.$temp2[0] . "/" . $image_id . "_homepage." . end($temp);
 
-				if(unlink($path))
+				if(unlink($path) && unlink($path2))
 				{
 					if(!mysqli_query($this->getConnection(),$query1))
 					{
@@ -658,6 +665,19 @@
 			$row = mysqli_fetch_array($result);
 			return $row['home_path'];
 		}
+
+        /*
+			Method Functionality: Returns user's home directory
+		*/
+        public function getProfilePicture($username)
+        {
+            $field = 'profile_picture';
+            $query = "select ".$field." from uprofile where user_id ='".$this->getUserID($username)."'";
+            $result = mysqli_query($this->connection,$query);
+            $row = mysqli_fetch_array($result);
+            return USER_HOME_URL.$username.'/profile/'.$row[$field];
+        }
+
 		/*
 			Method Functionality: Returns user's email
 		*/

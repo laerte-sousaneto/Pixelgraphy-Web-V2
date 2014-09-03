@@ -169,30 +169,30 @@ function uploadController($scope, $timeout, dataModifier, userService)
             });
         }
 
-    }
+    };
 
     $scope.isAlbumValid = function()
     {
         var regex = new RegExp("^(([a-zA-Z0-9\\s]){3,25})$");
         return regex.test($scope.newAlbum);
-    }
+    };
 
     $scope.isAlbumSelected = function(album)
     {
         return album != null;
-    }
+    };
 
     $scope.isNameValid = function(name)
     {
         var regex = new RegExp("^(([a-zA-Z0-9\\s\\.\\'\\()\\%\\@\\:\\,]){3,25})$");
         return regex.test(name);
-    }
+    };
 
     $scope.isDescriptionValid = function(description)
     {
         var regex = new RegExp("^(([a-zA-Z0-9\\s\\n\\.\\'\\()\\%\\@\\:\\,]){10,150})$");
         return regex.test(description);
-    }
+    };
 
     $scope.isUploadEnabled = function(fileIndex)
     {
@@ -200,7 +200,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
             && $scope.isDescriptionValid($scope.files[fileIndex].description)
             && $scope.isAlbumSelected($scope.files[fileIndex].album)
             && !$scope.files[fileIndex].uploaded);
-    }
+    };
 
     userService.updateAlbums();
 }

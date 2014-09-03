@@ -10,11 +10,18 @@
             </div>
 
             <div class="modal-body">
-                <div class="row">
 
-                    <div class="col-lg-8">
+                <div class="row text-center">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <h1 ng-bind="image.name" style="margin-top: 0px;"></h1>
+                    </div>
+                </div>
 
-                        <img class="img-thumbnail" width="100%" ng-src="{{image['directory']}}" />
+                <div class="row container-fluid">
+
+                    <div class="col-lg-7">
+
+                        <img class="img-thumbnail" width="100%" ng-src="{{original}}" />
 
 
                         <blockquote class="caption">
@@ -24,15 +31,70 @@
 
                     </div>
 
-                    <div class="col-lg-4 well" style="height: 400px;">
+                    <div class="col-lg-5 well" style="height: 500px; word-wrap:break-word;">
 
-                        <div class="row">
+                        <div class="row" id="commentScroll" style="height:300px; overflow-y: scroll;">
+
+                            <div class="col-lg-12">
+
+                                <div class="row well well-sm" ng-repeat="comment in image.comments">
+
+                                    <div class="col-lg-2 thumbnail">
+                                        <img class=""   height="auto" ng-src="{{comment.profilePicture}}" />
+                                    </div>
+
+                                    <div class="col-lg-9">
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h4 ng-bind="comment.poster"></h4>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p ng-bind="comment.comment"></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
                         <div class="row">
 
+                            <div class="col-lg-12">
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success' : isCommentValid(), 'has-error' : !isCommentValid()}">
+                                    <label class="control-label">Comment</label>
+                                    <textarea  type="text"
+                                               class="form-control"
+                                               rows="4"
+                                               placeholder="Add a comment!"
+                                               ng-model="comment"
+                                               multiline
+                                            />
+                                    <span style="margin:5px;">{{comment.length}} / 150</span>
+                                <span class="glyphicon glyphicon-ok form-control-feedback"
+                                      ng-class="{'glyphicon-ok': isCommentValid(), 'glyphicon-remove': !isCommentValid()}"></span>
+
+                                    <button class="btn btn-sm btn-info pull-right"
+                                            style="width: 100px; margin-top: 2px;"
+                                            ng-click="addComment()"
+                                            ng-disabled="!isCommentValid()">Add</button>
+                                </div>
+
+
+                            </div>
+
+
                         </div>
+
+
 
                     </div>
 

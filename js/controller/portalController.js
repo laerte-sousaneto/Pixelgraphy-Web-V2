@@ -11,6 +11,7 @@ function portalController($scope, sessionStateService, userService)
     $scope.loggedIn = userService.loggedIn;
 
     userService.updateUserProfile();
+    userService.updateGlobalImages();
 
     $scope.tabs = [
         {

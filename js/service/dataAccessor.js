@@ -46,6 +46,18 @@ pixelApp.factory('dataAccessor', function($http)
             ).success(onSuccess);
         },
 
+        getComments: function(imageID, onSuccess)
+        {
+            $http(
+                {
+                    method : 'POST',
+                    url : '../../php/Accessors/CommentFeed.get.php',
+                    data    :   $.param({'imageID':imageID}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
+
         tryLogin: function(username, password, onSuccess)
         {
             $http(
