@@ -27,7 +27,11 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
        {
            $interval(function()
            {
-              nextImage($scope, $timeout, fadeInterval);
+               if($scope.index < $scope.images.length)
+               {
+                   nextImage($scope, $timeout, fadeInterval);
+               }
+
            }, imageChangeInterval);
        }
        else
@@ -69,8 +73,6 @@ function nextImage(scope, timeout, fadeInterval)
 {
     scope.lastBoxIndex = nextBoxIndex(scope.lastBoxIndex, scope.imageSelected.length);
 
-    var imageChangeInterval = 1000;
-
     if(scope.index < scope.images.length-1)
     {
         scope.index++;
@@ -101,16 +103,40 @@ function swapImage(scope, index, newImage, timeout, fadeInterval)
 
     timeout(function()
     {
-        scope.imageSelected[index].image['ID'] = newImage['ID'];
-        scope.imageSelected[index].image['username'] = newImage['username'];
-        scope.imageSelected[index].image['name'] = newImage['name'];
-        scope.imageSelected[index].image['description'] = newImage['description'];
-        scope.imageSelected[index].image['directory'] = newImage['directory'];
-        scope.imageSelected[index].image['date'] = newImage['date'];
-        scope.imageSelected[index].show = true;
+        if(!isImageSelectedDuplicate(newImage['ID'], scope))
+        {
+            scope.imageSelected[index].image['ID'] = newImage['ID'];
+            scope.imageSelected[index].image['username'] = newImage['username'];
+            scope.imageSelected[index].image['name'] = newImage['name'];
+            scope.imageSelected[index].image['description'] = newImage['description'];
+            scope.imageSelected[index].image['directory'] = newImage['directory'];
+            scope.imageSelected[index].image['date'] = newImage['date'];
+            scope.imageSelected[index].show = true;
+        }
+        else
+        {
+            nextImage(scope,timeout, fadeInterval);
+        }
+
 
     }, fadeInterval);
 
+}
+
+function isImageSelectedDuplicate(id, scope)
+{
+    var isDuplicate = false;
+
+    for(var x in scope.imageSelected)
+    {
+        if(scope.imageSelected[x].image.ID == id)
+        {
+            console.log(scope.imageSelected[x].image.ID, id);
+            isDuplicate = true;
+        }
+    }
+
+    return isDuplicate;
 }
 
 function setSource(data, source)
