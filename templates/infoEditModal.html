@@ -1,0 +1,113 @@
+<div id="infoEditModal" class="modal fade" ng-controller="infoEditController">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header noBorder">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-lg-offset-3">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': true, 'has-error': false}">
+                            <label class="src-only">Full Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="fullname"
+                                   placeholder="Enter your name..." />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-lg-offset-3">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': true, 'has-error': false}">
+                            <label class="src-only">Major</label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="major"
+                                   placeholder="Enter your major..." />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-lg-offset-3">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': true, 'has-error': false}">
+                            <label class="src-only">Gender</label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="gender"
+                                   placeholder="Enter your name..." />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-lg-offset-3">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': true, 'has-error': false}">
+                            <label class="src-only">Relationship Status</label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="relationship"
+                                   placeholder="" />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-lg-offset-3">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success': true, 'has-error': false}">
+                            <label class="src-only">Birthday</label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="birthday"
+                                   placeholder="" />
+
+                            <span class="glyphicon glyphicon-ok form-control-feedback"
+                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+                <button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
+            </div>
+
+        </div>
+
+        {{fullname}}
+
+    </div>
+
+</div>

@@ -51,6 +51,17 @@ pixelApp.factory('dataModifier', function($http)
                 }
             ).success(onSuccess);
         },
+        updateProfile: function(data, onSuccess)
+        {
+            $http(
+                {
+                    method: 'POST',
+                    url : '../../php/Modifiers/updateProfile.php',
+                    data : $.param({'fullname':data.fullname, 'major':data.major, 'relationship':data.relationship, 'birthday':data.birthday}),
+                    headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
         register: function(email, password1, password2, onSuccess)
         {
             $http(

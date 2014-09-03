@@ -1,4 +1,11 @@
-<div ng-controller="profileController" onload="init();">
+<div ng-controller="profileController">
+
+    <button class="btn btn-sm btn-warning btn-toolbar pull-right"
+            data-toggle="tooltip"
+            title="Edit"
+            ng-click="openInfoEditModal()">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </button>
 
     <!-- Top Info -->
     <div class="row">
@@ -6,7 +13,7 @@
         <div class="col-lg-4 col-md-4 col-sm-4 col-md-xs-12">
             <img class="img-responsive img-thumbnail" ng-src="{{data['profile_picture']}}" />
         </div>
-        <p ng-bind="data['profile_picture']"></p>
+
         <!-- Main Info -->
         <div class="col-lg-8 col-md-8 col-sm-8 col-md-xs-12">
 
@@ -19,6 +26,7 @@
                     <div class="row">
 
                         <div class="col-md-12">
+
 
                             <div class="input-group">
                                 <span class="input-group-addon"
@@ -71,13 +79,21 @@
     <!-- Bottom Info -->
     <div class="row" style="margin-top: 10px;">
 
-        <div class="col-md-12">
+        <div class="col-lg-12">
 
             <tabset id="subTab">
 
                 <tab heading="About">
 
                     <div class="well" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+
+                        <button class="btn btn-sm btn-warning btn-toolbar pull-right"
+                                data-toggle="tooltip"
+                                title="Edit"
+                                ng-click="openInfoEditModal()">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+
 
                         <div class="row">
 
@@ -135,7 +151,7 @@
                                                     <img
                                                          class="img-rounded img-responsive"
                                                          style="margin: 5px;"
-                                                         ng-src="{{image['directory']}}"
+                                                         ng-src="{{image['thumbnail']}}"
                                                             />
                                                 </div>
                                             </div>
@@ -143,12 +159,26 @@
                                         </div>
 
 
-                                        <div class="text-center pull-left" style="margin-top: 10px;">
-                                            <button class="btn btn-sm btn-danger"
-                                                    ng-click="openAlbumRemovalModal($index)">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
+                                        <div class="row">
+
+                                            <div class="col-lg-12 btn-toolbar" style="margin-top: 10px;">
+
+                                                <button class="btn btn-sm btn-warning btn-toolbar"
+                                                        data-toggle="tooltip"
+                                                        title="Edit"
+                                                        ng-click="openInfoEditModal()">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+
+                                                <button class="btn btn-sm btn-danger"
+                                                        ng-click="openAlbumRemovalModal($index)">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+
+                                            </div>
+
                                         </div>
+
 
 
 
@@ -198,12 +228,21 @@
 
                                             <div class="row">
 
-                                                <div class="col-lg-1" style="margin: 5px;">
+                                                <div class="col-lg-12 btn-toolbar" style="margin: 10px;">
+
+                                                    <button class="btn btn-sm btn-warning btn-toolbar"
+                                                            data-toggle="tooltip"
+                                                            title="Edit"
+                                                            ng-click="openInfoEditModal()">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>
+
                                                     <button class="btn btn-sm btn-danger"
                                                             ng-click="openImageRemovalModal($index)"
                                                             >
                                                         <span class="glyphicon glyphicon-trash"></span>
                                                     </button>
+
                                                 </div>
 
                                             </div>
@@ -232,6 +271,7 @@
 
     <div ng-include src="'../../templates/imageRemovalModal.html'"></div>
     <div ng-include src="'../../templates/albumRemovalModal.html'"></div>
+    <div ng-include src="'../../templates/infoEditModal.html'"></div>
 
 </div>
 

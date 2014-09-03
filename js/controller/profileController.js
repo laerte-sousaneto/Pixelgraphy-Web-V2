@@ -109,7 +109,12 @@ function profileController($scope, userService, dataModifier)
         $("#albumRemovalModal").modal('hide');
     };
 
+    $scope.openInfoEditModal = function()
+    {
+        $("#infoEditModal").modal('show');
+    };
 
     userService.updateAlbums();
+    $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
 
 }

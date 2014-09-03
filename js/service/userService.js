@@ -61,8 +61,9 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
                         if(!data['error'])
                         {
                             service.userProfile = data['result'];
-                        }
 
+                        }
+                        console.log(service.userProfile);
                         service.loggedIn = true;
 
                         service.notifyProfileUpdate();
