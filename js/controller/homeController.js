@@ -22,8 +22,8 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
 
 
     $scope.$watch('images', function()
-    {
-       if($scope.imageSelected != null)
+    {1
+       if($scope.imageSelected != null && $scope.images != null)
        {
            $interval(function()
            {
@@ -62,17 +62,33 @@ function setImageBoxes(scope, quantity)
 
     for(var i = 0; i < quantity; i++)
     {
-        scope.imageSelected.push({image:scope.images[i], show:true});
+        scope.imageSelected[i] = [];
+        scope.imageSelected[i].image = [];
+        scope.imageSelected[i].image['ID'] = scope.images[i]['ID'];
+        scope.imageSelected[i].image['username'] = scope.images[i]['username'];
+        scope.imageSelected[i].image['name'] = scope.images[i]['name'];
+        scope.imageSelected[i].image['description'] = scope.images[i]['description'];
+        scope.imageSelected[i].image['directory'] = scope.images[i]['directory'];
+        scope.imageSelected[i].image['date'] = scope.images[i]['date'];
+        scope.imageSelected[i].show = true;
 
         scope.index++;
     }
 }
 
 
+
 function nextImage(scope, timeout, fadeInterval)
 {
     scope.lastBoxIndex = nextBoxIndex(scope.lastBoxIndex, scope.imageSelected.length);
 
+    nextImageIndex(scope);
+
+    swapImage(scope,scope.lastBoxIndex, scope.images[scope.index], timeout, fadeInterval);
+}
+
+function nextImageIndex(scope)
+{
     if(scope.index < scope.images.length-1)
     {
         scope.index++;
@@ -82,8 +98,9 @@ function nextImage(scope, timeout, fadeInterval)
         scope.index = 0;
     }
 
-    swapImage(scope,scope.lastBoxIndex, scope.images[scope.index], timeout, fadeInterval);
+    return scope.index;
 }
+
 
 function nextBoxIndex(lastIndex, length)
 {
@@ -115,7 +132,8 @@ function swapImage(scope, index, newImage, timeout, fadeInterval)
         }
         else
         {
-            nextImage(scope,timeout, fadeInterval);
+            var newIndex = nextImageIndex(scope);
+            swapImage(scope,scope.lastBoxIndex, scope.images[scope.index], timeout, fadeInterval);
         }
 
 
