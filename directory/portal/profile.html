@@ -60,7 +60,7 @@
                                       style="width: 110px;">
                                     Birthday
                                 </span>
-                                <span class="form-control" ng-bind="data.DOB"></span>
+                                <span class="form-control" ng-bind="convertToDate(data.DOB) | date:'longDate'"></span>
                             </div>
 
                         </div>
@@ -90,7 +90,7 @@
                         <button class="btn btn-sm btn-warning btn-toolbar pull-right"
                                 data-toggle="tooltip"
                                 title="Edit"
-                                ng-click="openInfoEditModal()">
+                                ng-click="openAboutEditModal()">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
 
@@ -269,9 +269,12 @@
     <!-- Bottom Info -->
 
 
+    <!-- Modals -->
     <div ng-include src="'../../templates/imageRemovalModal.html'"></div>
     <div ng-include src="'../../templates/albumRemovalModal.html'"></div>
     <div ng-include src="'../../templates/infoEditModal.html'"></div>
+    <div ng-include src="'../../templates/aboutEditModal.html'"></div>
+    <!-- Modals -->
 
 </div>
 

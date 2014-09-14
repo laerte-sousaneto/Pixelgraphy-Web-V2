@@ -17,12 +17,13 @@
                 </h1>
 
                 <p ng-bind="image['image']['description']"></p>
+
                 <blockquote class="caption">
                     <footer class="" ng-bind="image['image']['username'] | uppercase" style="color: white;"><cite title="Source Title"></cite></footer>
                 </blockquote>
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <div class="alert alert-info"
                              style="display: inline; cursor: pointer;"
                                 ng-click="showImageDetails($index)">

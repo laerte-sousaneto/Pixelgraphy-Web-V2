@@ -15,83 +15,168 @@
 
                 <div class="row">
 
-                    <div class="col-lg-6 col-lg-offset-3">
+                    <div class="col-lg-12">
 
-                        <div class="form-group has-feedback"
-                             ng-class="{'has-success': true, 'has-error': false}">
-                            <label class="src-only">Full Name</label>
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="fullname"
-                                   placeholder="Enter your name..." />
+                        <!-- Full Name Field -->
+                        <div class="row">
 
-                            <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                            <div class="col-lg-6 col-lg-offset-3">
+
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
+
+                                    <label class="src-only">Full Name</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           ng-model="fullname"
+                                           placeholder="Enter your name..." />
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+                            </div>
+
                         </div>
+                        <!-- Full Name Field -->
 
-                    </div>
+                        <!-- Major Field -->
+                        <div class="row">
 
-                    <div class="col-lg-6 col-lg-offset-3">
+                            <div class="col-lg-6 col-lg-offset-3">
 
-                        <div class="form-group has-feedback"
-                             ng-class="{'has-success': true, 'has-error': false}">
-                            <label class="src-only">Major</label>
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="major"
-                                   placeholder="Enter your major..." />
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
+                                    <label class="src-only">Major</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           ng-model="major"
+                                           placeholder="Enter your major..." />
 
-                            <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-2">
+
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+
+                            </div>
+
                         </div>
+                        <!-- Major Field -->
 
-                    </div>
+                        <!-- Gender Field -->
+                        <div class="row">
 
-                    <div class="col-lg-6 col-lg-offset-3">
+                            <div class="col-lg-6 col-lg-offset-3">
 
-                        <div class="form-group has-feedback"
-                             ng-class="{'has-success': true, 'has-error': false}">
-                            <label class="src-only">Gender</label>
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="gender"
-                                   placeholder="Enter your name..." />
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
 
-                            <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                                    <label class="src-only">Gender</label>
+
+                                    <select class="form-control"
+                                            ng-model="gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Other</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-2">
+
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+
+                            </div>
+
                         </div>
+                        <!-- Gender Field -->
 
-                    </div>
+                        <!-- Relationship Field -->
+                        <div class="row">
 
-                    <div class="col-lg-6 col-lg-offset-3">
+                            <div class="col-lg-6 col-lg-offset-3">
 
-                        <div class="form-group has-feedback"
-                             ng-class="{'has-success': true, 'has-error': false}">
-                            <label class="src-only">Relationship Status</label>
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="relationship"
-                                   placeholder="" />
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
 
-                            <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                                    <label class="src-only">Relationship Status</label>
+
+                                    <select class="form-control"
+                                            ng-model="relationship">
+                                        <option>Single</option>
+                                        <option>In a relationship</option>
+                                        <option>Married</option>
+                                        <option>It's complicated!</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-2">
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+                            </div>
+
                         </div>
+                        <!-- Relationship Field -->
 
-                    </div>
+                        <!-- Birthday Field -->
+                        <div class="row">
 
-                    <div class="col-lg-6 col-lg-offset-3">
+                            <div class="col-lg-6 col-lg-offset-3">
 
-                        <div class="form-group has-feedback"
-                             ng-class="{'has-success': true, 'has-error': false}">
-                            <label class="src-only">Birthday</label>
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="birthday"
-                                   placeholder="" />
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
 
-                            <span class="glyphicon glyphicon-ok form-control-feedback"
-                                  ng-class="{'glyphicon-ok': true, 'glyphicon-remove': false}"></span>
+                                    <label class="src-only">Birthday</label>
+
+                                    <p class="input-group">
+
+                                        <input type="text"
+                                               class="hidden"
+                                               datepicker-popup="longDate"
+                                               datepicker-options="dateOptions"
+                                               ng-model="birthday"
+                                               is-open="opened"
+                                               ng-required="true"
+                                               disabled="true"
+                                               close-text="Close" />
+
+                                        <span class="form-control"
+                                              style="cursor: pointer;"
+                                              ng-bind="convertToDate(birthday) | date:'longDate'"
+                                              ng-click="open($event)"></span>
+
+                                        <span class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-default"
+                                                    ng-click="open($event)">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-2">
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+                            </div>
+
                         </div>
+                        <!-- Birthday Field -->
 
                     </div>
 

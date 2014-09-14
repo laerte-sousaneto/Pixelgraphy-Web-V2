@@ -114,6 +114,18 @@ function profileController($scope, userService, dataModifier)
         $("#infoEditModal").modal('show');
     };
 
+    $scope.openAboutEditModal = function()
+    {
+        $("#aboutEditModal").modal('show');
+    };
+
+    $scope.convertToDate = function (stringDate)
+    {
+        var dateOut = new Date(stringDate);
+        dateOut.setDate(dateOut.getDate() + 1);
+        return dateOut;
+    };
+
     userService.updateAlbums();
     $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
 

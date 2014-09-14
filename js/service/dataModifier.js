@@ -57,7 +57,18 @@ pixelApp.factory('dataModifier', function($http)
                 {
                     method: 'POST',
                     url : '../../php/Modifiers/updateProfile.php',
-                    data : $.param({'fullname':data.fullname, 'major':data.major, 'relationship':data.relationship, 'birthday':data.birthday}),
+                    data : $.param(data),
+                    headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
+        updateAboutInfo: function(data, onSuccess)
+        {
+            $http(
+                {
+                    method: 'POST',
+                    url : '../../php/Modifiers/updateAboutInfo.php',
+                    data : $.param(data),
                     headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);

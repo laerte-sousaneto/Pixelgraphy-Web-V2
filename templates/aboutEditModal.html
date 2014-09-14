@@ -1,0 +1,99 @@
+<div id="aboutEditModal" class="modal fade" ng-controller="aboutEditController">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header noBorder">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <!-- Biography Field -->
+                        <div class="row">
+
+                            <div class="col-lg-6 col-lg-offset-3">
+
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
+
+                                    <label class="src-only">Biography</label>
+
+                                    <textarea  type="text"
+                                               class="form-control"
+                                               rows="8"
+                                               placeholder="Tell us about yourself."
+                                               ng-model="biography"
+                                               multiline
+                                            />
+
+                                    <span style="margin:5px;">{{biography.length}} / 500</span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+                            </div>
+
+                        </div>
+                        <!-- Biography Field -->
+
+                        <!-- Hobbies Field -->
+                        <div class="row">
+
+                            <div class="col-lg-6 col-lg-offset-3">
+
+                                <div class="form-group has-feedback"
+                                     ng-class="{'has-success': true, 'has-error': false}">
+
+                                    <label class="src-only">Hobbies</label>
+
+                                    <textarea  type="text"
+                                               class="form-control"
+                                               rows="8"
+                                               placeholder="Share what you like to do in your free time."
+                                               ng-model="hobbies"
+                                               multiline
+                                            />
+
+                                    <span style="margin:5px;">{{hobbies.length}} / 500</span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <br>
+                                <img src="../image/loading.gif" class="img-responsive" width="40" alt="loading image" ng-show="showLoading"/>
+                            </div>
+
+                        </div>
+                        <!-- Hobbies Field -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+                <button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
+            </div>
+
+        </div>
+
+        {{fullname}}
+
+    </div>
+
+</div>
