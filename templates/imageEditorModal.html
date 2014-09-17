@@ -1,0 +1,93 @@
+<!--Image Editor Modal -->
+<div id="imageEditorModal" class="modal fade" tab-index="-1" >
+
+    <div class="modal-dialog modal-md">
+
+        <div class="modal-content">
+
+            <div class="modal-header noBorder">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+
+            <div class="modal-body text-center">
+
+                <!-- Image Thumbnail -->
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-lg-10 col-lg-offset-1 ">
+                        <img    class="img-rounded img-responsive"
+                                style="margin: 0 auto;"
+                                ng-src="{{selectedImage.thumbnail}}"  />
+                    </div>
+                </div>
+                <!-- Image Thumbnail -->
+
+                <!-- Image Name -->
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success' : isNameValid(file.name), 'has-error' : !isNameValid(file.name)}">
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Name"
+                                   ng-model="selectedImage.name"
+                                    />
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Image Name -->
+
+                <!-- Image Album -->
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="form-group has-success"
+                             ng-class="{'has-success' : isAlbumSelected(currentAlbum), 'has-error' : !isAlbumSelected(currentAlbum)}">
+
+                            <select class="form-control"
+                                    ng-model="currentAlbum"
+                                    ng-options="album as album.name for album in albums"></select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image Album -->
+
+                <!-- Image Description -->
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="form-group has-feedback"
+                             ng-class="{'has-success' : isDescriptionValid(selectedImage.description), 'has-error' : !isDescriptionValid(selectedImage.description)}">
+
+                            <textarea  type="text"
+                                       class="form-control"
+                                       rows="8"
+                                       placeholder="Describe your image here!"
+                                       ng-model="selectedImage.description"
+                                       multiline
+                                    />
+
+                            <span style="margin:5px;">{{selectedImage.description.length}} / 150</span>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Image Description -->
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-md" ng-click="">Save Changes</button>
+                <button type="button" class="btn btn-primary btn-md" ng-click="">Reset</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!--Image Modal -->

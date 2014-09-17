@@ -12,12 +12,16 @@ function profileController($scope, userService, dataModifier)
 
     $scope.verticalTab = true;
     $scope.albums = userService.albums;
+    $scope.currentAlbum = null;
 
     $scope.showImages = false;
     $scope.albumImages = null;
 
     $scope.removalIndex = null;
     $scope.removalImageImage = null;
+
+    $scope.selectedImageIndex = null;
+    $scope.selectedImage = null;
 
     $scope.albumRemovalIndex = null;
     $scope.removalAlbum = null;
@@ -45,6 +49,7 @@ function profileController($scope, userService, dataModifier)
     $scope.showAlbumImages = function(index)
     {
         $scope.showImages = true;
+        $scope.currentAlbum = $scope.albums[index];
         $scope.albumImages = $scope.albums[index].images;
     };
 
@@ -65,7 +70,6 @@ function profileController($scope, userService, dataModifier)
     {
         dataModifier.removeImage($scope.albumImages[index].ID, function(data)
         {
-
             if(!data['error'])
             {
                 $scope.albumImages.splice(index,1);
@@ -74,7 +78,6 @@ function profileController($scope, userService, dataModifier)
             $('#imageRemovalModal').modal('hide');
         });
     };
-
 
     $scope.toggleImages = function()
     {
@@ -89,6 +92,14 @@ function profileController($scope, userService, dataModifier)
         $scope.removalImage = $scope.albumImages[index];
     };
 
+    $scope.openImageEditorModal = function(index)
+    {
+        $('#imageEditorModal').modal('show');
+
+        $scope.selectedImageIndex = index;
+        $scope.selectedImage = $scope.albumImages[index];
+    };
+
     $scope.dismissImageRemovalModal = function()
     {
         $('#imageRemovalModal').modal('hide');
@@ -98,8 +109,6 @@ function profileController($scope, userService, dataModifier)
     {
         $scope.albumRemovalIndex = index;
         $scope.removalAlbum = $scope.albums[index];
-
-        console.log($scope.removalAlbum);
 
         $("#albumRemovalModal").modal('show');
     };
@@ -126,7 +135,24 @@ function profileController($scope, userService, dataModifier)
         return dateOut;
     };
 
+    $scope.isNameValid = function(name)
+    {
+        var regex = new RegExp("^(([a-zA-Z0-9\\s\\.\\'\\()\\%\\@\\:\\,]){3,25})$");
+        return regex.test(name);
+    };
+
+    $scope.isDescriptionValid = function(description)
+    {
+        var regex = new RegExp("^(([a-zA-Z0-9\\s\\n\\.\\'\\()\\%\\@\\:\\,]){10,150})$");
+        return regex.test(description);
+    };
+
+    $scope.isAlbumValid = function()
+    {
+        var regex = new RegExp("^(([a-zA-Z0-9\\s]){3,25})$");
+        return regex.test($scope.newAlbum);
+    };
+
     userService.updateAlbums();
     $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
-
 }

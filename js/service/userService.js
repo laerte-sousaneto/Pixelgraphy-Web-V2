@@ -15,8 +15,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
 
     service.loggedIn = false;
 
-    service.imageSource = "http://userhome.laertesousa.com/";
-
     service.setUserID = function(userID)
     {
         this.userID = userID;
@@ -27,14 +25,12 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
             {
                 service.userProfile = data['result'];
             }
-
             service.notifyProfileUpdate();
         });
 
         dataAccessor.getUserImages(this.userID,function(data)
         {
             service.userImages = data;
-
             service.notifyImagesUpdate();
         });
 
