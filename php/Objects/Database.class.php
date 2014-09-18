@@ -12,8 +12,8 @@
 		
 		-----------------------------------------------------------------------------
 	*/
-	require_once "Config/Credential.class.php";
-    require_once "Config/Config.php";
+	require_once "../Config/Credential.class.php";
+    require_once "../Config/Config.php";
 	
 	class Database
 	{
@@ -57,6 +57,46 @@
 			}
 			return $successful;
 		}
+
+        public function runQuery($sql)
+        {
+            $results = array('data' => null, 'error' => false, 'error_msg' => '');
+            if($this->connection != null)
+            {
+                $queryResult = mysqli_query($this->connection, $sql);
+
+                if(!$queryResult)
+                {
+                    $results['error'] = true;
+                    $results['error_msg'] = mysqli_error($this->connection);
+                }
+                else
+                {
+                    $results['data'] = $queryResult;
+                }
+            }
+
+            return $results;
+        }
+
+        public function updateTableField($table, $field, $value, $condition = "")
+        {
+            if( !isset($table) || strlen($table) < 0 ) throw new Exception("Table name cannot be null");
+            if( !isset($field) || strlen($field) < 0 ) throw new Exception("Field name cannot be null");
+            if( !isset($value) || strlen($value) < 0 ) throw new Exception("Field value cannot be null");
+
+            $sql = "UPDATE " . $table . " SET " . $field . "='" . $value . "' " . $condition;
+            $queryResult = $this->runQuery($sql);
+
+            if(!$queryResult)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
 		/*
 			Method Functionality: creates insert SQL command
