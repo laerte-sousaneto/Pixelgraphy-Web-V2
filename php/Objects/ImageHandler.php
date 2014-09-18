@@ -49,7 +49,7 @@ class ImageHandler extends Database
             $this->date = $data['date'];
             $this->privacy = $data['privacy'];
             $this->directory = $data['directory'];
-            $this->date_unix = $data['data_unix'];
+            $this->date_unix = $data['date_unix'];
             $this->album = $data['album'];
         }
 
@@ -58,9 +58,72 @@ class ImageHandler extends Database
     //--- Private Methods --
 
     //--- Public Methods ---
-    public function rename($newName) {}
-    public function changeDescription($newDescription) {}
-    public function changeAlbum($newAlbumID) {}
-    public function delete() {}
+    public function rename($newName)
+    {
+        if(strlen($newName) > 0)
+        {
+            $sqlCondition = "where image_id = '" . $this->id . "'";
+            $wasUpdated = parent::updateTableField('images', 'name', $newName, $sqlCondition);
+
+            if($wasUpdated)
+            {
+                $this->name = $newName;
+            }
+
+            return $wasUpdated;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function changeDescription($newDescription)
+    {
+        if(strlen($newDescription) > 0)
+        {
+            $sqlCondition = "where image_id = '" . $this->id . "'";
+            $wasUpdated = parent::updateTableField('images', 'description', $newDescription, $sqlCondition);
+
+            if($wasUpdated)
+            {
+                $this->description = $newDescription;
+            }
+
+            return $wasUpdated;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function changeAlbum($newAlbumID)
+    {
+        if(strlen($newAlbumID) > 0)
+        {
+            $sqlCondition = "where image_id = '" . $this->id . "'";
+            $wasUpdated = parent::updateTableField('images', 'album', $newAlbumID, $sqlCondition);
+
+            if($wasUpdated)
+            {
+                $this->album = $newAlbumID;
+            }
+
+            return $wasUpdated;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "delete from images where image_id ='" . $this->id . "'";
+        $queryResult = parent::runQuery($sql);
+
+        return $queryResult['error'];
+    }
     //--- Public Methods ---
 } 

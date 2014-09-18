@@ -88,14 +88,7 @@
             $sql = "UPDATE " . $table . " SET " . $field . "='" . $value . "' " . $condition;
             $queryResult = $this->runQuery($sql);
 
-            if(!$queryResult)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return $queryResult['error'];
         }
 
 		/*
