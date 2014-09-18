@@ -25,6 +25,7 @@ class AlbumHandler extends Database
         $this->id = $id;
         $this->getAlbumData();
     }
+    //--- Constructor ---
 
     //--- Private Methods ---
     private function getAlbumData()
