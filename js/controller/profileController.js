@@ -100,6 +100,22 @@ function profileController($scope, userService, dataModifier)
         $scope.selectedImage = $scope.albumImages[index];
     };
 
+    $scope.updateImageInfo = function()
+    {
+        if($scope.selectedImage != null)
+        {
+            dataModifier.updateImageInfo($scope.selectedImage, function(data)
+            {
+                if(data == '')
+                {
+                    userService.updateAlbums();
+                    console.log('Updated Image Info.');
+                }
+
+            });
+        }
+    };
+
     $scope.dismissImageRemovalModal = function()
     {
         $('#imageRemovalModal').modal('hide');

@@ -227,12 +227,14 @@
                 $extension = end(explode(".", $row['directory']));
 
                 array_push($resultArray,array("ID"=>$image_id,
-                    "name"=>$name,
-                    "username"=>$username,
-                    "description"=>$description,
-                    "directory"=>USER_HOME_URL . $row['directory'],
-                    "thumbnail"=>USER_HOME_URL . $username . "/" . $image_id . "_homepage." . $extension,
-                    "date"=>$date));
+                                            "name"=>$name,
+                                            "username"=>$username,
+                                            "description"=>$description,
+                                            "directory"=>USER_HOME_URL . $row['directory'],
+                                            "thumbnail"=>USER_HOME_URL . $username . "/" . $image_id . "_homepage." . $extension,
+                                            "date"=>$date,
+                                            "album"=>$albumID )
+                );
             }
 
             return $resultArray;

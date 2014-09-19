@@ -50,13 +50,13 @@
                              ng-class="{'has-success' : isAlbumSelected(currentAlbum), 'has-error' : !isAlbumSelected(currentAlbum)}">
 
                             <select class="form-control"
-                                    ng-model="currentAlbum"
+                                    ng-model="selectedImage.album"
                                     ng-options="album as album.name for album in albums"></select>
                         </div>
                     </div>
                 </div>
                 <!-- Image Album -->
-
+{{selectedImage.album}}
                 <!-- Image Description -->
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
@@ -81,7 +81,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-md" ng-click="">Save Changes</button>
+                <button type="button" class="btn btn-primary btn-md" ng-click="updateImageInfo()">Save Changes</button>
                 <button type="button" class="btn btn-primary btn-md" ng-click="">Reset</button>
             </div>
 

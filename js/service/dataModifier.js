@@ -116,6 +116,17 @@ pixelApp.factory('dataModifier', function($http)
                     headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);
+        },
+        updateImageInfo: function(data, onSuccess)
+        {
+            $http(
+                {
+                    method: 'POST',
+                    url: '../../php/Modifiers/updateImageInfo.php',
+                    data: $.param(data),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
         }
     }
 });

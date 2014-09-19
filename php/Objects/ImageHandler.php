@@ -118,6 +118,8 @@ class ImageHandler extends Database
         }
     }
 
+    public function updateImageInfo($newName, $newDescription, $newAlbumID) {}
+
     public function delete()
     {
         $sql = "delete from images where image_id ='" . $this->id . "'";
