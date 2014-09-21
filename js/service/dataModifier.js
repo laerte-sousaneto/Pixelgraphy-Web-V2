@@ -12,7 +12,7 @@ pixelApp.factory('dataModifier', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/createAlbum.php',
+                    url     :   '../../php/Modifiers/createAlbum.php',
                     data    :   $.param({'name':name}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
@@ -23,7 +23,7 @@ pixelApp.factory('dataModifier', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/removeAlbum.php',
+                    url     :   '../../php/Modifiers/removeAlbum.php',
                     data    :   $.param({'id':id}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
@@ -45,7 +45,7 @@ pixelApp.factory('dataModifier', function($http)
             $http(
                 {
                     method : 'POST',
-                    url : '../../php/Modifiers/CommentFeed.add.php',
+                    url : '../../php/Modifiers/addImageComment.php',
                     data : $.param({'image_id':image_id, 'comment':comment}),
                     headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }

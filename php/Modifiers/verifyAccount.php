@@ -1,6 +1,6 @@
 <?php
 require_once '../Config/Config.php';
-require '../Database.class.php';
+require '../Objects/Database.class.php';
 
 $username = $_POST['username'];
 $code = $_POST['code'];

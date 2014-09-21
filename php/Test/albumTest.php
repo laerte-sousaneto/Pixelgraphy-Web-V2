@@ -8,8 +8,10 @@
 
 ini_set('display_errors',1);  error_reporting(E_ALL);
 
-require_once "../Objects/AlbumHandler.php";
+require_once "../Objects/Album.class.php";
 
-$albumHandler = new AlbumHandler('15');
+//$albumHandler = new AlbumHandler('15');
 
-$albumHandler->rename("Renaming Album");
+//$albumHandler->rename("Renaming Album");
+
+$album = Album::createAlbum('53fe897c67053',"testing");

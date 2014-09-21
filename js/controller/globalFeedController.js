@@ -56,7 +56,6 @@ function globalFeedController($scope, userService)
     }
 
 
-
     $scope.$on('globalImagesUpdate', function()
     {
         $scope.images = userService.globalImages;

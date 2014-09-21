@@ -17,6 +17,11 @@
 */
 	require_once 'Database.class.php';
 	require_once 'ImageUtility.class.php';
+    require_once 'User.class.php';
+    require_once 'UserProfile.class.php';
+    require_once 'Image.php';
+    require_once '../Config/Config.php';
+
 
 	class ImageServerUpload
 	{
@@ -33,28 +38,33 @@
         private $tempDirectory;
 		private $domain;
 		private $image_id;
+
+        private $userProfile;
+        private $image;
 		
 		//---DEFAULT CONSTRUCTOR---
 		function __construct($user,$file,$name, $album,$description,$isProfile)
 		{
-
 			$this->database = new Database();
 
+            $USER = new User($user);
+            $this->userProfile = new UserProfile($user);
+            //$this->image = new
 
 			$this->user = $user;
-            $this->username = $this->database->getUsername($user);
+            $this->username = $USER->username;
 			$this->file = $file;
 			$this->name = $name;
             $this->album = $album;
 			$this->description = $description;
 			$this->image_id = uniqid();
 			$this->isProfile = $isProfile;
-			$this->rootDirectory = "/var/www/html/userhome_pixel/".$this->username."/";
-            $this->imageURL = "http://userhome.laertesousa.com/".$this->username."/";
+			$this->rootDirectory = USERS_HOME_PATH.$this->username."/";
+            $this->imageURL = USER_HOME_URL.$this->username."/";
 
-            $this->tempURL = "http://pixel.laertesousa.com/temp/";
-            $this->tempDirectory = "/var/www/html/pixelgraphy/temp/";
-			$this->domain = 'pixelgraphy.net/';
+            $this->tempURL = APP_DOMAIN_NAME."temp/";
+            $this->tempDirectory = APP_ROOT_PATH."temp/";
+			$this->domain = APP_DOMAIN_NAME;
 		}
 		//---PUBLIC METHODS---
 		/*
@@ -70,17 +80,6 @@
 			$str .=$this->directory.'<br/>';
 			$str .=$this->user.'<br/>';
 			return $str;
-		}
-		
-		/*
-			Method Functionality: Update Profile Picture
-			Specifications: This function will update profile image source in
-			the database. This method is assuming that the image file already
-			exists in the server.
-		*/
-		public function updateProfilePicture($table,$setting,$data,$user)
-		{
-			$this->database->updateUserSettings($table,$setting,$data,$user);
 		}
 		
 		/*
@@ -104,13 +103,16 @@
 				{
 					if($this->isProfile == 'true')
 					{
-						$this->database->updateUserSettings('uprofile','profile_picture',$this->directory,$this->user);
+						//$this->database->updateUserSettings('uprofile','profile_picture',$this->directory,$this->user);
+                        $this->userProfile->updateProfilePicture($this->driectory);
 					}
 					else
 					{
-						$this->database
-						->insertImage($this->image_id,$this->name, $this->album,$this->user,$this->username . '/' . $this->image_id.".".$ext,$this->description,0);
-						
+						//$this->database
+						//->insertImage($this->image_id,$this->name, $this->album,$this->user,$this->username . '/' . $this->image_id.".".$ext,$this->description,0);
+
+                        Image::addImage($this->image_id,$this->name, $this->user, $this->description, $this->username . '/' . $this->image_id.".".$ext, $this->album);
+
 						$imageUtility = new ImageUtility($this->rootDirectory.$this->image_id.".".$ext);
 						$imageUtility->cropAndSave($this->image_id.'_homepage.'.$this->getFileExtension(),$this->rootDirectory,350,200);
 					}

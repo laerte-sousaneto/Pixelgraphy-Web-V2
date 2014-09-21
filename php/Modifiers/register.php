@@ -1,6 +1,6 @@
 <?php
 
-require '../Database.class.php';
+require '../Objects/Database.class.php';
 
 $db = new Database();
 $con = $db->getConnection();

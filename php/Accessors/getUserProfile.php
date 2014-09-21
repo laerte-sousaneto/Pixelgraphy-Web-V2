@@ -5,21 +5,17 @@
  * Date: 7/21/2014
  * Time: 9:26 PM
  */
-header("access-control-allow-origin: *");
 
-require "../Database.class.php";
+//require "../Database.class.php";
+require "../Objects/UserProfile.class.php";
 
 $userID = $_POST['userID'];
 $userData = null;
 
-
-$db = new Database();
-
 if($userID != "" && $userID != null)
 {
-    $result = $db->retrieveUserData($userID);
-    $result['profile_picture'] = USER_HOME_URL . $result['profile_picture'];
-    $userData = array(  'result'    =>  $result,
+    $user = new UserProfile($userID);
+    $userData = array(  'result'    =>  $user->profileData,
                         'error'     =>  false,
                         'error_msg' =>  ""
                     );

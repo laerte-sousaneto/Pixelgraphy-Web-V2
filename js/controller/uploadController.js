@@ -121,7 +121,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
     {
         var file = $scope.files[fileIndex];
 
-        var url = "php/uploadTempImage.php";
+        var url = "php/Modifiers/uploadTempImage.php";
 
         var xhr = new XMLHttpRequest();
         var fileData = new FormData();

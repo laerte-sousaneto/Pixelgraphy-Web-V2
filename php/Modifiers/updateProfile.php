@@ -1,8 +1,6 @@
 <?php
 
-require '../Database.class.php';
-
-$db = new Database();
+require '../Objects/UserProfile.class.php';
 
 if(session_id() == '')
 {
@@ -17,33 +15,7 @@ $gender = $_POST['gender'];
 $relationship = $_POST['relationship'];
 $birthday = $_POST['birthday'];
 
+$userProfile = new UserProfile($userID);
 
-try
-{
-    $query = mysqli_query($db->getConnection(), "SELECT * FROM uprofile WHERE user_id='".$userID."'");
-
-    if(mysqli_num_rows($query)>=1)
-    {
-        $sql = "UPDATE uprofile SET fullname='".$fullname.
-            "', major='".$major.
-            "', gender='".$gender.
-            "', relationship='".$relationship.
-            "', DOB='".$birthday.
-            "' WHERE user_id='".$userID."'";
-
-        $result = mysqli_query($db->getConnection(), $sql);
-
-        echo $result;
-    }
-    else
-    {
-        $result = mysqli_query($db->getConnection(), "INSERT INTO uprofile (user_id, fullname, major, gender, relationship, DOB) VALUES ('".
-                                                                $userID."','".$fullname."', '".$major."', '".$gender."', '".relationship."', '"
-                                                                .$DOB."')") or die(mysql_error());
-        echo $result;
-    }
-}
-catch(Exception $ex)
-{
-    echo "Oh fiddlesticks...an error has occured: " . $ex->getMessage();
-}
+//returns true or false
+echo $userProfile->updateProfileInfo($fullname, $major, $gender, $relationship, $birthday);

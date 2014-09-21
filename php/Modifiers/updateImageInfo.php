@@ -6,11 +6,11 @@
  * Time: 1:11 PM
  */
 
-require_once "../Objects/ImageHandler.php";
+require_once "../Objects/Image.php";
 
 if(isset($_POST['ID']))
 {
-    $handler = new ImageHandler($_POST['ID']);
+    $handler = new Image($_POST['ID']);
 
     $name = isset($_POST['name']) ? $_POST['name'] : null;
     $description = isset($_POST['description']) ? $_POST['description'] : null;

@@ -6,8 +6,8 @@
  * Time: 1:28 PM
  */
 
-require '../ImageServerUpload.class.php';
-require_once '../Database.class.php';
+require '../Objects/ImageServerUpload.class.php';
+require_once '../Objects/Database.class.php';
 
 $db = new Database();
 

@@ -6,7 +6,7 @@
 
 pixelApp.controller('homeController',homeController);
 
-function homeController($scope, $interval, $timeout, dataAccessor, userService, uiService)
+function homeController($scope, $interval, $timeout, userService, uiService)
 {
     $scope.homeSource = "http://userhome.laertesousa.com/";
     $scope.images = userService.globalImages;
@@ -22,7 +22,7 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
 
 
     $scope.$watch('images', function()
-    {1
+    {
        if($scope.imageSelected != null && $scope.images != null)
        {
            $interval(function()
@@ -58,7 +58,7 @@ function homeController($scope, $interval, $timeout, dataAccessor, userService, 
 
 function setImageBoxes(scope, quantity)
 {
-    scope.imageSelected = new Array();
+    scope.imageSelected = [];
 
     for(var i = 0; i < quantity; i++)
     {
@@ -75,8 +75,6 @@ function setImageBoxes(scope, quantity)
         scope.index++;
     }
 }
-
-
 
 function nextImage(scope, timeout, fadeInterval)
 {
@@ -101,7 +99,6 @@ function nextImageIndex(scope)
     return scope.index;
 }
 
-
 function nextBoxIndex(lastIndex, length)
 {
     var boxIndex = Math.floor(Math.random() * length);
@@ -111,7 +108,7 @@ function nextBoxIndex(lastIndex, length)
         boxIndex = Math.floor(Math.random() * length);
     }
 
-    return boxIndex
+    return boxIndex;
 }
 
 function swapImage(scope, index, newImage, timeout, fadeInterval)
@@ -132,7 +129,7 @@ function swapImage(scope, index, newImage, timeout, fadeInterval)
         }
         else
         {
-            var newIndex = nextImageIndex(scope);
+            nextImageIndex(scope);
             swapImage(scope,scope.lastBoxIndex, scope.images[scope.index], timeout, fadeInterval);
         }
 
@@ -145,11 +142,10 @@ function isImageSelectedDuplicate(id, scope)
 {
     var isDuplicate = false;
 
-    for(var x in scope.imageSelected)
+    for(var index in scope.imageSelected)
     {
-        if(scope.imageSelected[x].image.ID == id)
+        if(scope.imageSelected[index].image.ID == id)
         {
-            console.log(scope.imageSelected[x].image.ID, id);
             isDuplicate = true;
         }
     }

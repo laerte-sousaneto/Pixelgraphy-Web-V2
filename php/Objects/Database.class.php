@@ -79,6 +79,30 @@
             return $results;
         }
 
+        public function insertToTable($table, $fields, $values, $hasAutoIncrement = false)
+        {
+            if( !isset($table) || strlen($table) < 0 ) throw new Exception("Table name cannot be null");
+            if( !isset($fields) || count($fields) < 0 ) throw new Exception("Field names cannot be null");
+            if( !isset($values) || count($values) < 0 ) throw new Exception("Field values cannot be null");
+
+            $sql = $this->generateInsertSqlForMultipleFields($table, $fields, $values);
+            $queryResult = $this->runQuery($sql);
+
+            if(!$queryResult['error'])
+            {
+                if($hasAutoIncrement)
+                {
+                    return mysqli_insert_id($this->connection);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public function updateTableField($table, $field, $value, $condition = "")
         {
             if( !isset($table) || strlen($table) < 0 ) throw new Exception("Table name cannot be null");
@@ -88,7 +112,20 @@
             $sql = "UPDATE " . $table . " SET " . $field . "='" . $value . "' " . $condition;
             $queryResult = $this->runQuery($sql);
 
-            return $queryResult['error'];
+            return $queryResult['data'];
+        }
+
+        public function updateMultipleTableFields($table,$fields,$values, $condition = "")
+        {
+            if( !isset($table) || strlen($table) < 0 ) throw new Exception("Table name cannot be null");
+            if( !isset($fields) || count($fields) < 0 ) throw new Exception("Field names cannot be null");
+            if( !isset($values) || count($values) < 0 ) throw new Exception("Field values cannot be null");
+
+
+            $sql = $this->generateUpdateSqlForMultipleFields($table, $fields, $values) . " " . $condition;
+            $queryResult = $this->runQuery($sql);
+
+            return $queryResult['data'];
         }
 
 		/*
@@ -175,7 +212,64 @@
 		{
 			return ($element == end($array));
 		}
-		
+
+
+        //--- Private Methods ---
+        private function generateUpdateSqlForMultipleFields($table, $fields, $values)
+        {
+            if(count($fields) != count($values)) throw new Exception("Quantity of fields must match quantity of values.");
+
+            $sql = "UPDATE " .$table. " SET ";
+
+            for($index = 0; $index < count($fields); $index++)
+            {
+                $sql .= $fields[$index] . " = " . $values[$index];
+
+                if($index != count($fields)-1) $sql .= ", ";
+            }
+
+            return $sql;
+        }
+        private function generateInsertSqlForMultipleFields($table, $fields, $values)
+        {
+            if(count($fields) != count($values)) throw new Exception("Quantity of fields must match quantity of values.");
+
+            $sql = "INSERT INTO " .$table. "(";
+
+            for($index = 0; $index < count($fields); $index++)
+            {
+                $sql .= $fields[$index];
+
+                if($index != count($fields)-1)
+                {
+                    $sql .= ", ";
+                }
+                else
+                {
+                    $sql .= ")";
+                }
+            }
+
+            $sql .= "VALUES(";
+
+            for($index = 0; $index < count($values); $index++)
+            {
+                $sql .= $values[$index];
+
+                if($index != count($values)-1)
+                {
+                    $sql .= ", ";
+                }
+                else
+                {
+                    $sql .= ")";
+                }
+            }
+
+            return $sql;
+        }
+        //--- Private Methods ---
+
 		// -----GETTERS & SETTERS-----
 		
 		//returns connection stream
@@ -233,6 +327,63 @@
 			$date=date_create();
 			return date_timestamp_get($date);
 		}
+
+        //Functions that needs refactoring
+        public function verifyAccount($username, $code)
+        {
+            $results = array(
+                'error'=> false,
+                'msg'=> "",
+                'userID' => null
+            );
+
+            $query = "SELECT * FROM users WHERE username='".$username."' and verificationCode='".$code."'";
+
+            $result = mysqli_query($this->connection, $query);
+
+            if(mysqli_num_rows($result) == 1)
+            {
+                $this->updateVerifiedField('1',$username, $code);
+                $results['userID'] = mysqli_fetch_array($result)['user_id'];
+            }
+            else
+            {
+                $results['error'] = true;
+                $results['msg'] = "Validation Failed";
+                $results['userID'] = null;
+            }
+
+            return $results;
+
+        }
+
+        public function updateVerifiedField($value, $username, $code)
+        {
+            $query = "UPDATE users SET verified='".$value."' WHERE username='".$username."'";
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function createProfileEntry($user_id)
+        {
+            $defaultImagePath = 'default.png';
+            $query = "INSERT INTO uprofile (user_id, profile_picture) VALUES ('$user_id','$defaultImagePath')";
+
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function updateUserHomePath($directory, $username)
+        {
+            $query = "UPDATE users SET home_path='$directory' WHERE username='$username'";
+            $result = mysqli_query($this->connection, $query);
+        }
+
+        public function insertResetHash($hash, $eml)
+        {
+            $query = "update users set rhash='".$hash."' where email='".$eml."'";
+            mysqli_query($this->connection,$query);
+        }
+
+
 
 	}
 	

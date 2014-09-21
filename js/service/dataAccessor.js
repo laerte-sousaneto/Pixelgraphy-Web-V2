@@ -9,13 +9,12 @@ pixelApp.factory('dataAccessor', function($http)
     var source = "http://pixel.laertesousa.com/";
     return{
 
-
         getImages: function(onSuccess)
         {
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/Accessors/globalImagesInJSON.php'
+                    url     :   '../../php/Accessors/getMostRecentImages.php'
                 }
             )
             .success(onSuccess);
@@ -26,7 +25,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/getUserAlbums.php'
+                    url     :   '../../php/Accessors/getUserAlbums.php'
                     //url     :   'http://pixel.laertesousa.com/php/globalImagesInJSON.php'
                 }
             )
@@ -38,7 +37,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/getAlbumImages.php',
+                    url     :   '../../php/Accessors/getAlbumImages.php',
                     //url     :   'http://pixel.laertesousa.com/php/login_check.php',
                     data    :   $.param({'albumID':albumID}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
@@ -51,7 +50,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method : 'POST',
-                    url : '../../php/Accessors/CommentFeed.get.php',
+                    url : '../../php/Accessors/getImageComments.php',
                     data    :   $.param({'imageID':imageID}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
@@ -89,7 +88,7 @@ pixelApp.factory('dataAccessor', function($http)
             $http(
                 {
                     method  :   'POST',
-                    url     :   '../../php/Accessors/getUser.php',
+                    url     :   '../../php/Accessors/getUserProfile.php',
                     data    :   $.param({'userID':id}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }

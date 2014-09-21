@@ -9,7 +9,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
     service.userID = null;
     service.userProfile = null;
     service.albums = null;
-    service.userImages = null;
     service.globalImages = null;
     service.selectedImageIndex = null;
 
@@ -26,12 +25,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
                 service.userProfile = data['result'];
             }
             service.notifyProfileUpdate();
-        });
-
-        dataAccessor.getUserImages(this.userID,function(data)
-        {
-            service.userImages = data;
-            service.notifyImagesUpdate();
         });
 
     };
@@ -59,7 +52,6 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
                             service.userProfile = data['result'];
 
                         }
-                        console.log(service.userProfile);
                         service.loggedIn = true;
 
                         service.notifyProfileUpdate();

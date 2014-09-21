@@ -1,8 +1,12 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: laerte
+ * Date: 9/20/2014
+ * Time: 8:52 PM
+ */
 
-header("access-control-allow-origin: *");
-
-require 'Database.class.php';
+require '../Objects/User.class.php';
 
 if(session_id() == '')
 {
@@ -11,9 +15,9 @@ if(session_id() == '')
 
 if(isset($_SESSION['userID']))
 {
-    $db = new Database();
+    $user = new User($_SESSION['userID']);
 
-    $albums = $db->retrieveUserAlbums($_SESSION['userID']);
+    $albums = $user->getAlbums();
 
     echo json_encode(array('result' => $albums, 'error' => false, 'error_msg' => ''));
 }
@@ -21,8 +25,3 @@ else
 {
     echo json_encode(array('result' => null, 'error' => true, 'error_msg' => 'User not logged in.'));
 }
-
-
-
-
-

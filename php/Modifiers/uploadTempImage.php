@@ -6,8 +6,8 @@
  * Time: 8:32 PM
  */
 
-require 'ImageServerUpload.class.php';
-error_reporting(E_ALL);
+require_once '../Objects/ImageServerUpload.class.php';
+//error_reporting(E_ALL);
 
 if(session_id() == '')
 {
