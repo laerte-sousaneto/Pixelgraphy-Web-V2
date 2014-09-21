@@ -17,14 +17,14 @@ function portalController($scope, sessionStateService, userService)
         {
             title:'Gallery',
             content:'Global Feed',
-            active: false,
+            active: true,
             icon: 'glyphicon-camera' ,
             url: 'directory/portal/globalfeed.html'
         },
         {
             title:'Profile',
             content:'Profile',
-            active: true,
+            active: false,
             icon: 'glyphicon-user' ,
             url: 'directory/portal/profile.html'
         },

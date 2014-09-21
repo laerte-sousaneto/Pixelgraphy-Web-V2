@@ -206,7 +206,7 @@ class Image extends Database
             "'" . $albumID . "'"
         ];
 
-        $id = $database->insertToTable($tableName, $fields, $values, $hasAutoIncrement);
+        $id = $database->insertToTable($tableName, $fields, $values, false);
 
         if($id != 'false')
         {

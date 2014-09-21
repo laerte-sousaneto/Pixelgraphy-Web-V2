@@ -8,9 +8,9 @@
 
     <div class="row">
 
-        <div class = "col-lg-6 col-md-6 col-sm-4 col-xs-3">
+        <div class = "col-lg-6 col-md-6 col-sm-4 col-xs-4">
             <div class="form-group">
-                <button class="btn btn-lg btn-primary" style="margin: 5px;"
+                <button class="btn btn-md btn-warning" style="margin: 5px;"
                         onclick="$('#uploadSelector').click()">
                     Add File
                 </button>
@@ -18,29 +18,29 @@
             </div>
         </div>
 
-        <div class = "col-lg-6 col-md-6 col-sm-8 col-xs-9">
-
-            <div class="form-inline has-feedback pull-right"
+        <div class = "col-lg-6 col-md-6 col-sm-8 col-xs-8">
+            <div class="navbar-form has-feedback"
+                 style="margin-top: 0; padding-top: 4px;"
                  ng-class="{'has-success' : isAlbumValid(), 'has-error' : !isAlbumValid()}">
 
-                <input type="text"
-                       style="width: 150px; margin-right: 0; display: inline-block;"
-                       class="form-control"
-                       ng-model="newAlbum"
-                       placeholder="Album's Name">
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           style="margin-right: 0; width: 130px; display: inline-block !important;"
+                           ng-model="newAlbum"
+                           placeholder="Add Album">
 
 
-                <button type="submit"
-                        class="form-group btn btn-default"
-                        ng-click="createAlbum()"
-                        ng-disabled="!isAlbumValid(newAlbum)">Add</button>
+                    <button type="submit"
+                            style="margin-right: 0;"
+                            class="btn btn-default"
+                            ng-click="createAlbum()"
+                            ng-disabled="!isAlbumValid(newAlbum)"><span class="glyphicon glyphicon-plus text-success"></span></button>
+                </div>
+
+
             </div>
-
-
         </div>
-
-
-
     </div>
 
     <div class="row">
@@ -52,7 +52,8 @@
 
                 <img class="img-rounded img-responsive img-thumbnail"
                      ng-src="{{file['source']}}"
-                     />
+                     style="min-height: 165px;" />
+
 
                 <div class="progress" style="margin: 5px;">
 

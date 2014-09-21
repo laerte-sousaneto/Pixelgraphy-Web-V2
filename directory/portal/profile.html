@@ -208,12 +208,14 @@
                                      ng-repeat="imageInfo in albumImages">
 
                                     <div class="row light-padding" >
+
                                         <div class="col-md-12 thumbnail">
 
                                             <div class="row"
                                                  style="min-height: 355px;">
+
                                                 <!-- Image Thumbnail -->
-                                                <div class="col-lg-12 col-xs-6">
+                                                <div class="col-lg-12 col-xs-12">
                                                     <div class="img-container">
 
                                                         <img id="{{imageInfo['ID']}}"
@@ -225,13 +227,13 @@
                                                 <!-- Image Thumbnail -->
 
                                                 <!-- Image Name -->
-                                                <div class="col-lg-12 col-xs-6 text-center">
+                                                <div class="col-lg-12 col-xs-12 text-center">
                                                     <h3 class="" ng-bind="imageInfo['name']"></h3>
                                                 </div>
                                                 <!-- Image Name -->
 
                                                 <!-- Image Description -->
-                                                <div class="col-lg-12 col-xs-6 ">
+                                                <div class="col-lg-12 col-xs-12 ">
                                                     <p class="well well-sm"
                                                        style="min-height: 100px; margin-bottom: 2px;"
                                                        ng-bind="imageInfo['description']"></p>

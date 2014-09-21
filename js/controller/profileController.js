@@ -13,7 +13,6 @@ function profileController($scope, userService, dataModifier)
     $scope.verticalTab = true;
     $scope.albums = userService.albums;
     $scope.currentAlbum = [];
-    $scope.selectedAlbum = null;
 
     $scope.showImages = false;
     $scope.albumImages = [];
@@ -46,11 +45,6 @@ function profileController($scope, userService, dataModifier)
     {
         $scope.albums = userService.albums;
         console.log($scope.albums);
-    });
-
-    $scope.$watch('selectedImage.album', function()
-    {
-        console.log($scope.selectedImage);
     });
 
     $scope.showAlbumImages = function(index)
@@ -110,16 +104,11 @@ function profileController($scope, userService, dataModifier)
     {
         if($scope.selectedImage != null)
         {
-            var tempAlbumID = '';
-
-            if($scope.currentAlbum.ID != $scope.selectedImage['album_id']) tempAlbumID = $scope.currentAlbum.ID;
-
-            dataModifier.updateImageInfo($scope.selectedImage, tempAlbumID, function(data)
+            dataModifier.updateImageInfo($scope.selectedImage,'', function(data)
             {
                 if(data == '')
                 {
                     userService.updateAlbums();
-                    console.log('Updated Image Info.');
                 }
 
             });

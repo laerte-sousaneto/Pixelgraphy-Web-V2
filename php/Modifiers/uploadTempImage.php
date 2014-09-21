@@ -5,7 +5,7 @@
  * Date: 8/7/2014
  * Time: 8:32 PM
  */
-
+header('Cache-Control: no-cache, no-store, must-revalidate');
 require_once '../Objects/ImageServerUpload.class.php';
 //error_reporting(E_ALL);
 
