@@ -44,7 +44,12 @@ function homeController($scope, $interval, $timeout, userService, uiService)
     $scope.$on('globalImagesUpdate', function()
     {
         $scope.images = userService.globalImages;
-        setImageBoxes($scope, 3);
+
+        if($scope.images.length > 0)
+        {
+            setImageBoxes($scope, 3);
+        }
+
     });
 
     $scope.$on('uiUpdate',function()

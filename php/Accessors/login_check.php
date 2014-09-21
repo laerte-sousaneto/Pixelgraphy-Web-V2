@@ -6,7 +6,7 @@ if(session_id() == '')
     session_start();
 }
 
-require '../Database.class.php';
+require '../Objects/Database.class.php';
 
 $db = new Database();
 
