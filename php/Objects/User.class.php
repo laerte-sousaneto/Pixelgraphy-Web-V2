@@ -81,5 +81,6 @@ class User extends Database
         return $resultArray;
     }
 
+
     //--- Public Methods ---
 } 

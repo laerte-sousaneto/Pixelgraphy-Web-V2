@@ -8,17 +8,17 @@
 
 require_once "../Objects/Image.php";
 
-if(isset($_POST['ID']))
+if(isset($_POST['image']['ID']))
 {
-    $handler = new Image($_POST['ID']);
+    $handler = new Image($_POST['image']['ID']);
 
-    $name = isset($_POST['name']) ? $_POST['name'] : null;
-    $description = isset($_POST['description']) ? $_POST['description'] : null;
-    $album = isset($_POST['album']['ID']) ? $_POST['album']['ID'] : null;
+    $name = isset($_POST['image']['name']) ? $_POST['image']['name'] : null;
+    $description = isset($_POST['image']['description']) ? $_POST['image']['description'] : null;
+    $albumID = ( isset($_POST['newAlbumID'])) ? $_POST['newAlbumID'] : null;
 
     if($name != null) $handler->rename($name);
     if($description != null) $handler->changeDescription($description);
-    if($album != null) $handler->changeAlbum($album);
+    if($albumID != null && $albumID != '') $handler->changeAlbum($album);
 }
 else
 {

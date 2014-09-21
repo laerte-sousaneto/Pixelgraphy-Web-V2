@@ -117,13 +117,13 @@ pixelApp.factory('dataModifier', function($http)
                 }
             ).success(onSuccess);
         },
-        updateImageInfo: function(data, onSuccess)
+        updateImageInfo: function(image, newAlbumID, onSuccess)
         {
             $http(
                 {
                     method: 'POST',
                     url: '../../php/Modifiers/updateImageInfo.php',
-                    data: $.param(data),
+                    data: $.param({'image': image, 'newAlbumID': newAlbumID}),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);

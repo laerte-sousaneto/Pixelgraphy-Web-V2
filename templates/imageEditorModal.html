@@ -43,20 +43,6 @@
                 </div>
                 <!-- Image Name -->
 
-                <!-- Image Album -->
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="form-group has-success"
-                             ng-class="{'has-success' : isAlbumSelected(currentAlbum), 'has-error' : !isAlbumSelected(currentAlbum)}">
-
-                            <select class="form-control"
-                                    ng-model="selectedImage.album"
-                                    ng-options="album as album.name for album in albums"></select>
-                        </div>
-                    </div>
-                </div>
-                <!-- Image Album -->
-{{selectedImage.album}}
                 <!-- Image Description -->
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">

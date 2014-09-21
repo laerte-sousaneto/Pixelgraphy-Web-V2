@@ -12,10 +12,11 @@ function profileController($scope, userService, dataModifier)
 
     $scope.verticalTab = true;
     $scope.albums = userService.albums;
-    $scope.currentAlbum = null;
+    $scope.currentAlbum = [];
+    $scope.selectedAlbum = null;
 
     $scope.showImages = false;
-    $scope.albumImages = null;
+    $scope.albumImages = [];
 
     $scope.removalIndex = null;
     $scope.removalImageImage = null;
@@ -44,12 +45,17 @@ function profileController($scope, userService, dataModifier)
     $scope.$on('albums', function()
     {
         $scope.albums = userService.albums;
+        console.log($scope.albums);
+    });
+
+    $scope.$watch('selectedImage.album', function()
+    {
+        console.log($scope.selectedImage);
     });
 
     $scope.showAlbumImages = function(index)
     {
         $scope.showImages = true;
-        $scope.currentAlbum = $scope.albums[index];
         $scope.albumImages = $scope.albums[index].images;
     };
 
@@ -104,7 +110,11 @@ function profileController($scope, userService, dataModifier)
     {
         if($scope.selectedImage != null)
         {
-            dataModifier.updateImageInfo($scope.selectedImage, function(data)
+            var tempAlbumID = '';
+
+            if($scope.currentAlbum.ID != $scope.selectedImage['album_id']) tempAlbumID = $scope.currentAlbum.ID;
+
+            dataModifier.updateImageInfo($scope.selectedImage, tempAlbumID, function(data)
             {
                 if(data == '')
                 {

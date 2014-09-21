@@ -85,7 +85,7 @@ class Album extends Database
                         "directory" => $directory,
                         "thumbnail"=>USER_HOME_URL . $username . "/" . $id . "_homepage." . $extension,
                         "date_unix" => $date_unix,
-                        "album_id" => $album_id,
+                        "album_id" => $album_id
 
 
                     ));
