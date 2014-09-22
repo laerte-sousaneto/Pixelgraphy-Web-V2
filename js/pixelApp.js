@@ -46,6 +46,12 @@ pixelApp.config(['$routeProvider','$locationProvider',
                 controller: 'resetPasswordController'
             }
         ).
+        when('/profile/:username',
+            {
+                templateUrl: '../directory/publicProfile.html',
+                controller: 'publicProfileController'
+            }
+        ).
         otherwise(
             {
                 redirectTo: '/'

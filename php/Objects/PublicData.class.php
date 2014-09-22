@@ -9,6 +9,7 @@
 require_once 'Database.class.php';
 require_once 'User.class.php';
 require_once 'UserProfile.class.php';
+require_once 'Album.class.php';
 
 class PublicData extends Database
 {
@@ -86,4 +87,27 @@ class PublicData extends Database
         return $resultArray;
     }
     //--- Public Methods ---
+
+    //-- Static Methods ---
+    public static function getUserAlbums($username)
+    {
+        $database = new Database();
+        $sql = "SELECT a.id, a.name, a.owner_id FROM albums a INNER JOIN users u ON u.user_id = a.owner_id WHERE u.username='" . $username . "'";
+        $result = $database->runQuery($sql);
+
+        $resultArray = array();
+
+        if(!$result['error'])
+        {
+            while($row = mysqli_fetch_assoc($result['data']))
+            {
+                $album = new Album($row['id']);
+
+                array_push($resultArray, array("ID"=>$album->id, "name"=>$album->name, "images"=>$album->images));
+            }
+        }
+
+        return $resultArray;
+    }
+    //-- Static Methods ---
 } 

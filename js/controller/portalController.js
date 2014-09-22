@@ -6,11 +6,11 @@
 
 pixelApp.controller('portalController', portalController);
 
-function portalController($scope, sessionStateService, userService)
+function portalController($scope, userService)
 {
     $scope.loggedIn = userService.loggedIn;
 
-    userService.updateUserProfile();
+    userService.updateUserProfile(true);
     userService.updateGlobalImages();
 
     $scope.tabs = [
@@ -48,14 +48,4 @@ function portalController($scope, sessionStateService, userService)
     {
         $scope.template = $scope.tabs[index].url;
     }
-
-    $scope.logout = function()
-    {
-        sessionStateService.closeSession(function()
-        {
-            window.location.href='/';
-            console.log('session closed');
-        });
-    };
-
 }

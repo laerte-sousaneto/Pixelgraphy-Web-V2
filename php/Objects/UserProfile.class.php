@@ -144,5 +144,23 @@ class UserProfile extends Database
     }
     //--- Public Methods ---
 
+    //--- Public Static Methods ---
+    public static function getUserProfileByUsername($username)
+    {
+        $database = new Database();
+        $fields = "p.fullname, p.gender, p.DOB, p.nickname, p.major, p.personal_email, p.hometown, p.homestate, p.relationship, p.biography, p.hobbies, p.profile_picture";
+        $sql = "SELECT " . $fields . " FROM uprofile p INNER JOIN users u ON u.user_id = p.user_id WHERE u.username='" . $username . "'";
+        $result = $database->runQuery($sql);
+        $data = false;
+
+        if(!$result['error'])
+        {
+            $data = mysqli_fetch_array($result['data']);
+            $data['profile_picture'] = USER_HOME_URL . $data['profile_picture'];
+        }
+
+        return $data;
+    }
+    //--- Public Static Methods ---
 
 } 

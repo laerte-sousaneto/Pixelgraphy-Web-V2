@@ -19,7 +19,6 @@ pixelApp.factory('dataAccessor', function($http)
             )
             .success(onSuccess);
         },
-
         getAlbums: function(onSuccess)
         {
             $http(
@@ -31,7 +30,18 @@ pixelApp.factory('dataAccessor', function($http)
             )
             .success(onSuccess);
         },
-
+        getAlbumsByUsername: function(username,onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    url     :   '../../php/Accessors/getUserAlbumsByUsername.php',
+                    data    :   $.param({'username':username}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            )
+                .success(onSuccess);
+        },
         getAlbumImages: function(albumID, onSuccess)
         {
             $http(
@@ -82,7 +92,6 @@ pixelApp.factory('dataAccessor', function($http)
                 }
             ).success(onSuccess);
         },
-
         getUser: function(id, onSuccess)
         {
             $http(
@@ -90,6 +99,17 @@ pixelApp.factory('dataAccessor', function($http)
                     method  :   'POST',
                     url     :   '../../php/Accessors/getUserProfile.php',
                     data    :   $.param({'userID':id}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                }
+            ).success(onSuccess);
+        },
+        getUserByUsername: function(username, onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    url     :   '../../php/Accessors/getUserProfileByUsername.php',
+                    data    :   $.param({'username':username}),
                     headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
                 }
             ).success(onSuccess);

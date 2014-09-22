@@ -158,12 +158,4 @@ function isImageSelectedDuplicate(id, scope)
     return isDuplicate;
 }
 
-function setSource(data, source)
-{
-    for(var x in data)
-    {
-        data[x].directory = source + data[x].directory;
-    }
-
-}
 

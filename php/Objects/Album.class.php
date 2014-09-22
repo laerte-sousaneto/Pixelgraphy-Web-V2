@@ -152,7 +152,5 @@ class Album extends Database
 
         return false;
     }
-
-
     //--- Public Static Methods
 } 

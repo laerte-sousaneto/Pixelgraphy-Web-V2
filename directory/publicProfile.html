@@ -1,0 +1,229 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-10 col-sm-10 col-xs-12" style="margin:0; padding: 0; ">
+
+            <div class="well tabBorder light-blue " style="border-top-left-radius: 0; border-bottom-left-radius: 0; margin: 0; min-height: 300px;">
+
+                <div ng-controller="publicProfileController">
+
+                    <!-- Top Info -->
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-md-xs-12">
+                            <img class="img-responsive img-thumbnail" ng-src="{{data['profile_picture']}}" />
+                        </div>
+
+                        <!-- Main Info -->
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-md-xs-12">
+
+                            <h1 ng-bind="data['fullname']"></h1>
+
+                            <div class="row">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+
+
+                                            <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                              style="width: 110px;">
+                                                            Major
+                                                        </span>
+                                                        <span class="form-control"
+                                                              ng-bind="data.major">
+
+                                                        </span>
+                                            </div>
+
+                                            <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                              style="width: 110px;">
+                                                            Gender
+                                                        </span>
+                                                <span class="form-control" ng-bind="data.gender"></span>
+                                            </div>
+
+                                            <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                              style="width: 110px;">
+                                                            Relationship
+                                                        </span>
+                                                <span class="form-control" ng-bind="data.relationship"></span>
+                                            </div>
+
+                                            <div class="input-group">
+                                                        <span class="input-group-addon"
+                                                              style="width: 110px;">
+                                                            Birthday
+                                                        </span>
+                                                <span class="form-control" ng-bind="convertToDate(data.DOB) | date:'longDate'"></span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- Main Info -->
+
+                    </div>
+                    <!-- Top Info -->
+
+                    <!-- Bottom Info -->
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-lg-12">
+
+                            <tabset id="subTab">
+
+                                <tab heading="About">
+                                    <div class="well" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+
+                                        <div class="row">
+                                            <div class="col-md-10 col-md-offset-1">
+
+                                                <div class="panel panel-info">
+
+                                                    <div class="panel-heading">Hobbies</div>
+                                                    <div class="panel-body">
+                                                        <p ng-bind="data.hobbies"></p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="panel panel-info">
+
+                                                    <div class="panel-heading">Biography</div>
+                                                    <div class="panel-body">
+                                                        <p ng-bind="data.biography"></p>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </tab>
+
+                                <tab heading="Gallery">
+                                <div class="well" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+
+                                    <!-- Display Albums -->
+                                    <div class="row" ng-show="!showImages">
+                                        <div class="col-lg-4 col-md-6 col-xs-12"
+                                             ng-repeat="album in albums track by $index">
+
+                                            <!-- Albums Container -->
+                                            <div class="panel panel-info" >
+
+                                                <!-- Albums Name -->
+                                                <div class="panel-heading"
+                                                     style=" cursor:pointer;"
+                                                     ng-click="showAlbumImages($index)">
+                                                    {{album.name | uppercase}}
+                                                </div>
+                                                <!-- Albums Name -->
+
+
+                                                <div class="panel-body">
+                                                    <!-- Preview of 4 latest images -->
+                                                    <div class="row">
+
+                                                        <div class="col-lg-6 col-md-6 col-xs-6"
+                                                             ng-repeat="image in album.images | limitTo: 4">
+                                                            <div>
+
+                                                                <img class="img-rounded img-responsive"
+                                                                     style="margin: 5px;"
+                                                                     ng-src="{{image['thumbnail']}}"
+                                                                        />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- Preview of 4 latest images -->
+                                                </div>
+
+                                            </div>
+                                            <!-- Albums Container -->
+
+                                        </div>
+                                    </div>
+                                    <!-- Display Albums -->
+
+                                    <!-- Display Album's Images -->
+                                    <div ng-show="showImages">
+
+                                        <button type="button" class="btn btn-info btn-md" ng-click="toggleImages()">
+                                            <span class="glyphicon glyphicon-arrow-left"></span> Back
+                                        </button>
+
+                                        <div class="row">
+                                            <div class="col-md-4"
+                                                 ng-repeat="imageInfo in albumImages">
+
+                                                <div class="row light-padding" >
+
+                                                    <div class="col-md-12 thumbnail">
+
+                                                        <div class="row"
+                                                             style="min-height: 355px;">
+
+                                                            <!-- Image Thumbnail -->
+                                                            <div class="col-lg-12 col-xs-12">
+                                                                <div class="img-container">
+
+                                                                    <img id="{{imageInfo['ID']}}"
+                                                                         class="img-rounded img-responsive img-thumbnail"
+                                                                         ng-src="{{imageInfo['thumbnail']}}"
+                                                                            />
+                                                                </div>
+                                                            </div>
+                                                            <!-- Image Thumbnail -->
+
+                                                            <!-- Image Name -->
+                                                            <div class="col-lg-12 col-xs-12 text-center">
+                                                                <h3 class="" ng-bind="imageInfo['name']"></h3>
+                                                            </div>
+                                                            <!-- Image Name -->
+
+                                                            <!-- Image Description -->
+                                                            <div class="col-lg-12 col-xs-12 ">
+                                                                <p class="well well-sm"
+                                                                   style="min-height: 100px; margin-bottom: 2px;"
+                                                                   ng-bind="imageInfo['description']"></p>
+                                                            </div>
+                                                            <!-- Image Description -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Display Album's Images -->
+
+                                </div>
+                            </tab>
+
+                            </tabset>
+
+                        </div>
+                    </div>
+                    <!-- Bottom Info -->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

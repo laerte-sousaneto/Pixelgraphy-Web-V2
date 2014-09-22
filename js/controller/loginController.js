@@ -51,6 +51,7 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
                 {
                     userService.setUserID(data['result']);
                     userService.loggedIn = true;
+                    userService.notifyPropertyChanged('loggedIn');
                     //$("#loginModal").modal('hide');
 
                     $scope.statusPanel = true;
@@ -75,8 +76,6 @@ function loginController($scope, dataAccessor, dataModifier, userService, uiServ
                     $scope.statusPanel = false;
                     $scope.hasLoginError = true;
                     $scope.loginError = data['error_msg'];
-
-
                 }
 
             }

@@ -6,7 +6,6 @@
  * Time: 9:26 PM
  */
 
-//require "../Database.class.php";
 require "../Objects/UserProfile.class.php";
 
 $userID = $_POST['userID'];

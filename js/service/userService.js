@@ -35,7 +35,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
         service.notifyPropertyChanged("SelectedImage");
     };
 
-    service.updateUserProfile = function()
+    service.updateUserProfile = function(redirect)
     {
         if(service.userID == null)
         {
@@ -53,6 +53,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
 
                         }
                         service.loggedIn = true;
+                        service.notifyPropertyChanged('loggedIn');
 
                         service.notifyProfileUpdate();
                     });
@@ -61,8 +62,14 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
                 }
                 else
                 {
-                    window.location.href='/';
                     service.loggedIn = false;
+                    service.notifyPropertyChanged('loggedIn');
+
+                    if(redirect)
+                    {
+                        window.location.href='/';
+                    }
+
                 }
 
             });

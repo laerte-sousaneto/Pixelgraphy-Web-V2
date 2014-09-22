@@ -1,5 +1,5 @@
 <!-- Title Area -->
-<div class="container">
+<div class="container" ng-controller="navbarController">
 
     <div class="row">
 
@@ -15,7 +15,6 @@
                         col-md-10 col-md-offset-1
                         col-sm-10 col-sm-offset-1
                         col-xs-9" >
-
 
                     <div class="navbar navbar-default light-padding" role="navigation">
 
@@ -36,11 +35,12 @@
                             <div id="navMenu" class="collapse navbar-collapse">
                                 <ul class="nav navbar-default navbar-nav">
                                     <li class="active"><a href="#">Home</a> </li>
+                                    <li ng-show="loggedIn"><a href="#/portal">Portal</a> </li>
                                     <li><a href="#/about">About</a> </li>
                                     <li><a href="#/feedback">Feedback</a> </li>
                                 </ul>
 
-                                <div class="navbar-right">
+                                <div class="navbar-right" ng-show="!loggedIn">
 
                                     <button
                                             type="button"
@@ -48,7 +48,6 @@
                                             data-toggle="modal"
                                             data-target="#loginModal"
                                             >
-
                                         Log In
                                     </button>
                                     <button
@@ -59,8 +58,16 @@
                                             >
                                         Sign Up!
                                     </button>
+
                                 </div>
 
+                                <div class="navbar-right" ng-show="loggedIn">
+                                    <button type="button"
+                                            class="btn btn-danger navbar-btn"
+                                            ng-click="logout()">
+                                        Log Out
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
