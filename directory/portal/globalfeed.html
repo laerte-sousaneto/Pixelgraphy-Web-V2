@@ -19,8 +19,11 @@
                         <p ng-bind="image['image']['description']"></p>
 
                         <blockquote class="caption">
-                            <footer class="" ng-bind="image['image']['username'] | uppercase" style="color: white;"><cite title="Source Title"></cite></footer>
-
+                            <a ng-href="http://pixel.laertesousa.com/#/profile/{{image.image.username}}">
+                            <footer class="" ng-bind="image['image']['username'] | uppercase" style="color: white;">
+                                <cite title="Source Title"></cite>
+                            </footer>
+                            </a>
                             <span class=""
                                  style="cursor: pointer;"
                                  ng-click="showImageDetails($index)">

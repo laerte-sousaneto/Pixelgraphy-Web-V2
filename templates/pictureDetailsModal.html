@@ -26,7 +26,11 @@
 
                         <blockquote class="caption">
                             <p ng-bind="image['description']"></p>
-                            <footer class="black" ng-bind="image['username'] | uppercase" style="color: white;"><cite title="Source Title"></cite></footer>
+                            <a ng-click="visitProfile(image.username)">
+                                <footer class="black" ng-bind="image['username'] | uppercase" style="color: white;">
+                                    <cite title="Source Title"></cite>
+                                </footer>
+                            </a>
                         </blockquote>
 
                     </div>
@@ -40,14 +44,18 @@
                                 <div class="row well well-sm" ng-repeat="comment in image.comments">
 
                                     <div class="col-lg-2 thumbnail">
-                                        <img class=""   height="auto" ng-src="{{comment.profilePicture}}" />
+                                        <a ng-click="visitProfile(image.username)">
+                                            <img height="auto" ng-src="{{comment.profilePicture}}" />
+                                        </a>
                                     </div>
 
                                     <div class="col-lg-9">
 
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <h4 ng-bind="comment.poster"></h4>
+                                                <a ng-click="visitProfile(image.username)">
+                                                    <h4 ng-bind="comment.poster"></h4>
+                                                </a>
                                             </div>
                                         </div>
 

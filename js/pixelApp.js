@@ -63,6 +63,7 @@ pixelApp.config(['$routeProvider','$locationProvider',
 ]);
 
 
+
 pixelApp.directive('whenScrolled', function() {
     return function(scope, elm, attr) {
         var raw = elm[0];
