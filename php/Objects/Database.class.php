@@ -383,6 +383,63 @@
             mysqli_query($this->connection,$query);
         }
 
+        /*
+			Method Functionality: Removes image from database
+			Specification: Removes image and its comments from database, using
+			its image id.
+		*/
+		public function removeImage($image_id)
+		{
+            $results = array(
+                'result' => "",
+                'error' => false,
+                'error_msg' => ""
+
+            );
+			$query = "SELECT directory FROM images WHERE id='".$image_id."'";
+			$query1 = "DELETE FROM images WHERE id='".$image_id."'";
+			$query2 = "DELETE FROM comments WHERE image_id='".$image_id."'";
+
+			if($result = mysqli_query($this->getConnection(),$query))
+			{
+				$row = mysqli_fetch_array($result);
+
+				$temp = explode(".", $row['directory']);
+                $temp2 = explode("/", $row['directory']);
+                $ext = end($temp);
+
+                $path = USERS_HOME_PATH.$row['directory'];
+                $path2 = USERS_HOME_PATH.$temp2[0] . "/" . $image_id . "_homepage." . end($temp);
+
+				if(unlink($path) && unlink($path2))
+				{
+					if(!mysqli_query($this->getConnection(),$query1))
+					{
+                        $results['error'] = true;
+                        $results['error_msg'] = mysqli_error($this->getConnection());
+					}
+					if(!mysqli_query($this->getConnection(),$query2))
+    				{
+                           $results['error'] = true;
+                          $results['error_msg'] = mysqli_error($this->getConnection());
+    					}
+				}
+				else
+				{
+                       $results['error'] = true;
+                        $results['error_msg'] = "file was not deleted sucessfully";
+    				}
+			}
+			else
+			{
+                    $results['error'] = true;
+                    $results['error_msg'] = mysqli_error($this->getConnection());
+    			}
+
+            return $results;
+
+		}
+
 
 
 	}

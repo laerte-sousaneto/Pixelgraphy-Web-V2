@@ -1,5 +1,5 @@
 <?php
-	require '../Database.class.php';
+	require '../Objects/Database.class.php';
 	
 	$image_id = $_POST['id'];
 	
