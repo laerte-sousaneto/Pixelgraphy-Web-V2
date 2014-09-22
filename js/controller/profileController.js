@@ -170,4 +170,60 @@ function profileController($scope, userService, dataModifier)
 
     userService.updateAlbums();
     $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+
+    $scope.uploadFile = function(file)
+    {
+        var url = "php/Modifiers/uploadImage.php";
+        var xhr = new XMLHttpRequest();
+        var fileData = new FormData();
+
+        $scope.data['profile_picture'] = "image/loading.gif";
+
+        xhr.open("POST", url, true);
+
+        xhr.onreadystatechange = function()
+        {
+            if (xhr.readyState == 4 && xhr.status == 200)
+            {
+                console.log(xhr.responseText);
+                if(xhr.response == 'File Uploaded')
+                {
+                    userService.updateUserProfile();
+                }
+            }
+        };
+
+
+        fileData.append('file', file);
+        fileData.append('isProfile', true);
+
+        // Initiate a multipart/form-data upload
+        xhr.send(fileData);
+    };
 }
+
+
+pixelApp.directive("readProfile", function ($timeout)
+{
+    return {
+
+        link: function (scope, element)
+        {
+            element.unbind("change").bind("change", function (changeEvent)
+            {
+
+                if(!scope.$$phase)
+                {
+                    console.log(changeEvent.target.files[0]);
+                    $timeout(function()
+                    {
+                        //scope.$apply(function(){scope.newFiles = changeEvent.target.files;});
+                        scope.uploadFile(changeEvent.target.files[0]);
+                    },500);
+
+                }
+
+            });
+        }
+    }
+});

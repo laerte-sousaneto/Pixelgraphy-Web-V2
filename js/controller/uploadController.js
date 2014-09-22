@@ -72,20 +72,9 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
         xhr.onreadystatechange = function()
         {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Handle response.
-                console.log(xhr.responseText);
-               // var phpResponse = JSON.parse(xhr.responseText);
-
-                //console.log(phpResponse);
-                /*if(!phpResponse['error'])
-                {
-                    $timeout(function()
-                    {
-
-
-                    },2000);
-                }*/
+            if (xhr.readyState == 4 && xhr.status == 200)
+            {
+                //console.log(xhr.responseText);
             }
         };
 
@@ -120,13 +109,13 @@ function uploadController($scope, $timeout, dataModifier, userService)
     $scope.sendTempFile = function(fileIndex)
     {
         var file = $scope.files[fileIndex];
-
         var url = "php/Modifiers/uploadTempImage.php";
-
-        var xhr = new XMLHttpRequest();
         var fileData = new FormData();
+        var xhr = new XMLHttpRequest();
 
         xhr.open("POST", url, true);
+        xhr.setRequestHeader("pragma", "no-cache");
+        xhr.setRequestHeader("cache-control", "no-cache");
 
         xhr.onreadystatechange = function()
         {
@@ -134,7 +123,6 @@ function uploadController($scope, $timeout, dataModifier, userService)
                 // Handle response.
 
                 var phpResponse = JSON.parse(xhr.responseText);
-
                 //console.log(phpResponse);
                 if(!phpResponse['error'])
                 {
@@ -149,7 +137,6 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
         fileData.append('file', file.file);
 
-        // Initiate a multipart/form-data upload
         xhr.send(fileData);
 
     };
@@ -233,8 +220,6 @@ pixelApp.directive("readFile", function ($timeout)
                 }
 
             });
-
-
 
         }
     }

@@ -104,7 +104,7 @@
 					if($this->isProfile == 'true')
 					{
 						//$this->database->updateUserSettings('uprofile','profile_picture',$this->directory,$this->user);
-                        $this->userProfile->updateProfilePicture($this->driectory);
+                        $this->userProfile->updateProfilePicture($this->username . '/' . $this->image_id.".".$ext);
 					}
 					else
 					{

@@ -7,11 +7,22 @@
         <span class="glyphicon glyphicon-pencil"></span>
     </button>
 
+    <input id="profileUpload"
+           type="file"
+           name="files"
+           read-profile
+           style="display:none;"/>
+
     <!-- Top Info -->
     <div class="row">
 
         <div class="col-lg-4 col-md-4 col-sm-4 col-md-xs-12">
             <img class="img-responsive img-thumbnail" ng-src="{{data['profile_picture']}}" />
+            <button class="btn btn-md btn-warning"
+                    style="margin: 2px;"
+                    onclick="$('#profileUpload').click()">
+                Update Picture
+            </button>
         </div>
 
         <!-- Main Info -->
