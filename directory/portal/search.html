@@ -1,0 +1,81 @@
+<div ng-controller="searchController">
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="navbar-form has-feedback"
+                 style="margin-top: 0; padding-top: 4px;">
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           style="margin-right: 0; width: 150px; display: inline-block !important;"
+                           ng-model="search"
+                           placeholder="Find a friend...">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-10" ng-repeat="user in users | filter:{ fullname: search }">
+
+            <div class="well well-sm"
+                 ng-click="visitProfile(user.username)"
+                    style="cursor: pointer;">
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <a >
+                            <img class="img-responsive img-thumbnail" height="auto" ng-src="{{user.profile_picture}}" />
+                        </a>
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Major
+                                </span>
+                                <span class="form-control"
+                                      ng-bind="user.fullname">
+                                </span>
+                        </div>
+
+                        <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Major
+                                </span>
+                                <span class="form-control"
+                                      ng-bind="user.major">
+                                </span>
+                        </div>
+
+                        <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Gender
+                                </span>
+                            <span class="form-control" ng-bind="user.gender"></span>
+                        </div>
+
+                        <div class="input-group">
+                                <span class="input-group-addon"
+                                      style="width: 110px;">
+                                    Birthday
+                                </span>
+                            <span class="form-control" ng-bind="convertToDate(user.DOB) | date:'longDate'"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

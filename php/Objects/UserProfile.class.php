@@ -102,7 +102,7 @@ class UserProfile extends Database
             $this->major = $major;
             $this->gender = $gender;
             $this->relationship = $relationship;
-            $this->DOB = $DOB;
+            $this->DOB = $birthday;
         }
 
         return $wasSuccess;

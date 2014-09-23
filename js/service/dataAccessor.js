@@ -8,7 +8,15 @@ pixelApp.factory('dataAccessor', function($http)
 {
     var source = "http://pixel.laertesousa.com/";
     return{
-
+        getAllUsers: function(onSuccess)
+        {
+            $http(
+                {
+                    method  :   'POST',
+                    url     :   '../../php/Accessors/getAllUsers.php'
+                }
+            ).success(onSuccess);
+        },
         getImages: function(onSuccess)
         {
             $http(

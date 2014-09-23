@@ -109,5 +109,27 @@ class PublicData extends Database
 
         return $resultArray;
     }
+
+    public static function getAllUsers()
+    {
+        $database = new Database();
+        $fields = "u.username,p.fullname, p.gender, p.DOB, p.nickname, p.major, p.personal_email, p.hometown, p.homestate, p.relationship, p.biography, p.hobbies, p.profile_picture";
+        $sql = "SELECT " . $fields . " FROM uprofile p INNER JOIN users u ON u.user_id = p.user_id";
+        $result = $database->runQuery($sql);
+        $data = array();
+
+        if(!$result['error'])
+        {
+            while($row = $result['data']->fetch_assoc())
+            {
+                $row['profile_picture'] = USER_HOME_URL . $row['profile_picture'];
+                array_push($data, $row);
+            }
+
+            return $data;
+        }
+
+        return false;
+    }
     //-- Static Methods ---
 } 

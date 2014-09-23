@@ -24,7 +24,7 @@ function portalController($scope, userService)
         {
             title:'Profile',
             content:'Profile',
-            active: true,
+            active: false,
             icon: 'glyphicon-user' ,
             url: 'directory/portal/profile.html'
         },
@@ -34,6 +34,14 @@ function portalController($scope, userService)
             active: false,
             url: 'directory/portal/upload.html',
             icon: 'glyphicon-picture' ,
+            disabled: false
+        },
+        {
+            title:'Search',
+            content:'',
+            active: true,
+            url: 'directory/portal/search.html',
+            icon: 'glyphicon glyphicon-search' ,
             disabled: false
         }
     ];

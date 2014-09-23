@@ -61,4 +61,14 @@ function pictureDetailsController($scope, $timeout, userService, dataModifier)
 
     };
 
+    $scope.visitProfile = function(username)
+    {
+        $('#pictureDetailsModal').modal('hide');
+        $('#pictureDetailsModal').on('hidden.bs.modal', function (e)
+        {
+            window.location.href = "http://pixel.laertesousa.com/#/profile/"+username;
+        });
+
+    };
+
 }
