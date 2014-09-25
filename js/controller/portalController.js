@@ -6,12 +6,13 @@
 
 pixelApp.controller('portalController', portalController);
 
-function portalController($scope, userService)
+function portalController($scope, userService, uiService)
 {
     $scope.loggedIn = userService.loggedIn;
 
     userService.updateUserProfile(true);
     userService.updateGlobalImages();
+    uiService.enablePortalTab();
 
     $scope.tabs = [
         {

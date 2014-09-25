@@ -9,6 +9,7 @@ pixelApp.factory('uiService', function($rootScope)
     var service = {};
 
     service.showHome = true;
+    service.portalTab = false;
 
     service.setShowHome = function(show)
     {
@@ -19,10 +20,20 @@ pixelApp.factory('uiService', function($rootScope)
         }
     };
 
+    service.enablePortalTab = function()
+    {
+        service.notifyPropertyChanged('enablePortalTab');
+    };
+
+    service.notifyPropertyChanged = function(propertyName)
+    {
+        $rootScope.$broadcast(propertyName);
+    };
+
     service.broadcastUpdate = function()
     {
         $rootScope.$broadcast('uiUpdate');
-    }
+    };
 
     return service;
 });

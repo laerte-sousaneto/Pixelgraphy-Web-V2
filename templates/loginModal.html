@@ -47,7 +47,7 @@
                 <!-- Password Recover View -->
                 <div class="row" ng-show="(forgotPasswordPanel && !statusPanel)">
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-xs-2">
 
                         <a class="pull-left" ng-click="forgotPasswordPanel = false;">
                             <span class="glyphicon glyphicon-arrow-left" style="font-size: 18px;"></span>
@@ -55,7 +55,7 @@
 
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-xs-8">
 
                         <div class="form-group has-feedback"
                              ng-class="{'has-success': (isEmailValid() && !hasRecoverError), 'has-error': (!isEmailValid() || hasRecoverError)}">

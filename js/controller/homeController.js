@@ -56,9 +56,6 @@ function homeController($scope, $interval, $timeout, userService, uiService)
     {
         $scope.imagePreview = uiService.showHome;
     });
-
-
-
 }
 
 function setImageBoxes(scope, quantity)
