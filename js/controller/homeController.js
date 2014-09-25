@@ -8,6 +8,8 @@ pixelApp.controller('homeController',homeController);
 
 function homeController($scope, $interval, $timeout, userService, uiService)
 {
+    uiService.enableHomeTab();
+
     $scope.homeSource = "http://userhome.laertesousa.com/";
     $scope.images = userService.globalImages;
     $scope.imageSelected = null;
@@ -56,6 +58,7 @@ function homeController($scope, $interval, $timeout, userService, uiService)
     {
         $scope.imagePreview = uiService.showHome;
     });
+
 }
 
 function setImageBoxes(scope, quantity)

@@ -61,6 +61,11 @@ function navbarController($scope, userService, sessionStateService)
         }
     });
 
+    $scope.$on('enableHomeTab', function()
+    {
+        $scope.selectTab(0);
+    });
+
     $scope.$on('enablePortalTab', function()
     {
         $scope.selectTab(1);
@@ -69,6 +74,11 @@ function navbarController($scope, userService, sessionStateService)
     $scope.$on('enableFeedbackTab', function()
     {
         $scope.selectTab(3);
+    });
+
+    $scope.$on('enableAboutTab', function()
+    {
+        $scope.selectTab(2);
     });
 
     $scope.logout = function()

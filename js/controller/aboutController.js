@@ -6,7 +6,7 @@
 
 pixelApp.controller('aboutController', aboutController);
 
-function aboutController($scope)
+function aboutController($scope, uiService)
 {
-
+    uiService.enableAboutTab();
 }

@@ -153,7 +153,7 @@ class UserProfile extends Database
         $result = $database->runQuery($sql);
         $data = false;
 
-        if(!$result['error'])
+        if(!$result['error'] && mysqli_num_rows($result['data']) > 0)
         {
             $data = mysqli_fetch_array($result['data']);
             $data['profile_picture'] = USER_HOME_URL . $data['profile_picture'];

@@ -20,6 +20,11 @@ pixelApp.factory('uiService', function($rootScope)
         }
     };
 
+    service.enableHomeTab = function()
+    {
+        service.notifyPropertyChanged('enableHomeTab');
+    };
+
     service.enablePortalTab = function()
     {
         service.notifyPropertyChanged('enablePortalTab');
@@ -28,6 +33,11 @@ pixelApp.factory('uiService', function($rootScope)
     service.enableFeedbackTab = function()
     {
         service.notifyPropertyChanged('enableFeedbackTab');
+    };
+
+    service.enableAboutTab = function()
+    {
+        service.notifyPropertyChanged('enableAboutTab');
     };
 
     service.notifyPropertyChanged = function(propertyName)

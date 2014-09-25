@@ -13,10 +13,23 @@ $userData = null;
 
 if($username != "" && $username != null)
 {
-    $userData = array(  'result'    =>  UserProfile::getUserProfileByUsername($username),
-        'error'     =>  false,
-        'error_msg' =>  ""
-    );
+    $data = UserProfile::getUserProfileByUsername($username);
+
+    if(!$data)
+    {
+        $userData = array(  'result'    =>  '',
+            'error'     =>  true,
+            'error_msg' =>  "User not found."
+        );
+    }
+    else
+    {
+        $userData = array(  'result'    =>  $data,
+            'error'     =>  false,
+            'error_msg' =>  ""
+        );
+    }
+
 }
 else
 {

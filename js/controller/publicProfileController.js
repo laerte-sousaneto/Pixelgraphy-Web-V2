@@ -12,6 +12,9 @@ function publicProfileController($scope, $routeParams, dataAccessor)
 
     $scope.showImages = false;
 
+    $scope.loading = true;
+    $scope.showProfile = false;
+
     dataAccessor.getUserByUsername($scope.username, function(data)
     {
         //console.log(data);
@@ -23,10 +26,20 @@ function publicProfileController($scope, $routeParams, dataAccessor)
                 if(!albumData['error'])
                 {
                     $scope.albums = albumData['result'];
+                    dataAccessor.getAlbumsByUsername($scope.username, function(albumData)
+                    {
+                        if(!albumData['error'])
+                        {
+                            $scope.albums = albumData['result'];
+                            $scope.showProfile = true;
+                        }
+                    });
                 }
             });
-
-            console.log('here');
+        }
+        else
+        {
+            $scope.loading = false;
         }
 
     });
