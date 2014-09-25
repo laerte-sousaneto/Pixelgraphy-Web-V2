@@ -1,13 +1,84 @@
-<div id="feedback" class="container">
-
+<div id="feedback"
+     ng-controller="feedbackController"
+     class="container">
     <div class="row">
 
         <div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
 
-            <h1>Feedback</h1>
+            <div class="well well-md" ng-show="!sending">
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Your name..."
+                           ng-model="fullname"/>
+                </div>
+                <!-- Full Name -->
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Your email..."
+                           ng-model="email"/>
+                </div>
+                <!-- Email -->
+
+                <!-- Subject -->
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="What is this message about?"
+                           ng-model="subject"/>
+                </div>
+                <!-- Subject -->
+
+                <!-- Message -->
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea  type="text"
+                               class="form-control"
+                               rows="8"
+                               placeholder="Tell us what you have in mind!"
+                               ng-model="message"
+                               multiline/>
+                </div>
+                <!-- Message -->
+
+                <!-- Send Button -->
+                <div class="form-group text-center">
+                    <button class="btn btn-lg btn-primary"
+                            ng-click="send()">
+                    Send
+                    </button>
+                </div>
+                <!-- Send Button -->
+
+            </div>
+
+            <div class="well well-md text-center" ng-show="sending">
+
+                <!-- Loading Section -->
+                <div ng-show="!sent">
+                    <img src="../image/loading.gif" width="50" alt="loading image"/>
+
+                    <p class="lead">Sending</p>
+                </div>
+                <!-- Loading Section -->
+
+                <!-- Final Message -->
+                <div ng-show="sent">
+                    <p class="lead">Your message has been sent. Thank you for the feedback!</p>
+                </div>
+                <!-- Final Message -->
+
+            </div>
 
         </div>
 
     </div>
-
 </div>

@@ -66,6 +66,11 @@ function navbarController($scope, userService, sessionStateService)
         $scope.selectTab(1);
     });
 
+    $scope.$on('enableFeedbackTab', function()
+    {
+        $scope.selectTab(3);
+    });
+
     $scope.logout = function()
     {
         sessionStateService.closeSession(function()

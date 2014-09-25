@@ -25,6 +25,11 @@ pixelApp.factory('uiService', function($rootScope)
         service.notifyPropertyChanged('enablePortalTab');
     };
 
+    service.enableFeedbackTab = function()
+    {
+        service.notifyPropertyChanged('enableFeedbackTab');
+    };
+
     service.notifyPropertyChanged = function(propertyName)
     {
         $rootScope.$broadcast(propertyName);
