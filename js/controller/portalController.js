@@ -17,7 +17,7 @@ function portalController($scope, userService)
         {
             title:'Gallery',
             content:'Global Feed',
-            active: false,
+            active: true,
             icon: 'glyphicon-camera' ,
             url: 'directory/portal/globalfeed.html'
         },
@@ -39,7 +39,7 @@ function portalController($scope, userService)
         {
             title:'Search',
             content:'',
-            active: true,
+            active: false,
             url: 'directory/portal/search.html',
             icon: 'glyphicon glyphicon-search' ,
             disabled: false

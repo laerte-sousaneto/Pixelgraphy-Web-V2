@@ -19,7 +19,7 @@
 
                 <div class="row container-fluid">
 
-                    <div class="col-lg-7">
+                    <div class="col-lg-7 col-xs-12">
 
                         <img class="img-thumbnail" width="100%" ng-src="{{original}}" />
 
@@ -35,26 +35,27 @@
 
                     </div>
 
-                    <div class="col-lg-5 well" style="height: 500px; word-wrap:break-word;">
+                    <div class="col-lg-5 col-xs-12" style="word-wrap:break-word;">
 
-                        <div class="row" id="commentScroll" style="height:300px; overflow-y: scroll;">
+                        <div class="row" id="commentScroll" style="max-height:300px; overflow-y: scroll;">
 
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 col-xs-12">
 
                                 <div class="row well well-sm" ng-repeat="comment in image.comments">
 
-                                    <div class="col-lg-2 thumbnail">
+                                    <div class="col-lg-4 col-xs-3"
+                                            style="padding: 0;">
                                         <a ng-click="visitProfile(image.username)">
-                                            <img height="auto" ng-src="{{comment.profilePicture}}" />
+                                            <img class="img-comment img-responsive" ng-src="{{comment.profilePicture}}" />
                                         </a>
                                     </div>
 
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-8 col-xs-9">
 
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <a ng-click="visitProfile(image.username)">
-                                                    <h4 ng-bind="comment.poster"></h4>
+                                                    <h4 ng-bind="comment.poster" style="margin-top: 0;"></h4>
                                                 </a>
                                             </div>
                                         </div>

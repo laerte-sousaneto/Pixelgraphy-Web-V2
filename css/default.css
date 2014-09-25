@@ -207,6 +207,11 @@ textarea {
     resize: none;
 }
 
+.img-comment
+{
+    max-width: 80px;
+}
+
 @media all and (max-width: 767px)
 {
     .img-container
@@ -236,7 +241,7 @@ textarea {
 
     #mainTab > .nav-tabs > li
     {
-        width: 33.3%;
+        width: 25%;
     }
     #mainTab > .nav-tabs > li > a
     {
@@ -263,5 +268,10 @@ textarea {
     .form-control
     {
         font-size: 10px;
+    }
+
+    .img-comment
+    {
+        max-width: 50px;
     }
 }

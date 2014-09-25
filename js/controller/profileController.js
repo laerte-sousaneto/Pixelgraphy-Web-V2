@@ -169,7 +169,9 @@ function profileController($scope, userService, dataModifier)
     };
 
     userService.updateAlbums();
-    $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+
+    //$('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+    $(function () { $("[data-toggle='tooltip']").tooltip({'placement': 'top'}); });
 
     $scope.uploadFile = function(file)
     {
