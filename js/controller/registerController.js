@@ -12,10 +12,6 @@ function registerController($scope, $timeout, dataModifier)
     $scope.repeatPassword = "";
     $scope.email = "";
 
-    $scope.password = "lta86t7v";
-    $scope.repeatPassword = "lta86t7v";
-    $scope.email = "sousa.lae@gmail.com";
-
     $scope.registered = false;
     $scope.inProcess = false;
     $scope.statusMsg = "";
@@ -35,9 +31,9 @@ function registerController($scope, $timeout, dataModifier)
 
     $scope.isEmailValid = function()
     {
-        var regex = new RegExp("^([a-z0-9._%+-]+(@purchase+\.edu))$");
+        var regex = new RegExp("^([a-z0-9._]+(@purchase+\.edu))$");
+        //var regex = new RegExp("^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
         return regex.test($scope.email);
-        //return true;
     };
 
     $scope.isAllFieldsValid = function()

@@ -8,50 +8,69 @@
             <div class="well well-md" ng-show="!sending">
 
                 <!-- Full Name -->
-                <div class="form-group">
-                    <label>Full Name</label>
+                <div class="form-group has-feedback"
+                     ng-class="{'has-success': isNameValid(), 'has-error': !isNameValid()}">
+                    <label class="control-label">Full Name</label>
                     <input type="text"
                            class="form-control"
                            placeholder="Your name..."
                            ng-model="fullname"/>
+
+                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                          ng-class="{'glyphicon-ok': isNameValid(), 'glyphicon-remove': !isNameValid()}"></span>
                 </div>
                 <!-- Full Name -->
 
                 <!-- Email -->
-                <div class="form-group">
-                    <label>Email</label>
+                <div class="form-group has-feedback"
+                     ng-class="{'has-success': isEmailValid(), 'has-error': !isEmailValid()}">
+                    <label class="control-label" for="email">Email</label>
                     <input type="text"
+                           id="email"
                            class="form-control"
                            placeholder="Your email..."
                            ng-model="email"/>
+
+                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                          ng-class="{'glyphicon-ok': isEmailValid(), 'glyphicon-remove': !isEmailValid()}"></span>
                 </div>
                 <!-- Email -->
 
                 <!-- Subject -->
-                <div class="form-group">
-                    <label>Subject</label>
+                <div class="form-group has-feedback"
+                     ng-class="{'has-success': isSubjectValid(), 'has-error': !isSubjectValid()}">
+                    <label class="control-label" for="subject">Subject</label>
                     <input type="text"
+                           id="subject"
                            class="form-control"
                            placeholder="What is this message about?"
                            ng-model="subject"/>
+
+                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                          ng-class="{'glyphicon-ok': isSubjectValid(), 'glyphicon-remove': !isSubjectValid()}"></span>
                 </div>
                 <!-- Subject -->
 
                 <!-- Message -->
-                <div class="form-group">
-                    <label>Message</label>
+                <div class="form-group has-feedback"
+                     ng-class="{'has-success': isMessageValid(), 'has-error': !isMessageValid()}">
+                    <label class="control-label">Message</label>
                     <textarea  type="text"
                                class="form-control"
                                rows="8"
                                placeholder="Tell us what you have in mind!"
                                ng-model="message"
                                multiline/>
+                    <span style="margin:5px;">{{message.length}} / 500</span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                          ng-class="{'glyphicon-ok': isMessageValid(), 'glyphicon-remove': !isMessageValid()}"></span>
                 </div>
                 <!-- Message -->
 
                 <!-- Send Button -->
                 <div class="form-group text-center">
                     <button class="btn btn-lg btn-primary"
+                            ng-disabled="!isAllFieldsValid()"
                             ng-click="send()">
                     Send
                     </button>
