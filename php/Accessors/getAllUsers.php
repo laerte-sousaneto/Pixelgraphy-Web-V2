@@ -11,7 +11,7 @@ require_once "../Objects/PublicData.class.php";
 $profiles = null;
 $result = PublicData::getAllUsers();
 
-if(!$result['error'])
+if($result != false)
 {
     $profiles = array(  'result'    =>  $result,
         'error'     =>  false,
