@@ -33,9 +33,14 @@ function create_folder($username, $database)
 
     $dir_path = USERS_HOME_PATH.$username;
 
+    $sql = "select user_id from users where username ='" . $username . "'";
+    $result = $database->runQuery($sql);
+
+    $user_id = mysqli_fetch_assoc($result['data'])['user_id'];
+
     $database->updateUserHomePath($dir_path, $username);
 
-    $database->createProfileEntry($database->getUserID($username));
+    $database->createProfileEntry($user_id);
 
     if(!file_exists($dir_path))
     {

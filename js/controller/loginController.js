@@ -7,8 +7,8 @@ pixelApp.controller('loginController', loginController);
 
 function loginController($scope, dataAccessor, dataModifier, userService, uiService, $timeout)
 {
-    $scope.username = "laerte.sousaneto";
-    $scope.password = "lta86t7v";
+    $scope.username = "";
+    $scope.password = "";
     $scope.loginError = "";
     $scope.recoverError = "";
     $scope.hasLoginError = false;
