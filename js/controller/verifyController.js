@@ -51,8 +51,9 @@ function verifyController($scope, $routeParams, $timeout, dataModifier, userServ
                         $scope.status = "Your username was successfully verified.";
                         $scope.subStatus = "You will automatically be logged in to the portal.";
                         userService.setUserID(data['userID']);
-                        userService.updateUserProfile(true);
                         userService.notifyPropertyChanged('loggedIn');
+                        //userService.updateUserProfile(true);
+
 
 
                         $timeout(function()
