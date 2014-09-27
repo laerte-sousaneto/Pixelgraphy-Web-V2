@@ -8,6 +8,12 @@ function infoEditController($scope, $timeout, userService, dataModifier)
 {
     $scope.showLoading = false;
 
+    $scope.fullname = userService.userProfile.fullname;
+    $scope.major = userService.userProfile.major;
+    $scope.gender = userService.userProfile.gender;
+    $scope.relationship = userService.userProfile.relationship;
+    $scope.birthday = userService.userProfile.DOB;
+
     $scope.$on('profileUpdate', function()
     {
         if(userService.userProfile != null)

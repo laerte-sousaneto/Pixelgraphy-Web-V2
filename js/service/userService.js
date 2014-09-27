@@ -23,7 +23,9 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
             if(!data['error'])
             {
                 service.userProfile = data['result'];
+                service.loggedIn = true;
             }
+
             service.notifyProfileUpdate();
         });
 
