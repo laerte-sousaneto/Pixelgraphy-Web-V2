@@ -21,7 +21,7 @@ try
 	$eml = $_POST['email'];
 
     $isPurchaseEmail = preg_match("/^([a-z0-9._%+-]+(@purchase.edu))$/",trim($eml));
-
+    $disableEmailRestriction = true;
 
 	//BEGIN SQL INJECTION PROTECTION
 	$usr = stripslashes($usr);
@@ -56,7 +56,7 @@ try
 	{
 		throw new Exception("E-Mail is not valid");
 	}
-	else if(!$isPurchaseEmail)
+	else if(!$isPurchaseEmail && !$disableEmailRestriction)
 	{
 		throw new Exception("E-Mail must be a @purchase.edu email");
 	}
