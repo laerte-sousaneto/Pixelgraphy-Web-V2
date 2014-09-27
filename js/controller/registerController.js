@@ -35,9 +35,16 @@ function registerController($scope, $timeout, dataModifier)
     {
         var regex = null;
 
-        if($scope.disableEmailRestriction) regex = new RegExp("^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
-        else regex = new RegExp("^([a-z0-9._]+(@purchase+\.edu))$")
-        
+        if($scope.disableEmailRestriction)
+        {
+            regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            
+        }
+        else
+        {
+            regex = new RegExp("^([a-z0-9._]+(@purchase+\.edu))$");
+        }
+
         return regex.test($scope.email);
     };
 
