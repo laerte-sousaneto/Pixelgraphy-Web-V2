@@ -35,7 +35,7 @@ function pictureDetailsController($scope, $timeout, userService, dataModifier)
 
     $scope.isCommentValid = function()
     {
-        var regex = new RegExp("^(([a-zA-Z0-9\\s\\n\\.\\'\\()\\%\\@\\:\\,]){10,150})$");
+        var regex = new RegExp("^([^ƒ\\^]{10,150})$");
         return regex.test($scope.comment);
     };
 

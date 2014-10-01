@@ -48,8 +48,7 @@
 		public function connect()
 		{
 			$successful = true;
-			$this->connection = mysqli_connect
-			($this->host,$this->username,$this->password,$this->dbName);
+			$this->connection = mysqli_connect($this->host,$this->username,$this->password,$this->dbName);
 			
 			if(mysqli_connect_errno($this->connection))
 			{

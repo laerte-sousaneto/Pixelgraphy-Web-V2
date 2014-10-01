@@ -24,6 +24,7 @@ pixelApp.factory('userService', function($rootScope, $timeout, dataAccessor, ses
             {
                 service.userProfile = data['result'];
                 service.loggedIn = true;
+                service.notifyPropertyChanged("loggedIn");
             }
 
             service.notifyProfileUpdate();

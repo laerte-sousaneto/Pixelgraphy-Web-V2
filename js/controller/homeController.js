@@ -49,7 +49,7 @@ function homeController($scope, $interval, $timeout, userService, uiService)
 
         if($scope.images.length > 0)
         {
-            setImageBoxes($scope, 3);
+            setImageBoxes($scope, 6);
         }
 
     });

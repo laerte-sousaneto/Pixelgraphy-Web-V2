@@ -177,7 +177,7 @@ function uploadController($scope, $timeout, dataModifier, userService)
 
     $scope.isDescriptionValid = function(description)
     {
-        var regex = new RegExp("^(([a-zA-Z0-9\\s\\n\\.\\'\\()\\%\\@\\:\\,]){10,150})$");
+        var regex = new RegExp("^([^ƒ\\^]{10,150})$");
         return regex.test(description);
     };
 

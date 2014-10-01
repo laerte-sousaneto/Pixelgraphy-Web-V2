@@ -18,7 +18,7 @@ function verifyController($scope, $routeParams, $timeout, dataModifier, userServ
 
     $scope.isUsernameValid = function()
     {
-        var regex = new RegExp("^([a-zA-Z0-9\\-\\.]){4,20}$");
+        var regex = new RegExp("^([a-zA-Z0-9\\-\\_\\.]){4,20}$");
         return regex.test($scope.username);
     };
 

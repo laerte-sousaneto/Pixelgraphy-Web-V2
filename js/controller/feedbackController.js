@@ -31,7 +31,7 @@ function feedbackController($scope, $http, uiService)
 
     $scope.isMessageValid = function()
     {
-        var regex = new RegExp("^(([a-zA-Z0-9\\s\\n\\.\\'\\()\\%\\@\\:\\,]){10,500})$");
+        var regex = new RegExp("^([^ƒ\\^]{10,1500})$");
         return regex.test($scope.message);
     };
 
